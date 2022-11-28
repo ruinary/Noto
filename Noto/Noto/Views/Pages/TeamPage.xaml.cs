@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Noto.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,16 +18,17 @@ namespace Noto.Views.Pages
 {
     public partial class TeamPage : Page
     {
-        int countTasks = 0;
         public TeamPage()
         {
             InitializeComponent();
-            TeamName.DataContext = "lohi";
+            TeamName.DataContext = DataWorker.CurrentTeam.teamName;
+            Page page = new TaskPage();
+            TaskFrame.Content = page;
+        }
 
-            if (countTasks > 0) 
-            {
+        private void TeamSettingsButtonClick(object sender, RoutedEventArgs e)
+        {
 
-            }
         }
     }
 }

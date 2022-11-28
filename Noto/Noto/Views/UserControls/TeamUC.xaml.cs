@@ -1,4 +1,6 @@
-﻿using Oracle.ManagedDataAccess.Client;
+﻿using Noto.Data;
+using Noto.Views.Pages;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
 using System.IO;
@@ -8,16 +10,12 @@ using System.Windows.Media.Imaging;
 
 namespace Noto.Views.UserControls
 {
-    /// <summary>
-    /// Логика взаимодействия для TeamUC.xaml
-    /// </summary>
     public partial class TeamUC : UserControl
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=192.168.2.10:1521/orcl;PERSIST SECURITY INFO=True;USER ID=DBMOONYFM;PASSWORD=Pa$$w0rd";
-        Int16 year, albumId;
-        string album, artist;
-        byte[] cover;
+        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+        Int16 teamId;
+        string teamName;
 
         public TeamUC()
         {
@@ -25,40 +23,49 @@ namespace Noto.Views.UserControls
             InitializeComponent();
         }
 
-        //public TeamUC(Int16 id, string artistName, string albumName, Int16 yearReleased)
-        //{
-        //    con.ConnectionString = connectionString;
-        //    InitializeComponent();
-        //    this.albumId = id;
-        //    this.album = albumName;
-        //    this.artist = artistName;
-        //    this.year = yearReleased;
+        public TeamUC(Int16 _id, string _teamName)
+        {
+            con.ConnectionString = connectionString;
+            InitializeComponent();
 
-        //    blockAlbumName.Text = albumName;
-        //    blockArtistName.Text = artistName;
-        //    blockYear.Text = yearReleased.ToString();
+            this.teamId = _id;
+            this.teamName = _teamName;
 
-        //    con.Open();
-        //    OracleCommand cmd = con.CreateCommand();
-        //    cmd.CommandText = "SELECT album_blob FROM DBMOONYFM.artist_album_view WHERE album_id = " + id.ToString();
-        //    cmd.CommandType = CommandType.Text;
-        //    OracleDataReader reader = cmd.ExecuteReader();
-        //    while (reader.Read())
-        //    {
-        //        try
-        //        {
-        //            BitmapImage image = new BitmapImage();
-        //            image.BeginInit();
-        //            image.StreamSource = new MemoryStream(reader.GetValue(0) as byte[]);
-        //            image.EndInit();
-        //            albumCover.Source = image;
-        //        }
-        //        catch (Exception exc)
-        //        {
-        //            MessageBox.Show(exc.Message);
-        //        }
-        //    }
-        //}
+            teamNameBlock.Text = teamName; 
+
+            con.Open();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT TeamIcon FROM DBNoto.UserTeam_view WHERE TeamID = " + teamId.ToString();
+            cmd.CommandType = CommandType.Text;
+            OracleDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                try
+                {
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.StreamSource = new MemoryStream(reader.GetValue(0) as byte[]);
+                    image.EndInit();
+                    teamIconCircle.ImageSource = image;
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show(exc.Message);
+                }
+            }
+            con.Close();
+        }
+
+        private void OpenTeamPageButtonClick(object sender, RoutedEventArgs e)
+        {
+            DataWorker.CurrentTeam.teamId = teamId;
+            DataWorker.CurrentTeam.teamName = teamName;
+            DataWorker.CurrentPage.currentPage = new TeamPage();
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            Application.Current.Windows[0].Close();
+           
+        }
 
         //private void editAlbum_Click(object sender, RoutedEventArgs e)
         //{

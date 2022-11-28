@@ -12,7 +12,6 @@ namespace Noto
         public MainWindow()
         {
             InitializeComponent();
-            
         }
     }
 }

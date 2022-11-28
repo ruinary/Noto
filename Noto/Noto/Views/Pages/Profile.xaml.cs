@@ -22,35 +22,8 @@ namespace Noto.Views.Pages
         {
             InitializeComponent();
             con.ConnectionString = connectionString;
-
-            {
-                //image = File.ReadAllBytes(@"D:\Noto\Noto\usericon.png");
-                //var bitmImg0 = new BitmapImage();
-                //using (var mem = new MemoryStream(image))
-                //{
-                //    mem.Position = 0;
-                //    bitmImg0.BeginInit();
-                //    bitmImg0.CacheOption = BitmapCacheOption.OnLoad;
-                //    bitmImg0.StreamSource = mem;
-                //    bitmImg0.EndInit();
-                //}
-                //bitmImg0.Freeze();
-                //userIconCircle.ImageSource = bitmImg0;
-                //DataWorker.UserProfile.userIcon = image;
-
-            }
-
-            var bitmImg = new BitmapImage();
-            using (var mem = new MemoryStream(DataWorker.UserProfile.userIcon))
-            {
-                mem.Position = 0;
-                bitmImg.BeginInit();
-                bitmImg.CacheOption = BitmapCacheOption.OnLoad;
-                bitmImg.StreamSource = mem;
-                bitmImg.EndInit();
-            }
-            bitmImg.Freeze();
-            userIconCircle.ImageSource = bitmImg;
+                        
+            userIconCircle.ImageSource = DataWorker.UserProfile.userIconImg;
 
             userEmail.Text = DataWorker.UserProfile.userEmail;
             EditedEmail.Text = DataWorker.UserProfile.userEmail;

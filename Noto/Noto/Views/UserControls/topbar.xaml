@@ -23,12 +23,10 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <Button  Style="{DynamicResource MoreButton}" Click="Button_Click"/>
+                    <Button  Style="{DynamicResource MoreButton}" Click="UserTeamsButtonClick"/>
                 </Grid>
                 <Grid Grid.Column="1"/>
-                <Grid Grid.Column="2">
-                    <Button Click="Button_Click_1"/>
-                </Grid>
+                <Grid Grid.Column="2"/>
                 <Grid Grid.Column="3">
                     <Button Style="{DynamicResource NoticesButton}"/>
                 </Grid>
@@ -37,7 +35,7 @@
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
-                <Frame Name="MainFrame" Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden"/>
+                <Frame Name="MainFrame" Content="{Binding DataWorker.CurrentPage.currentPage}" NavigationUIVisibility="Hidden"/>
             </Grid>
         </Grid>
     </Grid>

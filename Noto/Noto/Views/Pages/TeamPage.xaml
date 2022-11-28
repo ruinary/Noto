@@ -16,7 +16,8 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Style="{DynamicResource PanelsBackground}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="170"/>
                 <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="220"/>
@@ -24,26 +25,31 @@
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
+                <Viewbox Margin="2">
+                    <Rectangle x:Name="circleTeamIcon" RadiusY="100" RadiusX="100" MinWidth="40" MinHeight="40" Fill="{DynamicResource ColorTransWhiteBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"  />
+                </Viewbox>
+            </Grid>
+            <Grid Grid.Column="1">
                 <Viewbox>
                     <TextBlock x:Name="TeamName" Style="{DynamicResource CommonTitleTextH1}" Text="{Binding}"/>
                 </Viewbox>
             </Grid>
-            <Grid Grid.Column="1">
-                <Button Style="{DynamicResource SettingsButton}"/>
-            </Grid>
-            <Grid Grid.Column="3">
-                <uc:UsersInTeam/>
+            <Grid Grid.Column="2">
+                <Button Style="{DynamicResource SettingsButton}" Click="TeamSettingsButtonClick" Height="50" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Column="4">
-                <Button Style="{DynamicResource CalendarButton}"/>
+                <uc:UsersInTeam/>
             </Grid>
             <Grid Grid.Column="5">
+                <Button Style="{DynamicResource CalendarButton}"/>
+            </Grid>
+            <Grid Grid.Column="6">
                 <Button Style="{DynamicResource GraficButton}"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
-
+            <Frame Name="TaskFrame" Content="{Binding }" NavigationUIVisibility="Hidden"/>
         </Grid>
-        
+
     </Grid>
 </Page>

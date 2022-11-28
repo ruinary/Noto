@@ -385,6 +385,38 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    
+    <!-- IMG TEAM -->
+    <Style TargetType="Button"  x:Key="ImgTeam">
+        <!--Set to true to not get any properties from the themes.-->
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Rectangle RadiusY="117" RadiusX="117" MinWidth="200" MinHeight="200" Fill="{TemplateBinding Background}"/>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property = "IsMouseOver" Value = "True">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Rectangle RadiusY="117" RadiusX="117" MinWidth="200" MinHeight="200" Fill="{TemplateBinding Background}"/>
+                                <Rectangle RadiusY="117" RadiusX="117" MinWidth="200" MinHeight="200" Fill="Black" Opacity="0.5"/>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <materialDesign:PackIcon Kind="OpenInNew" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#99FFFFFF" MinWidth="50" MinHeight="50"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 
 </ResourceDictionary>

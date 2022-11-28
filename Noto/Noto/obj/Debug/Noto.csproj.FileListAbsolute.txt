@@ -28,10 +28,6 @@ D:\git\Noto\Noto\Noto\obj\Debug\Noto.csproj.CopyComplete
 D:\git\Noto\Noto\Noto\obj\Debug\Styles\Elements.baml
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\WinHeader.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\WinHeader.baml
-D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\SideBar.g.cs
-D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\SideBar.baml
-D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\DeskOfBar.g.cs
-D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\DeskOfBar.baml
 D:\git\Noto\Noto\Noto\obj\Debug\Views\Windows\Authorization.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\Windows\Authorization.baml
 D:\git\Noto\Noto\Noto\obj\Debug\Views\Windows\Registration.g.cs
@@ -42,10 +38,6 @@ D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\Profile.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\Profile.baml
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\UsersInTeam.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\UsersInTeam.baml
-D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\TaskPanel.g.cs
-D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\TaskPanel.baml
-D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\Comment.g.cs
-D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\Comment.baml
 D:\git\Noto\Noto\Noto\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 D:\git\Noto\Noto\Noto\bin\Debug\Oracle.ManagedDataAccess.dll
 D:\git\Noto\Noto\Noto\bin\Debug\System.Buffers.dll
@@ -270,3 +262,13 @@ D:\other\Noto\Noto\Noto\obj\Debug\Noto.Properties.Resources.resources
 D:\other\Noto\Noto\Noto\obj\Debug\Noto.csproj.GenerateResource.cache
 D:\other\Noto\Noto\Noto\obj\Debug\Noto.csproj.CoreCompileInputs.cache
 D:\other\Noto\Noto\Noto\obj\Debug\Noto.csproj.CopyComplete
+D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\UserTeams.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\CommentUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\TaskUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\TeamUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\UserTeams.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\CommentUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\TaskUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\TeamUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\TaskPage.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\TaskPage.baml

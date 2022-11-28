@@ -1,5 +1,6 @@
 ﻿using Noto.Data;
 using Noto.Views.Pages;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -10,11 +11,13 @@ namespace Noto.Views.UserControls
         public Topbar()
         {
             InitializeComponent();
+            MainFrame.Content = DataWorker.CurrentPage.currentPage;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void UserTeamsButtonClick(object sender, RoutedEventArgs e)
         {
-            
+            DataWorker.CurrentPage.currentPage = new UserTeams();
+            MainFrame.Content = DataWorker.CurrentPage.currentPage;
         }
 
         private void ProfileButtonClick(object sender, RoutedEventArgs e)
@@ -25,15 +28,10 @@ namespace Noto.Views.UserControls
             DataWorker.UserProfile.userPhoneNumber = DataWorker.CurrentUser.currentUserPhoneNumber;
             DataWorker.UserProfile.userName = DataWorker.CurrentUser.currentUserName;
             DataWorker.UserProfile.userLastName = DataWorker.CurrentUser.currentUserLastName;
+            DataWorker.UserProfile.userIconImg = DataWorker.CurrentUser.currentUserIconImg;
 
-            Profile profilePage = new Profile();
-            MainFrame.Navigate(profilePage);
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            TeamPage teamPage = new TeamPage();
-            MainFrame.Navigate(teamPage);
+            DataWorker.CurrentPage.currentPage = new Profile();
+            MainFrame.Content = DataWorker.CurrentPage.currentPage;
         }
     }
 }

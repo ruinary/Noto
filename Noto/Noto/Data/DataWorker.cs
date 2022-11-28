@@ -1,9 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using Noto.Views.Pages;
+using System.Collections.Generic;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace Noto.Data
 {
     public static class DataWorker
     {
+        public static class CurrentPage
+        {
+            public static Page currentPage = new UserTeams();
+            //public static Page currentTaskPage = new TaskPage();
+        }
+
+        public static class CurrentTeam
+        {
+            public static int teamId { get; set; }
+            public static string teamName { get; set; }
+            public static BitmapImage currentUserIconImg { get; set; }
+        }
+
         public static class CurrentUser
         {
             public static int currentUserId;
@@ -15,6 +31,7 @@ namespace Noto.Data
             public static string currentUserEmail;
             public static string currentUserPhoneNumber;
             public static byte[] currentUserIcon;
+            public static BitmapImage currentUserIconImg;
         }
 
         public static class UserProfile 
@@ -26,68 +43,7 @@ namespace Noto.Data
             public static string userEmail { get; set; }
             public static string userPhoneNumber { get; set; }
             public static byte[] userIcon { get; set; }
+            public static BitmapImage userIconImg { get; set; }
         }
-        public class Team
-        {
-            public int teamId { get; set; }
-            public string teamName { get; set; }
-            public byte[] teamIcon { get; set; }
-
-            //public static List<Task> tasks = new List<Task>();
-
-            Team() { }
-            Team(int _teamId, string _teamName, byte[] _teamIcon) 
-            {
-                this.teamId = _teamId;
-                this.teamName = _teamName;
-                this.teamIcon = _teamIcon;
-            }
-            Team(int _teamId, string _teamName)
-            {
-                this.teamId = _teamId;
-                this.teamName = _teamName;
-                //this.teamIcon = _teamIcon;
-            }
-        }
-        
-        public static List<Team> teams = new List<Team>();
-
-        //public class Task
-        //{
-        //    public int taskId { get; set; }
-        //    public string TaskTeamID { get; set; }
-
-        //    public string TaskTeamID { get; set; }
-
-        //    public string TaskTeamID { get; set; }
-
-        //    public string TaskTeamID { get; set; }
-        //    public byte[] teamIcon { get; set; }
-
-        //    /*
-        //    TaskID NUMBER(10) GENERATED AS IDENTITY(START WITH 1 INCREMENT BY 1),
-        //    TaskTeamID NUMBER(10) NOT NULL,
-        //    TaskStatus NUMBER(10) NOT NULL,
-        //    TaskPriority NUMBER(10) NOT NULL,
-        //    TaskTitle VARCHAR2(30) NOT NULL,
-        //    TaskDescription VARCHAR2(200) NOT NULL,
-        //    CreationDate VARCHAR2(30) NOT NULL,
-        //    DeadlineDate VARCHAR2(30) NOT NULL,
-        //     */
-
-        //    Task() { }
-        //    Task(int _teamId, string _teamName, byte[] _teamIcon)
-        //    {
-        //        this.teamId = _teamId;
-        //        this.teamName = _teamName;
-        //        this.teamIcon = _teamIcon;
-        //    }
-        //    Task(int _teamId, string _teamName)
-        //    {
-        //        this.teamId = _teamId;
-        //        this.teamName = _teamName;
-        //        //this.teamIcon = _teamIcon;
-        //    }
-        //}
     }
 }

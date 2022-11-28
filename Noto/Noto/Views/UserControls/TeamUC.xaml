@@ -5,8 +5,53 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Noto.Views.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+            d:DesignHeight="150" d:DesignWidth="100">
+    
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <Border CornerRadius="10" Grid.Row="1" Grid.Column="1" >
+            <Border.Background>
+                <SolidColorBrush Color="{DynamicResource ColorTransWhite}"/>
+            </Border.Background>
+            <Grid  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="10"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Viewbox Grid.Column="1">
+                            <Button Style="{DynamicResource ImgTeam}" Click="OpenTeamPageButtonClick" >
+                                <Button.Background>
+                                    <ImageBrush x:Name="teamIconCircle" ImageSource="{Binding }" Stretch="UniformToFill"/>
+                                </Button.Background>
+                            </Button>
+                        </Viewbox>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <TextBlock x:Name="teamNameBlock" TextAlignment="Center"  TextWrapping="Wrap" FontSize="30" FontStyle="Normal" FontWeight="Normal" Foreground="White" FontFamily="Bahnschrift Condensed" HorizontalAlignment="Center" Background="{x:Null}" VerticalAlignment="Center">TaskTitle</TextBlock>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

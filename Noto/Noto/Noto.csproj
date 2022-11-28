@@ -100,6 +100,9 @@
     <Compile Include="Views\Pages\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\TaskPage.xaml.cs">
+      <DependentUpon>TaskPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\TeamPage.xaml.cs">
       <DependentUpon>TeamPage.xaml</DependentUpon>
     </Compile>
@@ -108,9 +111,6 @@
     </Compile>
     <Compile Include="Views\UserControls\CommentUC.xaml.cs">
       <DependentUpon>CommentUC.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserControls\TaskPanel.xaml.cs">
-      <DependentUpon>TaskPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\TaskUC.xaml.cs">
       <DependentUpon>TaskUC.xaml</DependentUpon>
@@ -136,6 +136,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\TaskPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\TeamPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -145,10 +149,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\CommentUC.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\UserControls\TaskPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

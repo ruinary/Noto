@@ -2,45 +2,35 @@
 using Noto.Views.UserControls;
 using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Noto.Views.Pages
 {
-    public partial class UserTeams : Page
+    public partial class TaskPage : Page
     {
         OracleConnection con = new OracleConnection();
-        public UserTeams()
+        public TaskPage()
         {
             String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
             con.ConnectionString = connectionString;
-
-            InitializeComponent();
-
+            MessageBox.Show(DataWorker.CurrentTeam.teamId.ToString());
             con.Open();
             OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT * FROM DBNoto.UserTeam_view WHERE UserID = " + DataWorker.CurrentUser.currentUserId + " ORDER BY TeamName ASC";
+            cmd.CommandText = "SELECT * FROM DBNoto.TaskTeam_view WHERE TeamID = " + DataWorker.CurrentTeam.teamId + " ORDER BY TaskPriorityName ASC";
             cmd.CommandType = CommandType.Text;
             OracleDataReader reader = cmd.ExecuteReader();
-            teamList.Children.Clear();
+            //taskList.Children.Clear();
             while (reader.Read())
             {
-                TeamUC team = new TeamUC(reader.GetInt16(0), reader.GetString(1));
-                teamList.Children.Add(team);
+                TaskUC task = new TaskUC(reader.GetInt16(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6));
+                taskList.Children.Add(task);
             }
             con.Close();
+
+            InitializeComponent();
         }
     }
+
 }
