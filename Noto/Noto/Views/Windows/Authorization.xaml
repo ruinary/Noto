@@ -1,0 +1,109 @@
+﻿<Window x:Class="Noto.Views.Windows.Authorization"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Noto.Views.Windows"
+        xmlns:uc="clr-namespace:Noto.Views.UserControls"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="Authorization" Height="600" Width="400" Background="{x:Null}">
+    <Border Style="{DynamicResource WinBackground}" CornerRadius="6" BorderBrush="#FF252942" BorderThickness="2" Margin="0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <uc:WinHeader/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="400*"/>
+                    <RowDefinition Height="40*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="150*"/>
+                        <ColumnDefinition Width="20*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100*"/>
+                            <RowDefinition Height="50*"/>
+                            <RowDefinition Height="60*"/>
+                            <RowDefinition Height="10*"/>
+                            <RowDefinition Height="60*"/>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="60*"/>
+                            <RowDefinition Height="10*"/>
+                            <RowDefinition Height="60*"/>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="60*"/>
+                            <RowDefinition Height="10*"/>
+                            <RowDefinition Height="60*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Viewbox>
+                                <TextBlock Style="{DynamicResource CommonTitleTextH1}">Авторизация</TextBlock>
+                            </Viewbox>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Viewbox>
+                                <TextBlock Style="{DynamicResource CommonTitleTextH3}">Логин</TextBlock>
+                            </Viewbox>
+                        </Grid>
+                        <Grid Grid.Row="4">
+                            <Border Style="{DynamicResource CommonBorderTextBox}">
+                                <TextBox x:Name="textBoxLogin" Style="{DynamicResource CommonTextBox}"></TextBox>
+                            </Border>
+                        </Grid>
+                        <Grid Grid.Row="6">
+                            <Viewbox>
+                                <TextBlock Style="{DynamicResource CommonTitleTextH3}">Пароль</TextBlock>
+                            </Viewbox>
+                        </Grid>
+                        <Grid Grid.Row="8">
+                            <Border Style="{DynamicResource CommonBorderTextBox}">
+                                <TextBox x:Name="textBoxPassword" Style="{DynamicResource CommonTextBox}"></TextBox>
+                            </Border>
+                        </Grid>
+                        <Grid Grid.Row="10">
+                            <Button Click="AuthButtonClick" Style="{DynamicResource LogInButton}"/>
+                        </Grid>
+                        <Grid Grid.Row="13">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Viewbox Grid.Column="0">
+                                    <TextBlock Style="{DynamicResource CommonTitleTextH1}">Еще нет аккаунта?</TextBlock>
+                                </Viewbox>
+                                <Viewbox Grid.Column="1" HorizontalAlignment="Stretch">
+                                    <Button Click="SigInButtonClick" Style="{DynamicResource SignInButton}"/>
+                                </Viewbox>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            ResizeBorderThickness="5"
+            CaptionHeight="8"
+            GlassFrameThickness="0"
+            CornerRadius="6"
+            />
+    </WindowChrome.WindowChrome>
+</Window>

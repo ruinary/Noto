@@ -1,0 +1,38 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- WINDOW HEAD APP NAME TEXT -->
+    <Style TargetType="{x:Type TextBlock}" x:Key="HeaderText" >
+        <Setter Property="Foreground" Value="{DynamicResource ColorWhiteBrush}" />
+        <Setter Property="FontSize" Value="70px"/>
+        <Setter Property="FontFamily" Value="/Res/#Pecita"/>
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 6" />
+    </Style>
+    <!-- DEFAULT TEXT -->
+    <Style TargetType="{x:Type TextBlock}" x:Key="CommonText" >
+        <Setter Property="Foreground" Value="{DynamicResource ColorWhiteBrush}" />
+        <Setter Property="FontSize" Value="15px"/>
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10 5" />
+    </Style>
+    <!-- DEFAULT TITLE TEXT H1 -->
+    <Style TargetType="{x:Type TextBlock}" x:Key="CommonTitleTextH1" >
+        <Setter Property="Foreground" Value="{DynamicResource ColorWhiteBrush}" />
+        <Setter Property="FontSize" Value="40px"/>
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10 5" />
+        <Setter Property="FontFamily" Value="/Res/#Steclo ExtLt"/>
+    </Style>
+    <!-- DEFAULT TITLE TEXT H3 -->
+    <Style TargetType="{x:Type TextBlock}" x:Key="CommonTitleTextH3" >
+        <Setter Property="Foreground" Value="{DynamicResource ColorWhiteBrush}" />
+        <Setter Property="FontSize" Value="20px"/>
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10 5" />
+        <Setter Property="FontFamily" Value="/Res/#Steclo ExtLt"/>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Noto.Views.UserControls.Task"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Noto.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="300">
+    <Border CornerRadius="6">
+        <Border.BorderBrush>
+            <SolidColorBrush Color="{DynamicResource ColorTransWhite}"/>
+        </Border.BorderBrush>
+        <Border.Background>
+            <SolidColorBrush Color="{DynamicResource ColorWhite}"/>
+        </Border.Background>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="20*"/>
+            </Grid.RowDefinitions>
+
+        </Grid>
+    </Border>
+</UserControl>

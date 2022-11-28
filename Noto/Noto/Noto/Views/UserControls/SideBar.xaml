@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="Noto.Views.UserControls.SideBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:uc="clr-namespace:Noto.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="410" d:DesignWidth="200">
+    <Grid Style="{DynamicResource PanelsBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <uc:DeskOfBar/>
+        </Grid>
+    </Grid>
+</UserControl>
