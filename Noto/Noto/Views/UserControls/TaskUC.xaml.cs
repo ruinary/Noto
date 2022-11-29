@@ -1,4 +1,5 @@
 ﻿using Noto.Data;
+using Noto.Views.ExtraWindows;
 using Noto.Views.Pages;
 using Oracle.ManagedDataAccess.Client;
 using System;
@@ -47,6 +48,20 @@ namespace Noto.Views.UserControls
             taskPriorityBlock.Text = taskPriority;
             taskStatusBlock.Text = taskStatus;
             taskDescriptionBlock.Text = taskDescription;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DataWorker.CurrentTask.taskId = taskId;
+            DataWorker.CurrentTask.taskTitle = taskTitle;
+            DataWorker.CurrentTask.taskDeadlineDate = taskDeadlineDate;
+            DataWorker.CurrentTask.taskCreationDate = taskCreationDate;
+            DataWorker.CurrentTask.taskPriority = taskPriority;
+            DataWorker.CurrentTask.taskStatus = taskStatus;
+            DataWorker.CurrentTask.taskDescription = taskDescription;
+
+            TaskSettings taskSettings = new TaskSettings();
+            taskSettings.Show();
         }
     }
 }

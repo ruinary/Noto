@@ -66,19 +66,5 @@ namespace Noto.Views.UserControls
             Application.Current.Windows[0].Close();
            
         }
-
-        //private void editAlbum_Click(object sender, RoutedEventArgs e)
-        //{
-        //    UpdateAlbum updateWin = new UpdateAlbum(this.albumId, this.artist, this.album);
-        //    updateWin.Show();
-        //    Application.Current.Windows[0].Hide();
-        //}
-
-        //private void showSongs_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ShowSongsByAlbum show = new ShowSongsByAlbum(artist, album);
-        //    show.Show();
-        //    Application.Current.Windows[0].Hide();
-        //}
     }
 }

@@ -11,25 +11,37 @@ namespace Noto.Views.Pages
     public partial class TaskPage : Page
     {
         OracleConnection con = new OracleConnection();
+        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
         public TaskPage()
         {
-            String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
             con.ConnectionString = connectionString;
-            MessageBox.Show(DataWorker.CurrentTeam.teamId.ToString());
+
+            InitializeComponent();
+
+            //con.Open();
+            //OracleCommand cmd = con.CreateCommand();
+            //cmd.CommandText = "SELECT * FROM DBNoto.UserTeam_view WHERE UserID = " + DataWorker.CurrentUser.currentUserId + " ORDER BY TeamName ASC";
+            //cmd.CommandType = CommandType.Text;
+            //OracleDataReader reader = cmd.ExecuteReader();
+            //taskList.Children.Clear();
+            //while (reader.Read())
+            //{
+            //    TeamUC team = new TeamUC(reader.GetInt16(0), reader.GetString(1));
+            //    taskList.Children.Add(team);
+            //}
+            //con.Close();
             con.Open();
             OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT * FROM DBNoto.TaskTeam_view WHERE TeamID = " + DataWorker.CurrentTeam.teamId + " ORDER BY TaskPriorityName ASC";
+            cmd.CommandText = "SELECT * FROM DBNoto.TaskTeam_view WHERE TeamID = " + DataWorker.CurrentTeam.teamId;
             cmd.CommandType = CommandType.Text;
             OracleDataReader reader = cmd.ExecuteReader();
-            //taskList.Children.Clear();
+            taskList.Children.Clear();
             while (reader.Read())
             {
                 TaskUC task = new TaskUC(reader.GetInt16(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6));
                 taskList.Children.Add(task);
             }
             con.Close();
-
-            InitializeComponent();
         }
     }
 

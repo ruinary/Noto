@@ -97,6 +97,12 @@
     </ApplicationDefinition>
     <Compile Include="Data\DataWorker.cs" />
     <Compile Include="Models\Users.cs" />
+    <Compile Include="Views\ExtraWindows\TaskSettings.xaml.cs">
+      <DependentUpon>TaskSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExtraWindows\TeamSettings.xaml.cs">
+      <DependentUpon>TeamSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
@@ -129,6 +135,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\Texts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExtraWindows\TaskSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExtraWindows\TeamSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

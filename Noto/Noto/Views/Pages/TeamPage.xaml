@@ -48,7 +48,7 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
-            <Frame Name="TaskFrame" Content="{Binding }" NavigationUIVisibility="Hidden"/>
+            <Frame Name="taskFrame" Content="{Binding }" NavigationUIVisibility="Hidden"/>
         </Grid>
 
     </Grid>

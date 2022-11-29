@@ -80,6 +80,7 @@ namespace Noto.Views.Pages
 
                 con.Close();
 
+                DataWorker.CurrentUser.currentUserEmail = EditedEmail.Text.Trim();
                 DataWorker.UserProfile.userEmail = EditedEmail.Text.Trim();
 
                 EditEmail.Visibility = Visibility.Hidden;
@@ -156,7 +157,7 @@ namespace Noto.Views.Pages
                     cmd2.CommandText = "UPDATE UserTable " +
                                       "SET " +
                                       "UserIcon = :ImageFront " +
-                                      "WHERE UPPER(UserLogin) = UPPER('" + DataWorker.UserProfile.userLogin + "')";
+                                      "WHERE UPPER(UserLogin) = UPPER('" + DataWorker.CurrentUser.currentUserLogin + "')";
 
                     cmd2.Parameters.Add(":ImageFront", OracleDbType.Blob);
                     cmd2.Parameters[":ImageFront"].Value = blob;
@@ -182,7 +183,37 @@ namespace Noto.Views.Pages
 
         private void Button_Click_ConfPhone(object sender, RoutedEventArgs e)
         {
-            
+            bool check1 = Regex.IsMatch(EditedPhone.Text, @"^(\+375|80)(29|44|33)([0-9]){7}$");
+            if (check1)
+            {
+                string curPhone = EditedPhone.Text;
+                int userAuthId = DataWorker.UserProfile.userId;
+
+                con.Open();
+                OracleCommand cmd = con.CreateCommand();
+                try
+                {
+                    cmd.CommandText = "DBNoto.update_user_phonenumber";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("p_user_login", OracleDbType.Varchar2, 30).Value = DataWorker.UserProfile.userLogin;
+                    cmd.Parameters.Add("p_new_user_phonenumber", OracleDbType.Varchar2, 13).Value = EditedPhone.Text.Trim();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show(exc.ToString());
+                }
+
+                con.Close();
+
+                DataWorker.CurrentUser.currentUserPhoneNumber = EditedPhone.Text.Trim();
+                DataWorker.UserProfile.userPhoneNumber = EditedPhone.Text.Trim();
+
+                EditPhone.Visibility = Visibility.Hidden;
+                CurPhone.Visibility = Visibility.Visible;
+
+                userPhoneNumber.Text = DataWorker.UserProfile.userPhoneNumber;
+            }
         }
         #endregion
     }

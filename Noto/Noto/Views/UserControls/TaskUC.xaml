@@ -6,54 +6,117 @@
              xmlns:local="clr-namespace:Noto.Views.UserControls"             
              xmlns:uc="clr-namespace:Noto.Views.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="250" d:DesignWidth="200">
-
-    <Border CornerRadius="10" >
-        <Border.Background>
-            <SolidColorBrush Color="{DynamicResource ColorTransWhite}"/>
-        </Border.Background>
-
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition  Width="10"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="10"/>
-            </Grid.ColumnDefinitions>
+             d:DesignHeight="250" d:DesignWidth="200" MaxHeight="450" MaxWidth="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition />
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="1" Grid.Row="1" CornerRadius="10" >
+            <Border.Background>
+                <SolidColorBrush Color="{DynamicResource ColorTransWhite}"/>
+            </Border.Background>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TextBlock x:Name="taskTitleBlock">TaskTitle</TextBlock>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="taskTitleBlock" Grid.Column="0" TextAlignment="Center"  TextWrapping="Wrap" FontSize="30" FontStyle="Normal" FontWeight="Normal" Foreground="White" FontFamily="Bahnschrift Condensed" HorizontalAlignment="Center" Background="{x:Null}" VerticalAlignment="Center"/>
+                    <Button Grid.Column="1" Style="{DynamicResource SettingsButton}" Click="Button_Click"/>
                 </Grid>
                 <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" x:Name="taskCreationDateBlock">Date1</TextBlock>
-                    <TextBlock Grid.Column="1" x:Name="taskDeadlineDateBlock">Date2</TextBlock>
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Viewbox>
+                            <TextBlock Style="{DynamicResource CommonTitleTextH1}" Text="Дата создания" VerticalAlignment="Top"/>
+                        </Viewbox>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Viewbox>
+                            <TextBlock x:Name="taskCreationDateBlock" Style="{DynamicResource CommonTitleTextH1}" VerticalAlignment="Top"/>
+                        </Viewbox>
+                    </Grid>
+                    <Grid Grid.Row="0" Grid.Column="1">
+                        <Viewbox>
+                            <TextBlock Style="{DynamicResource CommonTitleTextH1}" Text="Дата выполнения" VerticalAlignment="Top"/>
+                        </Viewbox>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Viewbox>
+                            <TextBlock x:Name="taskDeadlineDateBlock" Style="{DynamicResource CommonTitleTextH1}" VerticalAlignment="Top"/>
+                        </Viewbox>
+                    </Grid>
                 </Grid>
                 <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" x:Name="taskPriorityBlock">Priority</TextBlock>
-                    <TextBlock Grid.Column="1" x:Name="taskStatusBlock">Status</TextBlock>
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Viewbox>
+                            <TextBlock Style="{DynamicResource CommonTitleTextH1}" Text="Приоритет выполения" VerticalAlignment="Top"/>
+                        </Viewbox>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Viewbox>
+                            <TextBlock x:Name="taskPriorityBlock" Style="{DynamicResource CommonTitleTextH1}"/>
+                        </Viewbox>
+                    </Grid>
+                    <Grid Grid.Row="0" Grid.Column="1">
+                        <Viewbox>
+                            <TextBlock Style="{DynamicResource CommonTitleTextH1}" Text="Статус выполения" VerticalAlignment="Top"/>
+                        </Viewbox>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Viewbox>
+                            <TextBlock x:Name="taskStatusBlock" Style="{DynamicResource CommonTitleTextH1}"/>
+                        </Viewbox>
+                    </Grid>
                 </Grid>
                 <Grid Grid.Row="3">
-                    <TextBlock Grid.Column="0" x:Name="taskDescriptionBlock">Description</TextBlock>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Viewbox>
+                            <TextBlock Style="{DynamicResource CommonTitleTextH1}" Text="Описание" VerticalAlignment="Top"/>
+                        </Viewbox>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Viewbox>
+                            <TextBlock x:Name="taskDescriptionBlock" Style="{DynamicResource CommonTitleTextH1}" VerticalAlignment="Top"/>
+                        </Viewbox>
+                    </Grid>
                 </Grid>
                 <Grid Grid.Row="4">
-                    <uc:CommentUC x:Name="LastComment" Grid.Column="0"/>
                 </Grid>
             </Grid>
-        </Grid>
-    </Border>
-
+        </Border>
+    </Grid>
 </UserControl>

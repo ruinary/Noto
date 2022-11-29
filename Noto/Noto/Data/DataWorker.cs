@@ -10,7 +10,7 @@ namespace Noto.Data
         public static class CurrentPage
         {
             public static Page currentPage = new UserTeams();
-            //public static Page currentTaskPage = new TaskPage();
+            public static Page currentTaskPage = new TaskPage();
         }
 
         public static class CurrentTeam
@@ -18,6 +18,17 @@ namespace Noto.Data
             public static int teamId { get; set; }
             public static string teamName { get; set; }
             public static BitmapImage currentUserIconImg { get; set; }
+        }
+
+        public static class CurrentTask
+        {
+            public static int taskId { get; set; }
+            public static string taskTitle { get; set; }
+            public static string taskDeadlineDate { get; set; }
+            public static string taskCreationDate { get; set; }
+            public static string taskPriority { get; set; }
+            public static string taskStatus { get; set; }
+            public static string taskDescription { get; set; }
         }
 
         public static class CurrentUser

@@ -22,9 +22,9 @@ namespace Noto.Views.Pages
     public partial class UserTeams : Page
     {
         OracleConnection con = new OracleConnection();
+        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
         public UserTeams()
         {
-            String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
             con.ConnectionString = connectionString;
 
             InitializeComponent();

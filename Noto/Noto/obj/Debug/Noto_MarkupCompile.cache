@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\git\Noto\Noto\Noto\App.xaml
-16-411300921
+18-682146987
 
-191405012406
+212018743796
 26-1212186224
-Styles\Elements.xaml;Styles\Texts.xaml;Views\Pages\Profile.xaml;Views\Pages\TaskPage.xaml;Views\Pages\TeamPage.xaml;Views\Pages\UserTeams.xaml;Views\UserControls\CommentUC.xaml;Views\UserControls\TaskUC.xaml;Views\UserControls\TeamUC.xaml;Views\UserControls\Topbar.xaml;Views\UserControls\UsersInTeam.xaml;Views\UserControls\WinHeader.xaml;Views\Windows\Authorization.xaml;Views\Windows\MainWindow.xaml;Styles\Colors.xaml;Views\Windows\Registration.xaml;
+Styles\Elements.xaml;Styles\Texts.xaml;Views\ExtraWindows\TaskSettings.xaml;Views\ExtraWindows\TeamSettings.xaml;Views\Pages\Profile.xaml;Views\Pages\TaskPage.xaml;Views\Pages\TeamPage.xaml;Views\Pages\UserTeams.xaml;Views\UserControls\CommentUC.xaml;Views\UserControls\TaskUC.xaml;Views\UserControls\TeamUC.xaml;Views\UserControls\Topbar.xaml;Views\UserControls\UsersInTeam.xaml;Views\UserControls\WinHeader.xaml;Views\Windows\Authorization.xaml;Views\Windows\MainWindow.xaml;Styles\Colors.xaml;Views\Windows\Registration.xaml;
 res\logo.png
 False
 
