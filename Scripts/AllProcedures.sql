@@ -241,7 +241,7 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20002, 'User is not found');
     END IF;
 END update_user_last_name;
-
+begin update_user_last_name('REMERAL','E'); end;
 -------------------------DELETE_USER-------------------------
 CREATE OR REPLACE PROCEDURE delete_user
     (p_user_login IN UserTable.UserLogin%TYPE)
