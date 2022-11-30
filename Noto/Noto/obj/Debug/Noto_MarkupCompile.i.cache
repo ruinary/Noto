@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\git\Noto\Noto\Noto\App.xaml
-25-1381120510
+26-796433888
 
-29952043449
+30-1649353357
 26-1212186224
-Styles\Elements.xaml;Styles\Texts.xaml;Views\ExtraWindows\TaskSettings.xaml;Views\ExtraWindows\TeamSettings.xaml;Views\Pages\Profile.xaml;Views\Pages\TaskPage.xaml;Views\Pages\TeamPage.xaml;Views\Pages\UserTeams.xaml;Views\UserControls\ChangeUC\ChangeEmailUC.xaml;Views\UserControls\ChangeUC\ChangeLastNameUC.xaml;Views\UserControls\ChangeUC\ChangeLoginUC.xaml;Views\UserControls\ChangeUC\ChangeNameAndLastNameUC.xaml;Views\UserControls\ChangeUC\ChangeNameUC.xaml;Views\UserControls\ChangeUC\ChangePasswordUC.xaml;Views\UserControls\ChangeUC\ChangePhoneNumberUC.xaml;Views\UserControls\CommentUC.xaml;Views\UserControls\TaskUC.xaml;Views\UserControls\TeamUC.xaml;Views\UserControls\Topbar.xaml;Views\UserControls\UsersInTeam.xaml;Views\UserControls\WinHeader.xaml;Views\Windows\Authorization.xaml;Views\Windows\MainWindow.xaml;Styles\Colors.xaml;Views\Windows\Registration.xaml;
+Styles\Elements.xaml;Styles\Texts.xaml;Views\ExtraWindows\TaskSettings.xaml;Views\ExtraWindows\TeamSettings.xaml;Views\Pages\Profile.xaml;Views\Pages\TaskPage.xaml;Views\Pages\TeamPage.xaml;Views\Pages\UserTeams.xaml;Views\UserControls\ChangeUC\ChangeEmailUC.xaml;Views\UserControls\ChangeUC\ChangeLastNameUC.xaml;Views\UserControls\ChangeUC\ChangeLoginUC.xaml;Views\UserControls\ChangeUC\ChangeNameAndLastNameUC.xaml;Views\UserControls\ChangeUC\ChangeNameUC.xaml;Views\UserControls\ChangeUC\ChangePasswordUC.xaml;Views\UserControls\ChangeUC\ChangePhoneNumberUC.xaml;Views\UserControls\ChangeUC\ChangeTaskTitleUC.xaml;Views\UserControls\CommentUC.xaml;Views\UserControls\TaskUC.xaml;Views\UserControls\TeamUC.xaml;Views\UserControls\Topbar.xaml;Views\UserControls\UsersInTeam.xaml;Views\UserControls\WinHeader.xaml;Views\Windows\Authorization.xaml;Views\Windows\MainWindow.xaml;Styles\Colors.xaml;Views\Windows\Registration.xaml;
 res\logo.png
 False
 

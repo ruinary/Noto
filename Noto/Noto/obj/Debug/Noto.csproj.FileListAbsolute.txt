@@ -290,3 +290,5 @@ D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeLastNameUC.g.c
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeNameAndLastNameUC.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeLastNameUC.baml
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeNameAndLastNameUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeTaskTitleUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeTaskTitleUC.baml

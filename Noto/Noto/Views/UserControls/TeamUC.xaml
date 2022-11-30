@@ -48,7 +48,9 @@
                         </Viewbox>
                     </Grid>
                     <Grid Grid.Row="1">
-                        <TextBlock x:Name="teamNameBlock" TextAlignment="Center"  TextWrapping="Wrap" FontSize="30" FontStyle="Normal" FontWeight="Normal" Foreground="White" FontFamily="Bahnschrift Condensed" HorizontalAlignment="Center" Background="{x:Null}" VerticalAlignment="Center">TaskTitle</TextBlock>
+                        <Viewbox MaxWidth="200">
+                            <TextBlock x:Name="teamNameBlock" Style="{DynamicResource CommonTitleTextH1}">TaskTitle</TextBlock>
+                        </Viewbox>
                     </Grid>
                 </Grid>
             </Grid>

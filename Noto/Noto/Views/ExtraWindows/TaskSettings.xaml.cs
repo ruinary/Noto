@@ -20,17 +20,7 @@ namespace Noto.Views.ExtraWindows
         public TaskSettings()
         {
             InitializeComponent();
-            taskTitleBlock.Text = DataWorker.CurrentTask.taskTitle;
+            
         }
-
-        private void EditTaskTitileButtonClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void ConfTaskTitileButtonClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-        
     }
 }

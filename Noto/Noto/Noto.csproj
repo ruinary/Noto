@@ -136,6 +136,9 @@
     <Compile Include="Views\UserControls\ChangeUC\ChangePhoneNumberUC.xaml.cs">
       <DependentUpon>ChangePhoneNumberUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\ChangeUC\ChangeTaskTitleUC.xaml.cs">
+      <DependentUpon>ChangeTaskTitleUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\CommentUC.xaml.cs">
       <DependentUpon>CommentUC.xaml</DependentUpon>
     </Compile>
@@ -208,6 +211,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\ChangeUC\ChangePhoneNumberUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\ChangeUC\ChangeTaskTitleUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
