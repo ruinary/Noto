@@ -67,6 +67,7 @@ namespace Noto.Views.Windows
                     string email = Convert.ToString(cmd.Parameters["o_user_email"].Value);
 
                     DataWorker.CurrentUser.currentUserId = id;
+                    DataWorker.CurrentUser.currentPassword = textBoxPassword.Text.Trim();
                     DataWorker.CurrentUser.currentUserLogin = user;
                     DataWorker.CurrentUser.currentUserRole = role;
                     DataWorker.CurrentUser.currentUserEmail = email;
@@ -94,8 +95,6 @@ namespace Noto.Views.Windows
                             MessageBox.Show(exc.Message);
                         }
                     }
-
-                    //MessageBox.Show(DataWorker.CurrentPage.currentPage.ToString());
                     
                     DataWorker.CurrentPage.currentPage = new UserTeams();
                     MainWindow mainWindow = new MainWindow();

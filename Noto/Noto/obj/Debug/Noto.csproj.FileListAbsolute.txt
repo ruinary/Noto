@@ -276,3 +276,17 @@ D:\git\Noto\Noto\Noto\obj\Debug\Views\ExtraWindows\TaskSettings.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\ExtraWindows\TaskSettings.baml
 D:\git\Noto\Noto\Noto\obj\Debug\Views\ExtraWindows\TeamSettings.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\ExtraWindows\TeamSettings.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeEmailUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeEmailUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangePhoneNumberUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangePhoneNumberUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeLoginUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeNameUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangePasswordUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeLoginUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeNameUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangePasswordUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeLastNameUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeNameAndLastNameUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeLastNameUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeNameAndLastNameUC.baml

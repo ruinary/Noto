@@ -18,18 +18,6 @@ namespace Noto.Views.Pages
 
             InitializeComponent();
 
-            //con.Open();
-            //OracleCommand cmd = con.CreateCommand();
-            //cmd.CommandText = "SELECT * FROM DBNoto.UserTeam_view WHERE UserID = " + DataWorker.CurrentUser.currentUserId + " ORDER BY TeamName ASC";
-            //cmd.CommandType = CommandType.Text;
-            //OracleDataReader reader = cmd.ExecuteReader();
-            //taskList.Children.Clear();
-            //while (reader.Read())
-            //{
-            //    TeamUC team = new TeamUC(reader.GetInt16(0), reader.GetString(1));
-            //    taskList.Children.Add(team);
-            //}
-            //con.Close();
             con.Open();
             OracleCommand cmd = con.CreateCommand();
             cmd.CommandText = "SELECT * FROM DBNoto.TaskTeam_view WHERE TeamID = " + DataWorker.CurrentTeam.teamId;

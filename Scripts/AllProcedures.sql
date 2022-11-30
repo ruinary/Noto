@@ -6,11 +6,10 @@ BEGIN
 END;
 
 UPDATE UserTable SET UserRole  = 2 WHERE UserID = 1;
-UPDATE UserTable SET UserPassword  = encryption_password('qwerty') WHERE UserLogin = 'REMERAL';
+--UPDATE UserTable SET UserPassword  = encryption_password('qwerty') WHERE UserLogin = 'REMERAL';
 select* from UserTable;
 
 -------------------------ENCRYPTION_PASSWORD-------------------------
-
 CREATE OR REPLACE FUNCTION encryption_password
     (p_user_password IN UserTable.UserPassword%TYPE)
 	RETURN UserTable.UserPassword%TYPE
@@ -25,7 +24,6 @@ RETURN RAWTOHEX(l_enc);
 END encryption_password;
 
 -------------------------DECRYPTION_PASSWORD-------------------------
-
 CREATE OR REPLACE FUNCTION decryption_password
     (p_user_password IN UserTable.UserPassword%TYPE)
 	RETURN UserTable.UserPassword%TYPE
@@ -40,7 +38,6 @@ RETURN utl_i18n.raw_to_char(l_dec);
 END decryption_password;
 
 -------------------------REGISTER_USER-------------------------
-
 CREATE OR REPLACE PROCEDURE register_user
     (p_user_login IN UserTable.UserLogin%TYPE,
      p_user_password IN UserTable.UserPassword%TYPE,
@@ -53,7 +50,8 @@ IS
 BEGIN
     SELECT COUNT(*) INTO cnt FROM UserTable WHERE UPPER(UserLogin) = UPPER(p_user_login);
     IF (cnt = 0) THEN
-        INSERT INTO UserTable(UserLogin, UserPassword, UserName, UserLastName, UserPhoneNumber, UserEmail, UserRole) VALUES (UPPER(p_user_login), encryption_password(UPPER(p_user_password)), p_user_name,  p_user_lastname, p_user_phonenumber, p_user_email, 1);
+        INSERT INTO UserTable(UserLogin, UserPassword, UserName, UserLastName, UserPhoneNumber, UserEmail, UserRole) 
+	VALUES (UPPER(p_user_login), encryption_password(UPPER(p_user_password)), p_user_name,  p_user_lastname, p_user_phonenumber, p_user_email, 1);
         COMMIT;
     ELSE
         RAISE_APPLICATION_ERROR(-20001, 'This login is already taken');
@@ -61,7 +59,6 @@ BEGIN
 END register_user;
 
 -------------------------CHECK_ROLE-------------------------
-
 CREATE OR REPLACE PROCEDURE check_role
     (p_user_login IN UserTable.UserLogin%TYPE,
     o_user_role OUT AppRoleTable.RoleName%TYPE)
@@ -79,7 +76,6 @@ END check_role;
 select * from AppRoleTable_view;
 
 -------------------------LOG_IN_USER-------------------------
-
 CREATE OR REPLACE PROCEDURE log_in_user
     (p_user_login IN UserTable.UserLogin%TYPE,
     p_user_password IN UserTable.UserPassword%TYPE,
@@ -172,6 +168,80 @@ BEGIN
     END IF;
 END update_user_password;
 
+-------------------------UPDATE_USER_EMAIL-------------------------
+CREATE OR REPLACE PROCEDURE update_user_email
+    (p_user_login IN UserTable.UserLogin%TYPE,
+    p_new_user_email IN UserTable.UserEmail%TYPE)
+IS
+    cnt NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO cnt FROM UserTable WHERE UPPER(UserLogin) = UPPER(p_user_login);
+    IF (cnt != 0) THEN
+        SELECT COUNT(*) INTO cnt FROM UserTable WHERE UserEmail = p_new_user_email;
+        IF (cnt = 0) THEN
+            UPDATE UserTable SET UserEmail = p_new_user_email WHERE UPPER(UserLogin) = UPPER(p_user_login);
+            COMMIT;
+        ELSE
+            RAISE_APPLICATION_ERROR(-20001, 'This email is already taken');
+        END IF;
+    ELSE
+        RAISE_APPLICATION_ERROR(-20002, 'User is not found');
+    END IF;
+END update_user_email;
+
+-------------------------UPDATE_USER_PHONENUMBER-------------------------
+CREATE OR REPLACE PROCEDURE update_user_phonenumber
+    (p_user_login IN UserTable.UserLogin%TYPE,
+    p_new_user_phonenumber IN UserTable.UserPhoneNumber%TYPE)
+IS
+    cnt NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO cnt FROM UserTable WHERE UPPER(UserLogin) = UPPER(p_user_login);
+    IF (cnt != 0) THEN
+        SELECT COUNT(*) INTO cnt FROM UserTable WHERE UserPhoneNumber = p_new_user_phonenumber;
+        IF (cnt = 0) THEN
+            UPDATE UserTable SET UserPhoneNumber = p_new_user_phonenumber WHERE UPPER(UserLogin) = UPPER(p_user_login);
+            COMMIT;
+        ELSE
+            RAISE_APPLICATION_ERROR(-20001, 'This phone number is already taken');
+        END IF;
+    ELSE
+        RAISE_APPLICATION_ERROR(-20002, 'User is not found');
+    END IF;
+END update_user_phonenumber;
+
+-------------------------UPDATE_USER_NAME-------------------------
+CREATE OR REPLACE PROCEDURE update_user_name
+    (p_user_login IN UserTable.UserLogin%TYPE,
+    p_new_user_name IN UserTable.UserName%TYPE)
+IS
+    cnt NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO cnt FROM UserTable WHERE UPPER(UserLogin) = UPPER(p_user_login);
+    IF (cnt != 0) THEN
+        UPDATE UserTable SET UserName = p_new_user_name WHERE UPPER(UserLogin) = UPPER(p_user_login);
+        COMMIT;
+    ELSE
+        RAISE_APPLICATION_ERROR(-20002, 'User is not found');
+    END IF;
+END update_user_name;
+
+-------------------------UPDATE_USER_LAST_NAME-------------------------
+CREATE OR REPLACE PROCEDURE update_user_last_name
+    (p_user_login IN UserTable.UserLogin%TYPE,
+    p_new_user_last_name IN UserTable.UserLastName%TYPE)
+IS
+    cnt NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO cnt FROM UserTable WHERE UPPER(UserLogin) = UPPER(p_user_login);
+    IF (cnt != 0) THEN
+        UPDATE UserTable SET UserLastName = p_new_user_last_name WHERE UPPER(UserLogin) = UPPER(p_user_login);
+        COMMIT;
+    ELSE
+        RAISE_APPLICATION_ERROR(-20002, 'User is not found');
+    END IF;
+END update_user_last_name;
+
 -------------------------DELETE_USER-------------------------
 CREATE OR REPLACE PROCEDURE delete_user
     (p_user_login IN UserTable.UserLogin%TYPE)
@@ -191,10 +261,11 @@ END delete_user;
 
 -------------------------CREATE_TEAM (without blob)-------------------------
 CREATE OR REPLACE PROCEDURE create_team
-    (p_user_id IN UserTable.UserID%TYPE,
+    (p_user_login IN UserTable.UserLogin%TYPE,
      p_team_name IN TeamTable.TeamName%TYPE)
 IS
      cnt NUMBER;
+     usr_id UserTable.UserID%TYPE;
      tm_id TeamTable.TeamID%TYPE;
 BEGIN
     SELECT COUNT(*) INTO cnt FROM TeamTable WHERE UPPER(TeamName) = UPPER(p_team_name);
@@ -202,13 +273,14 @@ BEGIN
         INSERT INTO TeamTable (TeamName) VALUES(p_team_name);
         COMMIT;
         SELECT TeamID INTO tm_id FROM TeamTable WHERE UPPER(TeamName) = UPPER(p_team_name);
-        INSERT INTO UserTeamPrivTable(PrivUser,PrivTeam,Privelegy) VALUES(p_user_id,tm_id,1);
+        SELECT UserID INTO usr_id FROM UserTable WHERE UPPER(UserLogin) = UPPER(p_user_login);
+        INSERT INTO UserTeamPrivTable(PrivUser,PrivTeam,Privelegy) VALUES(usr_id,tm_id,1);
         COMMIT;
     ELSE
         RAISE_APPLICATION_ERROR(-20003, 'Team with this name already exists');
     END IF;
 END create_team;
-
+--begin create_team('remeral','ww'); end;
 -------------------------CREATE_TASK (without comments)-------------------------
 CREATE OR REPLACE PROCEDURE create_task
     (p_user_login IN UserTable.UserLogin%TYPE,
@@ -322,7 +394,7 @@ BEGIN
     END IF;
 END update_task_priority;
 
- -------------------------UPDATE_TASK_PRIORITY-------------------------
+ -------------------------UPDATE_TASK_DESCRIPTION-------------------------
 CREATE OR REPLACE PROCEDURE update_task_description
     (p_task_id IN TaskTable.TaskID %TYPE,
     p_new_task_description IN TaskTable.TaskDescription%TYPE)
@@ -449,9 +521,18 @@ END insert_100k_users;
 
 BEGIN
 insert_100k_users();
+commit;
 END;
 
-commit;
+CREATE OR REPLACE PROCEDURE insert_100k_tasks
+IS
+BEGIN    
+    BEGIN  create_team('user1','team1'); commit; END;
+    FOR i IN 1 .. 100000 LOOP
+         create_task('user1','team1','task_title'||i,1,1,'task_desc'||i, TO_CHAR(SYSDATE, 'DD.MM.YYYY'));
+    END LOOP;
+END insert_100k_tasks;
+
 ------------------------------EXPORT XML-------------------------
 ---------------------- as sys to orcl:
 create directory cw_dir as '/CW';
@@ -476,7 +557,7 @@ IS
     rc sys_refcursor;
     doc DBMS_XMLDOM.DOMDocument;
 BEGIN
-    OPEN rc FOR SELECT user_id, user_login, decr, role_name FROM user_role_full_view;
+    OPEN rc FOR SELECT UserID, UserLogin, decr, RoleName FROM UserRole_full_view;
     doc := DBMS_XMLDOM.NewDOMDocument(XMLTYPE(rc));
     DBMS_XMLDOM.WRITETOFILE(doc, 'CW_DIR/users_export.xml');
 END users_export;
@@ -484,7 +565,6 @@ END users_export;
 BEGIN
     users_export();
 END;
-
 ------------------------------ IMPORT XML
 CREATE OR REPLACE PROCEDURE artist_import
 IS

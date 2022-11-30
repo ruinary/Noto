@@ -1,6 +1,6 @@
 ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 select * from user_views;
-
+SELECT * FROM DBNoto.TaskTeam_view WHERE TeamID = 1;
 -------------------------USER & ROLE-------------------------
 
 CREATE VIEW AppRoleTable_view AS SELECT UserTable.UserLogin, UserTable.UserPassword, AppRoleTable.RoleName
@@ -11,46 +11,43 @@ SELECT * FROM AppRoleTable_view;
 DROP VIEW AppRoleTable_view;
 
 -------------------------USER & ROLE FULL-------------------------
+--DROP VIEW user_role_full_view;
+CREATE VIEW UserRole_full_view AS SELECT UserTable.UserID, UserTable.UserLogin, decryption_password(UserTable.UserPassword) as decr, AppRoleTable.RoleName
+FROM UserTable LEFT JOIN AppRoleTable ON UserTable.UserRole = AppRoleTable.RoleID;
 
-CREATE VIEW user_role_full_view AS SELECT user_table.user_id, user_table.user_login, decryption_password(user_table.user_password) as decr, role_table.role_name
-FROM user_table LEFT JOIN role_table ON user_table.user_role = role_table.role_id;
+SELECT * FROM UserRole_full_view;
 
-SELECT * FROM user_role_full_view;
+-------------------------USER & TEAM & PRIVELEGY-------------------------
+--DROP VIEW UserTeam_view;
+CREATE VIEW UserTeam_view AS SELECT TeamTable.TeamID, TeamTable.TeamName,TeamTable.TeamIcon,
+         UserTable.UserID,UserTable.UserLogin,UserTeamPrivs.UserTeamPrivName
+FROM UserTeamPrivTable 
+    JOIN UserTeamPrivs ON UserTeamPrivTable.Privelegy = UserTeamPrivs.UserTeamPrivID
+    JOIN TeamTable ON UserTeamPrivTable.PrivTeam = TeamTable.TeamID
+    JOIN UserTable ON UserTeamPrivTable.PrivUser = UserTable.UserID;
 
-DROP VIEW user_role_full_view;
-
--------------------------ARTIST & ALBUM-------------------------
-
-CREATE VIEW artist_album_view AS SELECT album_table.album_id, artist_table.artist_name, album_table.album_name, album_table.album_released, album_table.album_blob
-FROM artist_table JOIN album_table ON artist_table.artist_id = album_table.album_artist;
-
-SELECT * FROM artist_album_view;
-
-DROP VIEW artist_album_view;
-
--------------------------ARTIST & ALBUM & SONG-------------------------
-
-CREATE VIEW artist_album_song_view AS SELECT song_table.song_id, artist_table.artist_name, 
-    album_table.album_name, song_table.song_name, album_table.album_released, 
-    album_table.album_blob, song_table.song_blob
-FROM artist_table JOIN album_table ON artist_table.artist_id = album_table.album_artist
-    JOIN song_table on song_table.song_album = album_table.album_id;
-
-SELECT * FROM DBMOONYFM.artist_album_song_view ORDER BY song_name ASC;
-SELECT * FROM artist_album_song_view;
+SELECT * FROM DBNoto.UserTeam_view ORDER BY TeamName ASC;
+SELECT * FROM UserTeam_view;
 commit;
-DROP VIEW artist_album_song_view;
+SELECT * FROM DBNoto.UserTeam_view WHERE UserID = 1 ORDER BY TeamName ASC;
 
-------------------------- 
+-------------------------TEAM & TASK & LAST COMMENT------------------------- 
 
-CREATE VIEW artist_album_song_user_view AS SELECT user_table.user_id, song_table.song_id, artist_table.artist_name, 
-    album_table.album_name, song_table.song_name, album_table.album_released, 
-    album_table.album_blob, song_table.song_blob
-FROM artist_table JOIN album_table ON artist_table.artist_id = album_table.album_artist
-    JOIN song_table on song_table.song_album = album_table.album_id JOIN saved_table on song_table.song_id = saved_table.saved_song
-    JOIN user_table on saved_table.saved_user = user_table.user_id;
-    
-select * from artist_album_song_user_view;
-drop view artist_album_song_user_view;
+--DROP VIEW TaskTeam_view;
+CREATE VIEW TaskTeam_view 
+AS SELECT   TaskTable.TaskID, TaskTable.TaskTitle,
+            TaskTable.CreationDate,TaskTable.DeadlineDate, 
+            TaskPriorities.TaskPriorityName, TaskStatuses.TaskStatusName,
+            TaskTable.TaskDescription,
+            TeamTable.TeamID, TeamTable.TeamName
+FROM TaskTable 
+    JOIN TeamTable ON TeamTable.TeamID = TaskTable.TaskTeamID
+    JOIN TaskPriorities ON TaskTable.TaskPriority = TaskPriorities.TaskPriorityID
+    JOIN TaskStatuses ON TaskTable.TaskStatus = TaskStatuses.TaskStatusID;
+commit;
+SELECT * FROM DBNoto.TaskTeam_view WHERE TeamID = 1 ORDER BY TaskPriorityName ASC;
+select * from TaskTeam_view;
 
+
+ --JOIN TaskComments ON TaskTable.TaskID = TaskComments.ComTask
 -----------------------------

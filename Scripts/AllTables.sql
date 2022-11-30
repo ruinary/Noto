@@ -35,10 +35,6 @@ CREATE TABLE UserTable(
 commit;
 SELECT * FROM UserTable;
 select count(*) from UserTable;
-
-
-INSERT INTO UserTable(UserLogin, UserPassword, UserName, UserLastName, UserPhoneNumber, UserEmail, UserRole) VALUES ('Remeral', '1BLUErose', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru', 2);
-commit;
 -------------------------TASK STATUSES-------------------------
 
 --DROP TABLE TaskStatuses;
@@ -52,8 +48,7 @@ INSERT INTO TaskStatuses (TaskStatusName) VALUES('NOT STARTED');
 INSERT INTO TaskStatuses (TaskStatusName) VALUES('STARTED');
 INSERT INTO TaskStatuses (TaskStatusName) VALUES('IN PROCESS');
 INSERT INTO TaskStatuses (TaskStatusName) VALUES('READY');
-
-
+commit;
 SELECT * FROM TaskStatuses;
 
 -------------------------TASK PRIORITIES-------------------------
@@ -68,7 +63,7 @@ commit;
 INSERT INTO TaskPriorities (TaskPriorityName) VALUES('HIGH');
 INSERT INTO TaskPriorities (TaskPriorityName) VALUES('MEDIUM');
 INSERT INTO TaskPriorities (TaskPriorityName) VALUES('LOW');
-
+commit;
 SELECT * FROM TaskPriorities;
 
 -------------------------TEAM-------------------------
@@ -81,7 +76,7 @@ CREATE TABLE TeamTable (
     CONSTRAINT TeamTable_pk PRIMARY KEY (TeamID)
 );
 commit;
-INSERT INTO TeamTable (TeamName) VALUES('lohi');
+INSERT INTO TeamTable (TeamName) VALUES('team_demo');
 SELECT * FROM TeamTable;
 
 -------------------------TASK-------------------------
@@ -96,13 +91,13 @@ CREATE TABLE TaskTable (
     TaskDescription VARCHAR2(200) NOT NULL,
     CreationDate VARCHAR2(30) NOT NULL,
     DeadlineDate VARCHAR2(30) NOT NULL,
-    CONSTRAINT TaskTablePriority_fk FOREIGN KEY (TaskPriority) REFERENCES TaskPriorities(TaskPriorityID),
-    CONSTRAINT TaskTableStatus_fk FOREIGN KEY (TaskStatus) REFERENCES TaskStatuses(TaskStatusID),
-    CONSTRAINT TaskTableTask_fk FOREIGN KEY (TaskTeamID) REFERENCES TeamTable(TeamID),
+    CONSTRAINT TaskTablePriority_fk FOREIGN KEY (TaskPriority) REFERENCES TaskPriorities(TaskPriorityID)  ON DELETE CASCADE, 
+    CONSTRAINT TaskTableStatus_fk FOREIGN KEY (TaskStatus) REFERENCES TaskStatuses(TaskStatusID) ON DELETE CASCADE, 
+    CONSTRAINT TaskTableTask_fk FOREIGN KEY (TaskTeamID) REFERENCES TeamTable(TeamID) ON DELETE CASCADE,
     CONSTRAINT TaskTable_pk PRIMARY KEY (TaskID)
 );
 commit;
-INSERT INTO TaskTable (TaskTeamID,TaskStatus,TaskPriority,TaskTitle,TaskDescription,CreationDate,DeadlineDate) VALUES(1,1,1,'loh','d','22.01.2022','23.01.2022');
+--INSERT INTO TaskTable (TaskTeamID,TaskStatus,TaskPriority,TaskTitle,TaskDescription,CreationDate,DeadlineDate) VALUES(1,1,1,'loh','d','22.01.2022','23.01.2022');
 SELECT * FROM TaskTable;
 
 -------------------------TASK COMMENTS-------------------------
@@ -115,12 +110,12 @@ CREATE TABLE TaskComments (
     ComDate VARCHAR2(30) NOT NULL,
     ComText VARCHAR2(100) NOT NULL,
     CONSTRAINT TaskComment_pk PRIMARY KEY (ComID),
-    CONSTRAINT TaskComment_fk FOREIGN KEY (ComUser) REFERENCES UserTable(UserID),
-    CONSTRAINT TaskCommentTask_fk FOREIGN KEY (ComTask) REFERENCES TaskTable(TaskID)
+    CONSTRAINT TaskComment_fk FOREIGN KEY (ComUser) REFERENCES UserTable(UserID) ON DELETE CASCADE,
+    CONSTRAINT TaskCommentTask_fk FOREIGN KEY (ComTask) REFERENCES TaskTable(TaskID) ON DELETE CASCADE
 );
 commit;
 
-INSERT INTO TaskComments ( ComDate,ComText,ComUser) VALUES('22.01.2022','ComText',1);
+--INSERT INTO TaskComments ( ComDate,ComText,ComUser) VALUES('22.01.2022','ComText',1);
 
 SELECT * FROM TaskComments; 
 -------------------------TEAM USER PRIVS-------------------------
@@ -134,6 +129,7 @@ CREATE TABLE UserTeamPrivs (
 commit;
 INSERT INTO UserTeamPrivs(UserTeamPrivName) VALUES('OWNER');
 INSERT INTO UserTeamPrivs(UserTeamPrivName) VALUES('TEAMMATE');
+commit;
 SELECT * FROM UserTeamPrivs;
 
 -------------------------TEAM USER PRIVS TABLE-------------------------
@@ -143,10 +139,10 @@ CREATE TABLE UserTeamPrivTable (
     PrivUser NUMBER(10) NOT NULL,
     PrivTeam NUMBER(10) NOT NULL,
     Privelegy NUMBER(10) NOT NULL,
-    CONSTRAINT UserToUsers_fk FOREIGN KEY (PrivUser) REFERENCES UserTable(UserID),
-    CONSTRAINT TeamToTeams_fk FOREIGN KEY (PrivTeam) REFERENCES TeamTable(TeamID),
+    CONSTRAINT UserToUsers_fk FOREIGN KEY (PrivUser) REFERENCES UserTable(UserID) ON DELETE CASCADE,
+    CONSTRAINT TeamToTeams_fk FOREIGN KEY (PrivTeam) REFERENCES TeamTable(TeamID) ON DELETE CASCADE, 
     CONSTRAINT PrivToPrivs_fk FOREIGN KEY (Privelegy) REFERENCES UserTeamPrivs(UserTeamPrivID)
 );
 commit;
-INSERT INTO UserTeamPrivTable(PrivUser,PrivTeam,Privelegy) VALUES(1,1,1);
+--INSERT INTO UserTeamPrivTable(PrivUser,PrivTeam,Privelegy) VALUES(1,1,1);
 SELECT * FROM UserTeamPrivTable;

@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="Noto.Views.UserControls.ChangeUC.ChangeEmailUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Noto.Views.UserControls.ChangeUC"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Viewbox >
+                <TextBlock Style="{DynamicResource CommonTitleTextH1}" Text="Электронная почта" VerticalAlignment="Top"/>
+            </Viewbox>
+        </Grid>
+        <Grid Grid.Row="1">
+            <!-- email -->
+            <Grid x:Name="CurEmail">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Viewbox>
+                        <TextBlock x:Name="userEmail" Text="{Binding }" TextAlignment="Center"  TextWrapping="Wrap" FontSize="30" FontStyle="Normal" FontWeight="Normal" Foreground="White" FontFamily="Bahnschrift Condensed" HorizontalAlignment="Right" Background="{x:Null}" VerticalAlignment="Center"/>
+                    </Viewbox>
+                </Grid>
+                <Grid Grid.Column="1" x:Name="EditProfileEmail">
+                    <Button VerticalAlignment="Stretch" Foreground="#FFBFBFBF" Background="#33FFFFFF" BorderBrush="{x:Null}" Cursor="Hand" Click="Button_Click_EditEMail" HorizontalAlignment="Stretch">
+                        <materialDesign:PackIcon Kind="Edit"/>
+                    </Button>
+                </Grid>
+            </Grid>
+            <!-- Редактирование EMAIL -->
+            <Grid Visibility="Hidden" x:Name="EditEmail">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" >
+                    <Viewbox>
+                        <TextBox x:Name="EditedEmail" TextAlignment="Center"  TextWrapping="Wrap" FontSize="30" FontStyle="Normal" FontWeight="Normal" Foreground="White" FontFamily="Bahnschrift Condensed" HorizontalAlignment="Right" Background="{x:Null}" VerticalAlignment="Center"/>
+                    </Viewbox>
+                </Grid>
+                <Grid Grid.Column="1" >
+                    <Button VerticalAlignment="Stretch" Foreground="#FFBFBFBF" Background="#33FFFFFF" BorderBrush="{x:Null}" Cursor="Hand" Click="Button_Click_ConfEMail" HorizontalAlignment="Stretch" Width="45" Margin="5,0,5,0">
+                        <materialDesign:PackIcon Kind="Check"/>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

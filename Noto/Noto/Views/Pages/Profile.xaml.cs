@@ -25,75 +25,16 @@ namespace Noto.Views.Pages
                         
             userIconCircle.ImageSource = DataWorker.UserProfile.userIconImg;
 
-            userEmail.Text = DataWorker.UserProfile.userEmail;
-            EditedEmail.Text = DataWorker.UserProfile.userEmail;
-
-            userPhoneNumber.Text = DataWorker.UserProfile.userPhoneNumber;
-            EditedPhone.Text = DataWorker.UserProfile.userPhoneNumber;
-
-            userName.Text = DataWorker.UserProfile.userName;
-            userLastName.Text = DataWorker.UserProfile.userLastName;
-
-            userLogin.Text = DataWorker.UserProfile.userLogin;
-
-            if (DataWorker.CurrentUser.currentUserId == DataWorker.UserProfile.userId) 
-            { 
-                EditProfileEmail.Visibility = Visibility.Visible;
-                EditProfilePhoneNumber.Visibility = Visibility.Visible;
+            if (DataWorker.CurrentUser.currentUserId == DataWorker.UserProfile.userId)
+            {
+                ChangePasswordGrid.Visibility = Visibility.Visible;
             }
             else
             {
-                EditProfileEmail.Visibility = Visibility.Hidden;
-                EditProfilePhoneNumber.Visibility = Visibility.Hidden;
+                ChangePasswordGrid.Visibility = Visibility.Hidden;
             }
         }
 
-        #region Edit Email
-        private void Button_Click_EditEMail(object sender, RoutedEventArgs e)
-        {
-            EditEmail.Visibility = Visibility.Visible;
-            CurEmail.Visibility = Visibility.Hidden;
-        }
-        private void Button_Click_ConfEMail(object sender, RoutedEventArgs e)
-        {
-            bool check1 = Regex.IsMatch(EditedEmail.Text, @"(\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)");
-            
-            if (check1)
-            {
-                string curEmail = EditedEmail.Text;
-                int userAuthId = DataWorker.UserProfile.userId;
-
-                con.Open();
-                OracleCommand cmd = con.CreateCommand();
-                try
-                {
-                    cmd.CommandText = "DBNoto.update_user_email";
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("p_user_login", OracleDbType.Varchar2, 30).Value = DataWorker.UserProfile.userLogin;
-                    cmd.Parameters.Add("p_new_user_email", OracleDbType.Varchar2, 30).Value = EditedEmail.Text.Trim();
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception exc)
-                {
-                    MessageBox.Show(exc.ToString());
-                }
-
-                con.Close();
-
-                DataWorker.CurrentUser.currentUserEmail = EditedEmail.Text.Trim();
-                DataWorker.UserProfile.userEmail = EditedEmail.Text.Trim();
-
-                EditEmail.Visibility = Visibility.Hidden;
-                CurEmail.Visibility = Visibility.Visible;
-
-                userEmail.Text = DataWorker.UserProfile.userEmail;
-            }
-            else
-            {
-                MessageBox.Show("Введенные данные не являются почтой!");
-            }
-        }
-        #endregion
         #region Edit Photo
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -171,48 +112,6 @@ namespace Noto.Views.Pages
             catch (Exception exc)
             {
                 MessageBox.Show(exc.ToString());
-            }
-        }
-        #endregion
-        #region Edit Phone
-        private void Button_Click_EditPhone(object sender, RoutedEventArgs e)
-        {
-            EditPhone.Visibility = Visibility.Visible;
-            CurPhone.Visibility = Visibility.Hidden;
-        }
-
-        private void Button_Click_ConfPhone(object sender, RoutedEventArgs e)
-        {
-            bool check1 = Regex.IsMatch(EditedPhone.Text, @"^(\+375|80)(29|44|33)([0-9]){7}$");
-            if (check1)
-            {
-                string curPhone = EditedPhone.Text;
-                int userAuthId = DataWorker.UserProfile.userId;
-
-                con.Open();
-                OracleCommand cmd = con.CreateCommand();
-                try
-                {
-                    cmd.CommandText = "DBNoto.update_user_phonenumber";
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("p_user_login", OracleDbType.Varchar2, 30).Value = DataWorker.UserProfile.userLogin;
-                    cmd.Parameters.Add("p_new_user_phonenumber", OracleDbType.Varchar2, 13).Value = EditedPhone.Text.Trim();
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception exc)
-                {
-                    MessageBox.Show(exc.ToString());
-                }
-
-                con.Close();
-
-                DataWorker.CurrentUser.currentUserPhoneNumber = EditedPhone.Text.Trim();
-                DataWorker.UserProfile.userPhoneNumber = EditedPhone.Text.Trim();
-
-                EditPhone.Visibility = Visibility.Hidden;
-                CurPhone.Visibility = Visibility.Visible;
-
-                userPhoneNumber.Text = DataWorker.UserProfile.userPhoneNumber;
             }
         }
         #endregion
