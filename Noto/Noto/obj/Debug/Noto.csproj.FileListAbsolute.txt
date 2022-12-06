@@ -292,3 +292,13 @@ D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeLastNameUC.bam
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeNameAndLastNameUC.baml
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeTaskTitleUC.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeTaskTitleUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeDateCreationUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeDateCreationUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeDateDeadlineUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeDateDeadlineUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangePriorityUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangePriorityUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeStatusesUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeStatusesUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeTaskDescriptionUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeTaskDescriptionUC.baml

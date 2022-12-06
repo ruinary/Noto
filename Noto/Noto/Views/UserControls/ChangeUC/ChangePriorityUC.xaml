@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Noto.Views.UserControls.ChangeUC.ChangePriorityUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Noto.Views.UserControls.ChangeUC"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="500" Foreground="White">
+    <Grid>
+        <Viewbox>
+            <ListBox  x:Name="prioritySelection"  FontFamily="Bahnschrift Condensed" FontSize="30" BorderBrush="{x:Null}" Foreground="White" SelectionChanged="Priority_SelectionChanged" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{x:Null}"  ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False">
+                <ListBoxItem x:Name="selectorLow" Content="LOW" FontFamily="Bahnschrift Condensed" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                <ListBoxItem x:Name="selectorMedium" Content="MEDIUM" FontSize="20" Background="{x:Null}"  BorderBrush="{x:Null}"/>
+                <ListBoxItem x:Name="selectorHigh" Content="HIGH" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"/>
+            </ListBox>
+        </Viewbox>
+    </Grid>
+</UserControl>

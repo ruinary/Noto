@@ -49,7 +49,7 @@
                     </Grid>
                     <Grid Grid.Row="1">
                         <Viewbox MaxWidth="200">
-                            <TextBlock x:Name="teamNameBlock" Style="{DynamicResource CommonTitleTextH1}">TaskTitle</TextBlock>
+                            <TextBlock x:Name="teamNameBlock" Style="{DynamicResource CommonTitleTextH1}">TeamTitle</TextBlock>
                         </Viewbox>
                     </Grid>
                 </Grid>

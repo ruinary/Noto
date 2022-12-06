@@ -412,7 +412,7 @@ END update_task_description;
  -------------------------UPDATE_TASK_DEADLINEDATE-------------------------
 CREATE OR REPLACE PROCEDURE update_task_deadlinedate
     (p_task_id IN TaskTable.TaskID %TYPE,
-    p_new_task_deadlinedate IN TaskTable.TaskDescription%TYPE)
+    p_new_task_deadlinedate IN TaskTable.DeadlineDate%TYPE)
 IS
     cnt NUMBER;
 BEGIN
@@ -424,6 +424,20 @@ BEGIN
     END IF;
 END update_task_deadlinedate;
 
+ -------------------------UPDATE_TASK_CREATIONDATE-------------------------
+CREATE OR REPLACE PROCEDURE update_task_creationdate
+    (p_task_id IN TaskTable.TaskID %TYPE,
+    p_new_task_creationdate IN TaskTable.CreationDate%TYPE)
+IS
+    cnt NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO cnt FROM TaskTable WHERE TaskID = p_task_id;
+    IF (cnt != 0) THEN
+        UPDATE TaskTable SET CreationDate  = p_new_task_creationdate WHERE TaskID = p_task_id;
+    ELSE
+        RAISE_APPLICATION_ERROR(-20002, 'Task is not found');
+    END IF;
+END update_task_creationdate;
 
 ------------------------------DELETE TASK------------------------------
 create or replace PROCEDURE delete_task

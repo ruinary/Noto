@@ -52,7 +52,6 @@ commit;
 SELECT * FROM TaskStatuses;
 
 -------------------------TASK PRIORITIES-------------------------
-
 --DROP TABLE TaskPriorities;
 CREATE TABLE TaskPriorities (
     TaskPriorityID NUMBER(10) GENERATED AS IDENTITY(START WITH 1 INCREMENT BY 1),
@@ -67,7 +66,6 @@ commit;
 SELECT * FROM TaskPriorities;
 
 -------------------------TEAM-------------------------
-
 --DROP TABLE TeamTable;
 CREATE TABLE TeamTable (
     TeamID NUMBER(10) GENERATED AS IDENTITY(START WITH 1 INCREMENT BY 1),
@@ -80,7 +78,6 @@ INSERT INTO TeamTable (TeamName) VALUES('team_demo');
 SELECT * FROM TeamTable;
 
 -------------------------TASK-------------------------
-
 --DROP TABLE TaskTable;
 CREATE TABLE TaskTable (
     TaskID NUMBER(10) GENERATED AS IDENTITY(START WITH 1 INCREMENT BY 1),
@@ -101,7 +98,6 @@ commit;
 SELECT * FROM TaskTable;
 
 -------------------------TASK COMMENTS-------------------------
-
 --DROP TABLE TaskComments;
 CREATE TABLE TaskComments (
     ComID NUMBER(10) GENERATED AS IDENTITY(START WITH 1 INCREMENT BY 1),
@@ -118,8 +114,8 @@ commit;
 --INSERT INTO TaskComments ( ComDate,ComText,ComUser) VALUES('22.01.2022','ComText',1);
 
 SELECT * FROM TaskComments; 
--------------------------TEAM USER PRIVS-------------------------
 
+-------------------------TEAM USER PRIVS-------------------------
 --DROP TABLE UserTeamPrivs;
 CREATE TABLE UserTeamPrivs (
     UserTeamPrivID NUMBER(10) GENERATED AS IDENTITY(START WITH 1 INCREMENT BY 1),
@@ -133,7 +129,6 @@ commit;
 SELECT * FROM UserTeamPrivs;
 
 -------------------------TEAM USER PRIVS TABLE-------------------------
-
 --DROP TABLE UserTeamPrivTable;
 CREATE TABLE UserTeamPrivTable (
     PrivUser NUMBER(10) NOT NULL,

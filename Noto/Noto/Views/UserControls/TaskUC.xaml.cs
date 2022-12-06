@@ -43,8 +43,8 @@ namespace Noto.Views.UserControls
             this.taskDescription = _taskDescription;
 
             taskTitleBlock.Text = taskTitle;
-            taskCreationDateBlock.Text = taskDeadlineDate;
-            taskDeadlineDateBlock.Text = taskCreationDate;
+            taskCreationDateBlock.Text = taskCreationDate;
+            taskDeadlineDateBlock.Text = taskDeadlineDate;
             taskPriorityBlock.Text = taskPriority;
             taskStatusBlock.Text = taskStatus;
             taskDescriptionBlock.Text = taskDescription;

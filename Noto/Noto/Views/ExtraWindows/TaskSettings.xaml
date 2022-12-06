@@ -45,9 +45,7 @@
                             </Viewbox>
                         </Grid>
                         <Grid Grid.Row="1" Grid.Column="0">
-                            <Viewbox>
-                                <TextBlock x:Name="taskCreationDateBlock" Style="{DynamicResource CommonTitleTextH1}" VerticalAlignment="Top"/>
-                            </Viewbox>
+                            <uc:ChangeDateCreationUC/>
                         </Grid>
                         <Grid Grid.Row="0" Grid.Column="1">
                             <Viewbox>
@@ -55,9 +53,7 @@
                             </Viewbox>
                         </Grid>
                         <Grid Grid.Row="1" Grid.Column="1">
-                            <Viewbox>
-                                <TextBlock x:Name="taskDeadlineDateBlock" Style="{DynamicResource CommonTitleTextH1}" VerticalAlignment="Top"/>
-                            </Viewbox>
+                            <uc:ChangeDateDeadlineUC/>
                         </Grid>
                     </Grid>
                     <Grid Grid.Row="2">
@@ -75,9 +71,7 @@
                             </Viewbox>
                         </Grid>
                         <Grid Grid.Row="1" Grid.Column="0">
-                            <Viewbox>
-                                <TextBlock x:Name="taskPriorityBlock" Style="{DynamicResource CommonTitleTextH1}"/>
-                            </Viewbox>
+                            <uc:ChangePriorityUC/>
                         </Grid>
                         <Grid Grid.Row="0" Grid.Column="1">
                             <Viewbox>
@@ -85,9 +79,7 @@
                             </Viewbox>
                         </Grid>
                         <Grid Grid.Row="1" Grid.Column="1">
-                            <Viewbox>
-                                <TextBlock x:Name="taskStatusBlock" Style="{DynamicResource CommonTitleTextH1}"/>
-                            </Viewbox>
+                            <uc:ChangeStatusesUC/>
                         </Grid>
                     </Grid>
                     <Grid Grid.Row="3">
@@ -101,9 +93,7 @@
                             </Viewbox>
                         </Grid>
                         <Grid Grid.Row="1">
-                            <Viewbox>
-                                <TextBlock x:Name="taskDescriptionBlock" Style="{DynamicResource CommonTitleTextH1}" VerticalAlignment="Top"/>
-                            </Viewbox>
+                            <uc:ChangeTaskDescriptionUC/>
                         </Grid>
                     </Grid>
                     <Grid Grid.Row="4">
