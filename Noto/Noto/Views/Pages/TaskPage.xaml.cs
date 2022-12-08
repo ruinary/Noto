@@ -30,6 +30,9 @@ namespace Noto.Views.Pages
                 taskList.Children.Add(task);
             }
             con.Close();
+
+            CreateTaskUC newtask = new CreateTaskUC();
+            taskList.Children.Add(newtask);
         }
     }
 

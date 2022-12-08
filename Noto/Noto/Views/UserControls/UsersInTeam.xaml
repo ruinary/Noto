@@ -45,7 +45,7 @@
                             </Viewbox>
                             </Grid>
                             <Grid Grid.Column="2">
-                                <Viewbox>
+                                <Viewbox MaxHeight="100">
                                 <TextBlock x:Name="CountTeamates" FontWeight="Bold" Text="150">
                                     <TextBlock.Foreground>
                                         <SolidColorBrush Color="{DynamicResource ColorWhite}"/>
@@ -58,7 +58,7 @@
                 </Border>
             </Grid>
         <Grid Grid.Column="4" Grid.RowSpan="3">
-            <Button Style="{DynamicResource AddButton}"/>
+            <Button Style="{DynamicResource AddButton}" Click="Button_Click"/>
         </Grid>
     </Grid>
 </UserControl>

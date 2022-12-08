@@ -97,6 +97,15 @@
     </ApplicationDefinition>
     <Compile Include="Data\DataWorker.cs" />
     <Compile Include="Models\Users.cs" />
+    <Compile Include="Views\ExtraWindows\AddUserInTeam.xaml.cs">
+      <DependentUpon>AddUserInTeam.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExtraWindows\CreateTask.xaml.cs">
+      <DependentUpon>CreateTask.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExtraWindows\CreateTeam.xaml.cs">
+      <DependentUpon>CreateTeam.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ExtraWindows\TaskSettings.xaml.cs">
       <DependentUpon>TaskSettings.xaml</DependentUpon>
     </Compile>
@@ -154,8 +163,17 @@
     <Compile Include="Views\UserControls\ChangeUC\ChangeTaskTitleUC.xaml.cs">
       <DependentUpon>ChangeTaskTitleUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\ChangeUC\ChangeTeamNameUC.xaml.cs">
+      <DependentUpon>ChangeTeamNameUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\CommentUC.xaml.cs">
       <DependentUpon>CommentUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\CreateTaskUC.xaml.cs">
+      <DependentUpon>CreateTaskUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\CreateTeamUC.xaml.cs">
+      <DependentUpon>CreateTeamUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\TaskUC.xaml.cs">
       <DependentUpon>TaskUC.xaml</DependentUpon>
@@ -166,6 +184,9 @@
     <Compile Include="Views\UserControls\UsersInTeam.xaml.cs">
       <DependentUpon>UsersInTeam.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\UserUC.xaml.cs">
+      <DependentUpon>UserUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
@@ -174,6 +195,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\Texts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExtraWindows\AddUserInTeam.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExtraWindows\CreateTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExtraWindows\CreateTeam.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -253,7 +286,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\ChangeUC\ChangeTeamNameUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\CommentUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\CreateTaskUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\CreateTeamUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -270,6 +315,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\UsersInTeam.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\UserUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -29,7 +29,7 @@ FROM UserTeamPrivTable
 SELECT * FROM DBNoto.UserTeam_view ORDER BY TeamName ASC;
 SELECT * FROM UserTeam_view;
 commit;
-SELECT * FROM DBNoto.UserTeam_view WHERE UserID = 1 ORDER BY TeamName ASC;
+SELECT * FROM DBNoto.UserTeam_view WHERE TeamID = 1 ORDER BY UserLogin ASC;
 
 -------------------------TEAM & TASK & LAST COMMENT------------------------- 
 

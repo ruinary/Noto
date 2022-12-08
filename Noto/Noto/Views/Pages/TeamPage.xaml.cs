@@ -1,4 +1,5 @@
 ﻿using Noto.Data;
+using Noto.Views.ExtraWindows;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -16,7 +17,8 @@ namespace Noto.Views.Pages
 
         private void TeamSettingsButtonClick(object sender, RoutedEventArgs e)
         {
-           
+            TeamSettings teamSettings = new TeamSettings();
+            teamSettings.Show();
         }
     }
 }

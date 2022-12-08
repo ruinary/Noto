@@ -302,3 +302,17 @@ D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeStatusesUC.g.c
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeStatusesUC.baml
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeTaskDescriptionUC.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeTaskDescriptionUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeTeamNameUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\ChangeUC\ChangeTeamNameUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\UserUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\UserUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\ExtraWindows\AddUserInTeam.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\ExtraWindows\AddUserInTeam.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\CreateTaskUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\CreateTeamUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\CreateTaskUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\CreateTeamUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\ExtraWindows\CreateTask.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\ExtraWindows\CreateTeam.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\ExtraWindows\CreateTask.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\ExtraWindows\CreateTeam.baml

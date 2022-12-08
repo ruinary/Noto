@@ -116,20 +116,29 @@ END log_in_user;
 -------------------------SEARCH_USER-------------------------
 CREATE OR REPLACE PROCEDURE search_user
     (p_user_login IN UserTable.UserLogin%TYPE,
-    o_user_login OUT UserTable.UserLogin%TYPE,
-    o_user_password OUT UserTable.UserPassword%TYPE)
+    o_user_id OUT UserTable.UserID%TYPE,
+    o_user_name OUT UserTable.UserName%TYPE,
+    o_user_lastname OUT UserTable.UserLastName%TYPE,
+    o_user_phonenumber OUT UserTable.UserPhoneNumber%TYPE,
+    o_user_email OUT UserTable.UserEmail%TYPE)
 IS
-    CURSOR user_cursor IS SELECT UserLogin, decryption_password(UserPassword) FROM UserTable WHERE UPPER(UserLogin) = UPPER(p_user_login);
+    CURSOR user_cursor IS SELECT UserID,UserName,UserLastName,UserPhonenumber,UserEmail FROM UserTable WHERE UPPER(UserLogin) = UPPER(p_user_login);
 BEGIN
     OPEN user_cursor;
-        FETCH user_cursor INTO o_user_login, o_user_password;
+        FETCH user_cursor INTO o_user_id, o_user_name,o_user_lastname,o_user_phonenumber,o_user_email;
         IF user_cursor%NOTFOUND THEN
             RAISE_APPLICATION_ERROR(-20003, 'User is not found');
         END IF;
     CLOSE user_cursor;
 END search_user;
 
-begin search_user('REMERAL'); end;
+declare
+    o_user_id UserTable.UserID%TYPE;
+    o_user_name UserTable.UserName%TYPE;
+    o_user_lastname UserTable.UserLastName%TYPE;
+    o_user_phonenumber UserTable.UserPhoneNumber%TYPE;
+    o_user_email UserTable.UserEmail%TYPE;
+begin search_user('REMERAL',o_user_id,o_user_name,o_user_lastname,o_user_phonenumber,o_user_email); end;
 
 -------------------------UPDATE_USER_LOGIN-------------------------
 CREATE OR REPLACE PROCEDURE update_user_login
@@ -491,23 +500,31 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20003, 'User is not found');
     END IF;
 END delete_user;
-
 ------------------------------ADD USER TO TEAM------------------------------
 CREATE OR REPLACE PROCEDURE add_user_to_team
-    (p_user_id IN UserTable.UserID%TYPE,
+    (p_user_login IN UserTable.UserLogin%TYPE,
     p_team_id IN TeamTable.TeamID%TYPE)
 IS
+    user_id UserTable.UserID%TYPE;
     cnt NUMBER;
 BEGIN
-    SELECT COUNT(*) INTO cnt FROM UserTeamPrivTable WHERE PrivUser = p_user_id AND PrivTeam = p_team_id;
-    IF (cnt = 0) THEN
-        INSERT INTO UserTeamPrivTable(PrivUser, PrivTeam, Privelegy) VALUES(p_user_id, p_team_id, 2);
-        COMMIT;
+    SELECT COUNT(*) INTO CNT FROM UserTable WHERE upper(UserLogin) = upper(p_user_login);
+    SELECT UserID INTO user_id FROM UserTable WHERE upper(UserLogin) = upper(p_user_login);
+     IF (cnt != 0) THEN
+        SELECT COUNT(*) INTO cnt FROM UserTeamPrivTable WHERE PrivUser = user_id AND PrivTeam = p_team_id;
+        IF (cnt = 0) THEN
+            INSERT INTO UserTeamPrivTable(PrivUser, PrivTeam, Privelegy) VALUES(user_id, p_team_id, 2);
+            COMMIT;
+        ELSE
+            RAISE_APPLICATION_ERROR(-20011, 'This user is already add');
+        END IF; 
     ELSE
-        RAISE_APPLICATION_ERROR(-20011, 'This user is already add');
+        RAISE_APPLICATION_ERROR(-20011, 'This user is not find');
     END IF;
 END add_user_to_team;
 
+--select * from UserTable;
+--begin add_user_to_team('qusest',1); end;
 ------------------------------REMOVE USER FROM TEAM------------------------------
 CREATE OR REPLACE PROCEDURE remove_user_from_team
     (p_user_id IN UserTable.UserID%TYPE,
@@ -523,6 +540,21 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20012, 'This user is not found in this team');
     END IF;
 END remove_user_from_team;
+
+--select * from teamtable;
+--begin DBNoto.remove_user_from_team(21,1); end;
+
+------------------------------COUNT USER IN TEAM------------------------------
+CREATE OR REPLACE PROCEDURE count_user_in_team 
+    (p_team_id IN TeamTable.TeamID%TYPE,
+    o_count_users OUT NUMBER)
+IS
+BEGIN
+    SELECT count(*)INTO o_count_users FROM UserTeam_view WHERE TeamID = p_team_id;
+END count_user_in_team;
+
+--declare count_users NUMBER;
+--begin count_user_in_team(21,count_users); end;
 
 ------------------------INSERT 100 000 USERS-------------------------
 CREATE OR REPLACE PROCEDURE insert_100k_users
@@ -541,7 +573,7 @@ END;
 CREATE OR REPLACE PROCEDURE insert_100k_tasks
 IS
 BEGIN    
-    BEGIN  create_team('user1','team1'); commit; END;
+    BEGIN  create_team('qusest','team_demo'); commit; END;
     FOR i IN 1 .. 100000 LOOP
          create_task('user1','team1','task_title'||i,1,1,'task_desc'||i, TO_CHAR(SYSDATE, 'DD.MM.YYYY'));
     END LOOP;
