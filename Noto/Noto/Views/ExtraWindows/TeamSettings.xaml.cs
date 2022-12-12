@@ -8,6 +8,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Noto.Views.ExtraWindows
@@ -16,8 +17,6 @@ namespace Noto.Views.ExtraWindows
     {
         OracleConnection con = new OracleConnection();
         String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
-        byte[] image;
-        string imageName;
         int rowMargin = 4, rowCounter = 1;
 
         public TeamSettings()
@@ -32,6 +31,9 @@ namespace Noto.Views.ExtraWindows
             con.Close();
 
             InitializeComponent();
+
+            ImageWorker.LoadTeamImageBrush();
+            teamIconCircle.ImageSource = DataWorker.CurrentTeam.teamIconImg;
 
             loadSomeUsers();
         }
@@ -95,78 +97,12 @@ namespace Noto.Views.ExtraWindows
         {
             try
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog()
-                {
-                    Filter = "Image Files|*.jpg;*.png;"
-                };
-
-                if (openFileDialog.ShowDialog() == true)
-                {
-                    imageName = openFileDialog.FileName;
-                    image = File.ReadAllBytes(openFileDialog.FileName);
-                    var bitmImg = new BitmapImage();
-                    using (var mem = new MemoryStream(image))
-                    {
-                        mem.Position = 0;
-                        bitmImg.BeginInit();
-                        bitmImg.CacheOption = BitmapCacheOption.OnLoad;
-                        bitmImg.StreamSource = mem;
-                        bitmImg.EndInit();
-                    }
-                    bitmImg.Freeze();
-                    teamIconCircle.ImageSource = bitmImg;
-                }
-                openFileDialog = null;
-            }
-            catch (System.ArgumentException ae)
-            {
-                imageName = "";
-                MessageBox.Show(ae.Message.ToString());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
-            }
-            try
-            {
-                OracleCommand cmd = con.CreateCommand();
-                con.Open();
-                // запись изображения в таблицу
-                FileStream fls;
-                fls = new FileStream(imageName, FileMode.Open, FileAccess.Read);
-                byte[] blob = new byte[fls.Length];
-                fls.Read(blob, 0, System.Convert.ToInt32(fls.Length));
-                fls.Close();
-
-                if (imageName != "")
-                {
-                    OracleCommand cmd2 = con.CreateCommand();
-                    OracleTransaction txn;
-                    txn = con.BeginTransaction(IsolationLevel.ReadCommitted);
-                    cmd2.Transaction = txn;
-
-                    cmd2.CommandText = "UPDATE TeamTable " +
-                                      "SET " +
-                                      "TeamIcon = :ImageFront " +
-                                      "WHERE TeamID = " + DataWorker.CurrentTeam.teamId + " )";
-
-                    cmd2.Parameters.Add(":ImageFront", OracleDbType.Blob);
-                    cmd2.Parameters[":ImageFront"].Value = blob;
-
-                    cmd2.ExecuteNonQuery();
-                    txn.Commit();
-                    con.Close();
-                    con.Dispose();
-
-                    MessageBox.Show("Данные добавлены в поле blob из " + imageName);
-
-                    this.Close();
-                    Application.Current.Windows[0].Show();
-                }
+                ImageWorker.UpdateTeamImageBrush();
+                teamIconCircle.ImageSource = DataWorker.CurrentTeam.teamIconImg;
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Ошибка при добавлении (ты лох тупой)");
+                MessageBox.Show(exc.ToString());
             }
         }
     }

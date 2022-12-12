@@ -20,7 +20,7 @@ SELECT * FROM UserRole_full_view;
 -------------------------USER & TEAM & PRIVELEGY-------------------------
 --DROP VIEW UserTeam_view;
 CREATE VIEW UserTeam_view AS SELECT TeamTable.TeamID, TeamTable.TeamName,TeamTable.TeamIcon,
-         UserTable.UserID,UserTable.UserLogin,UserTeamPrivs.UserTeamPrivName
+         UserTable.UserID,UserTable.UserLogin,USerTable.UserIcon,UserTeamPrivs.UserTeamPrivName 
 FROM UserTeamPrivTable 
     JOIN UserTeamPrivs ON UserTeamPrivTable.Privelegy = UserTeamPrivs.UserTeamPrivID
     JOIN TeamTable ON UserTeamPrivTable.PrivTeam = TeamTable.TeamID
@@ -30,7 +30,8 @@ SELECT * FROM DBNoto.UserTeam_view ORDER BY TeamName ASC;
 SELECT * FROM UserTeam_view;
 commit;
 SELECT * FROM DBNoto.UserTeam_view WHERE TeamID = 1 ORDER BY UserLogin ASC;
-
+--SELECT UserIcon FROM DBNoto.UserTable WHERE UserID = 1;
+--SELECT UserIcon, UserLogin FROM DBNoto.UserTeam_view WHERE TeamID = 49 ORDER BY UserID ASC FETCH FIRST 1 ROWS ONLY;
 -------------------------TEAM & TASK & LAST COMMENT------------------------- 
 
 --DROP VIEW TaskTeam_view;

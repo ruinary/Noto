@@ -1,18 +1,12 @@
 ﻿using Noto.Data;
-using System;
-using Microsoft.Win32;
-using Noto.Data;
-using Noto.Views.UserControls;
+using Noto.Views.ExtraWindows;
 using Oracle.ManagedDataAccess.Client;
+using Oracle.ManagedDataAccess.Types;
 using System;
 using System.Data;
-using System.IO;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using Oracle.ManagedDataAccess.Types;
-using Noto.Views.ExtraWindows;
+using System.Windows.Media;
 
 namespace Noto.Views.UserControls
 {
@@ -25,12 +19,13 @@ namespace Noto.Views.UserControls
             con.ConnectionString = connectionString;
             InitializeComponent();
 
-            //BitmapImage image = new BitmapImage();
-            //image.BeginInit();
-            //image.StreamSource = new MemoryStream(DataWorker.UserProfile.userIcon as byte[]);
-            //image.EndInit();
-            //ImageBrush brush = new ImageBrush(image);
-            //circleUser1.Fill = brush;
+            ImageWorker.LoadUser1ImageBrush();
+            
+            ImageBrush brush = new ImageBrush(DataWorker.CurrentTeam.user1IconImg);
+
+            circleUser1.Fill = brush;
+            circleUser2.Fill = brush;
+            circleUser3.Fill = brush;
 
             con.Open();
             OracleCommand cmd = con.CreateCommand();

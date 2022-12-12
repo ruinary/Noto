@@ -1,14 +1,9 @@
-﻿using Microsoft.Win32;
-using Noto.Data;
+﻿using Noto.Data;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
-using System.IO;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace Noto.Views.Pages
 {
@@ -21,17 +16,19 @@ namespace Noto.Views.Pages
             InitializeComponent();
             con.ConnectionString = connectionString;
 
-            ImageWorker.LoadImageBrush();
+            ImageWorker.LoadUserImageBrush();
 
             userIconCircle.ImageSource = DataWorker.UserProfile.userIconImg;
 
             if (DataWorker.CurrentUser.currentUserId == DataWorker.UserProfile.userId)
             {
                 ChangePasswordGrid.Visibility = Visibility.Visible;
+                DeleteAccGrid.Visibility = Visibility.Visible;
             }
             else
             {
                 ChangePasswordGrid.Visibility = Visibility.Hidden;
+                DeleteAccGrid.Visibility = Visibility.Hidden;
             }
         }
 
@@ -41,7 +38,7 @@ namespace Noto.Views.Pages
         {
             try
             {
-                ImageWorker.UpdateImageBrush();
+                ImageWorker.UpdateUserImageBrush();
                 userIconCircle.ImageSource = DataWorker.UserProfile.userIconImg;
             }
             catch (Exception exc)
@@ -50,5 +47,22 @@ namespace Noto.Views.Pages
             }
         }
         #endregion
+
+        private void DeleteProfileButtonClick(object sender, RoutedEventArgs e)
+        {
+            con.Open();
+            OracleCommand cmd = con.CreateCommand();
+
+            cmd.CommandText = "DBNoto.delete_user";
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("p_user_login", OracleDbType.Varchar2, 30).Value = DataWorker.CurrentUser.currentUserLogin;
+
+            cmd.ExecuteNonQuery();
+            con.Close();
+            MessageBox.Show("Пользователь удален!");
+            Application.Current.Windows[0].Close();
+
+        }
     }
 }

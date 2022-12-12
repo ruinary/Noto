@@ -43,7 +43,7 @@ namespace Noto.Data
             image.Freeze();
             return image;
         }
-        public static void LoadImageBrush()
+        public static void LoadUserImageBrush()
         {
             String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
             OracleConnection con = new OracleConnection();
@@ -63,7 +63,7 @@ namespace Noto.Data
             cmd2.ExecuteNonQuery();
             con.Close();
         }
-        public static void UpdateImageBrush()
+        public static void UpdateUserImageBrush()
         {
             byte[] image = { };
             string imageName;
@@ -117,6 +117,105 @@ namespace Noto.Data
             con.Close();
 
             UserProfile.userIconImg = LoadImage(image);
+        }
+
+
+        public static void LoadTeamImageBrush()
+        {
+            String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+            OracleConnection con = new OracleConnection();
+            con.ConnectionString = connectionString;
+
+            con.Open();
+            OracleCommand cmd2 = con.CreateCommand();
+
+            cmd2.CommandText = "SELECT TeamIcon FROM DBNoto.TeamTable WHERE TeamID = " + CurrentTeam.teamId;
+            cmd2.CommandType = CommandType.Text;
+
+            OracleDataReader reader = cmd2.ExecuteReader();
+            while (reader.Read())
+            {
+                CurrentTeam.teamIconImg = LoadImage(reader.GetValue(0) as byte[]);
+            }
+            cmd2.ExecuteNonQuery();
+            con.Close();
+        }
+        public static void UpdateTeamImageBrush()
+        {
+            byte[] image = { };
+            string imageName;
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog()
+                {
+                    Filter = "Image Files|*.jpg;*.png;"
+                };
+
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    imageName = openFileDialog.FileName;
+                    image = PictureToByte(imageName);
+                    CurrentTeam.teamIcon = image;
+                    CurrentTeam.teamIconImg = LoadImage(image);
+                }
+                openFileDialog = null;
+            }
+            catch (ArgumentException ae)
+            {
+                imageName = "";
+                MessageBox.Show(ae.Message.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+
+            String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+            OracleConnection con = new OracleConnection();
+            con.ConnectionString = connectionString;
+
+            con.Open();
+
+            OracleCommand cmd2 = con.CreateCommand();
+            OracleTransaction txn;
+            txn = con.BeginTransaction(IsolationLevel.ReadCommitted);
+            cmd2.Transaction = txn;
+
+            cmd2.CommandText = "UPDATE DBNoto.TeamTable " +
+                              "SET " +
+                              "TeamIcon = :ImageFront " +
+                              "WHERE TeamID = " + CurrentTeam.teamId;
+
+            cmd2.Parameters.Add(":ImageFront", OracleDbType.Blob);
+            cmd2.Parameters[":ImageFront"].Value = image;
+            cmd2.ExecuteNonQuery();
+
+            txn.Commit();
+            con.Close();
+
+            CurrentTeam.teamIconImg = LoadImage(image);
+        }
+
+
+        public static void LoadUser1ImageBrush()
+        {
+            String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+            OracleConnection con = new OracleConnection();
+            con.ConnectionString = connectionString;
+
+            con.Open();
+            OracleCommand cmd2 = con.CreateCommand();
+
+            cmd2.CommandText = "SELECT UserIcon FROM DBNoto.UserTeam_view WHERE TeamID = " + CurrentTeam.teamId + " ORDER BY UserID ASC FETCH FIRST 1 ROWS ONLY";
+            cmd2.CommandType = CommandType.Text;
+
+            OracleDataReader reader = cmd2.ExecuteReader();
+            while (reader.Read())
+            {
+                CurrentTeam.user1IconImg = LoadImage(reader.GetValue(0) as byte[]);
+            }
+            cmd2.ExecuteNonQuery();
+            con.Close();
         }
     }
 }

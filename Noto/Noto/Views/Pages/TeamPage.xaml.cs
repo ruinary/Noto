@@ -5,6 +5,7 @@ using System;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Noto.Views.Pages
 {
@@ -20,6 +21,10 @@ namespace Noto.Views.Pages
             TeamName.DataContext = DataWorker.CurrentTeam.teamName;
             DataWorker.CurrentPage.currentTaskPage = new TaskPage();
             taskFrame.DataContext = DataWorker.CurrentPage.currentTaskPage;
+
+            ImageWorker.LoadTeamImageBrush();
+            ImageBrush brush = new ImageBrush(DataWorker.CurrentTeam.teamIconImg);
+            circleTeamIcon.Fill = brush;
 
             con.Open();
 
@@ -50,6 +55,7 @@ namespace Noto.Views.Pages
             {
                 teamSettingsButton.Visibility = Visibility.Visible;
             }
+            con.Close();
         }
 
         private void TeamSettingsButtonClick(object sender, RoutedEventArgs e)

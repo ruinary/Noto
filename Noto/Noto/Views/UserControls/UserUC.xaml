@@ -45,7 +45,7 @@
                     <Viewbox>
                         <Button Style="{DynamicResource ImgTeam}" Click="OpenUserPageButtonClick" >
                             <Button.Background>
-                                <ImageBrush x:Name="teamIconCircle" ImageSource="{Binding }" Stretch="UniformToFill"/>
+                                <ImageBrush x:Name="userIconCircle" ImageSource="{Binding }" Stretch="UniformToFill"/>
                             </Button.Background>
                         </Button>
                     </Viewbox>

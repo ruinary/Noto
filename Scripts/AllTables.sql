@@ -76,7 +76,7 @@ CREATE TABLE TeamTable (
 commit;
 INSERT INTO TeamTable (TeamName) VALUES('team_demo');
 SELECT * FROM TeamTable;
-
+SELECT TeamIcon FROM TeamTable WHERE TeamID = 54;
 -------------------------TASK-------------------------
 --DROP TABLE TaskTable;
 CREATE TABLE TaskTable (

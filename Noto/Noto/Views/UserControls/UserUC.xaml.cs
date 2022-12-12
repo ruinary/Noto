@@ -4,10 +4,8 @@ using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 using System;
 using System.Data;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 
 namespace Noto.Views.UserControls
 {
@@ -29,13 +27,22 @@ namespace Noto.Views.UserControls
         public UserUC(Int16 _idUser, string _userLogin, string _userTeamPrivName)
         {
             con.ConnectionString = connectionString;
-            InitializeComponent();
 
             this.idUser = _idUser;
             this.userLogin = _userLogin;
             this.userTeamPrivName = _userTeamPrivName;
 
+            DataWorker.UserProfile.userLogin = _userLogin;
+            DataWorker.UserProfile.userId = _idUser;
+
+            InitializeComponent();
+
             userNameBlock.Text = _userLogin;
+
+            ImageWorker.LoadUserImageBrush();
+            userIconCircle.ImageSource = DataWorker.UserProfile.userIconImg;
+               
+
 
             if (userTeamPrivName == "OWNER")
             {
@@ -107,27 +114,6 @@ namespace Noto.Views.UserControls
                     DataWorker.UserProfile.userPhoneNumber = phonenumber;
                     DataWorker.UserProfile.userName = name;
                     DataWorker.UserProfile.userLastName = lastname;
-
-                    OracleCommand cmd2 = con.CreateCommand();
-                    cmd2.CommandText = "SELECT UserIcon FROM DBNoto.UserTable WHERE UserID = " + id.ToString();
-                    cmd2.CommandType = CommandType.Text;
-                    OracleDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        try
-                        {
-                            BitmapImage image = new BitmapImage();
-                            image.BeginInit();
-                            byte[] cover = reader.GetValue(0) as byte[];
-                            image.StreamSource = new MemoryStream(reader.GetValue(0) as byte[]);
-                            image.EndInit();
-                            DataWorker.UserProfile.userIconImg = image;
-                        }
-                        catch (Exception exc)
-                        {
-                            MessageBox.Show(exc.Message);
-                        }
-                    }
 
                 }
                 catch (Exception exc)

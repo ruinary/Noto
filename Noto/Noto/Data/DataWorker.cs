@@ -17,7 +17,11 @@ namespace Noto.Data
         {
             public static int teamId { get; set; }
             public static string teamName { get; set; }
-            public static BitmapImage currentUserIconImg { get; set; }
+            public static byte[] teamIcon { get; set; }
+            public static BitmapImage teamIconImg { get; set; }
+            public static BitmapImage user1IconImg { get; set; }
+            public static BitmapImage user2IconImg { get; set; }
+            public static BitmapImage user3IconImg { get; set; }
         }
 
         public static class CurrentTask

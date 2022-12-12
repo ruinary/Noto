@@ -42,6 +42,7 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="1" Grid.Column="1">
@@ -58,6 +59,22 @@
             </Grid>
             <Grid Grid.Row="5" x:Name="ChangePasswordGrid" Grid.Column="1" Visibility="Visible">
                 <uc:ChangePasswordUC/>
+            </Grid>
+            <Grid Grid.Row="6" x:Name="DeleteAccGrid" Grid.Column="1" Visibility="Visible">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Viewbox >
+                        <TextBlock Style="{DynamicResource CommonTitleTextH1}" Text="Удалить свой аккаунт" VerticalAlignment="Top"/>
+                    </Viewbox>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Button VerticalAlignment="Stretch" Foreground="#FFBFBFBF" Background="#33FFFFFF" BorderBrush="{x:Null}" Cursor="Hand" Click="DeleteProfileButtonClick" HorizontalAlignment="Stretch">
+                        <materialDesign:PackIcon Kind="Delete"/>
+                    </Button>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>
