@@ -50,7 +50,6 @@ namespace Noto.Views.UserControls
         }
         private void RemoveUserFromTeamButtonClick(object sender, RoutedEventArgs e)
         {
-            
             try
             {
                 con.Open();
@@ -59,6 +58,7 @@ namespace Noto.Views.UserControls
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("p_user_id", OracleDbType.Int32, 10).Value = idUser;
                 cmd.Parameters.Add("p_team_id", OracleDbType.Int32, 10).Value = DataWorker.CurrentTeam.teamId;
+                cmd.ExecuteNonQuery();
                 con.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }

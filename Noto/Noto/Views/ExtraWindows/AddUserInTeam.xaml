@@ -19,14 +19,19 @@
                 <uc1:WinHeader/>
             </Grid>
             <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <TextBox x:Name="addedUserLogin" TextAlignment="Center"  TextWrapping="Wrap" FontSize="50" FontStyle="Normal" FontWeight="Normal" Foreground="White" FontFamily="Bahnschrift Condensed" HorizontalAlignment="Stretch" Background="{x:Null}" VerticalAlignment="Center"/>
-                    </Grid>
-                <Grid Grid.Column="1">
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid  Grid.Column="0" Grid.Row="1">
+                    <TextBox x:Name="addedUserLogin" TextAlignment="Center"  TextWrapping="Wrap" FontSize="50" FontStyle="Normal" FontWeight="Normal" Foreground="White" FontFamily="Bahnschrift Condensed" HorizontalAlignment="Stretch" Background="{x:Null}" VerticalAlignment="Stretch"/>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="1">
                     <Button VerticalAlignment="Stretch" Foreground="#FFFAFAF1" Background="#33FFFFFF" BorderBrush="{x:Null}" Cursor="Hand" Click="AddUserToTeamButtonClick" HorizontalAlignment="Stretch">
                         <materialDesign:PackIcon Kind="Add"/>
                     </Button>

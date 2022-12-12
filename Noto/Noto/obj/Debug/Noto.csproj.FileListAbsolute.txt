@@ -316,3 +316,5 @@ D:\git\Noto\Noto\Noto\obj\Debug\Views\ExtraWindows\CreateTask.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\ExtraWindows\CreateTeam.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\ExtraWindows\CreateTask.baml
 D:\git\Noto\Noto\Noto\obj\Debug\Views\ExtraWindows\CreateTeam.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\CreateUC\CreateTeamNameUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\CreateUC\CreateTeamNameUC.baml

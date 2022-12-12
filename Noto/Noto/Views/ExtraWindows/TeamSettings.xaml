@@ -61,8 +61,17 @@
                             <StackPanel x:Name="userList" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" />
                         </Grid>
                         <Grid Grid.Row="0">
-                            <Button VerticalAlignment="Stretch" Foreground="#FFFAFAF1" Background="#33FFFFFF" BorderBrush="{x:Null}" Cursor="Hand" Click="showNextPageUsersButtonClick" HorizontalAlignment="Stretch">
-                                <materialDesign:PackIcon Kind="PageNext"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Button Foreground="#FFFAFAF1" Background="#33FFFFFF" BorderBrush="{x:Null}" Cursor="Hand" Click="showBackPageUsersButtonClick" Grid.Column="0">
+                                    <materialDesign:PackIcon Kind="ArrowBack"/>
+                                </Button>
+                            </Grid>
+                            <Button Foreground="#FFFAFAF1" Background="#33FFFFFF" BorderBrush="{x:Null}" Cursor="Hand" Click="showNextPageUsersButtonClick" Grid.Column="1">
+                                <materialDesign:PackIcon Kind="ArrowForward"/>
                             </Button>
                         </Grid>
                     </Grid>

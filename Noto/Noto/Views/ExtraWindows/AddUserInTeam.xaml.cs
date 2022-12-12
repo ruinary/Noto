@@ -36,7 +36,7 @@ namespace Noto.Views.ExtraWindows
             }
             catch (Exception exc)
             {
-                MessageBox.Show(exc.ToString());
+                MessageBox.Show("Пользователь уже добавлен!");
             }
             con.Close();
         }

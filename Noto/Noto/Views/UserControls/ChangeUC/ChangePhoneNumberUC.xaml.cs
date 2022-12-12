@@ -42,9 +42,6 @@ namespace Noto.Views.UserControls.ChangeUC
             bool check1 = Regex.IsMatch(EditedPhone.Text, @"^(\+375|80)(29|44|33)([0-9]){7}$");
             if (check1)
             {
-                string curPhone = EditedPhone.Text;
-                int userAuthId = DataWorker.UserProfile.userId;
-
                 con.Open();
                 OracleCommand cmd = con.CreateCommand();
                 try

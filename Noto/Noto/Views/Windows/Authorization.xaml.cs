@@ -95,7 +95,7 @@ namespace Noto.Views.Windows
                             MessageBox.Show(exc.Message);
                         }
                     }
-                    
+                    cmd.ExecuteNonQuery();
                     DataWorker.CurrentPage.currentPage = new UserTeams();
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();

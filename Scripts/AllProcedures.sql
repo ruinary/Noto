@@ -113,6 +113,25 @@ BEGIN
     --check_role(o_user_login, o_user_role);
 END log_in_user;
 
+-------------------------SEARCH_USER_ROLE_IN_TEAM-------------------------
+CREATE OR REPLACE PROCEDURE search_user_role_in_team
+    (p_user_id IN UserTable.UserID%TYPE,
+    o_user_role OUT UserTeamPrivs.UserTeamPrivName%TYPE)
+IS
+    CURSOR user_cursor IS SELECT UserTeamPrivName FROM UserTeam_view WHERE UserID = p_user_id;
+BEGIN
+    OPEN user_cursor;
+        FETCH user_cursor INTO o_user_role;
+        IF user_cursor%NOTFOUND THEN
+            RAISE_APPLICATION_ERROR(-20003, 'User is not found');
+        END IF;
+    CLOSE user_cursor;
+END search_user_role_in_team;
+
+declare
+    o_user_role UserTeamPrivs.UserTeamPrivName%TYPE;
+begin search_user_role_in_team(1,o_user_role); end;
+
 -------------------------SEARCH_USER-------------------------
 CREATE OR REPLACE PROCEDURE search_user
     (p_user_login IN UserTable.UserLogin%TYPE,
@@ -463,7 +482,8 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20008, 'Task is not found');
     END IF;
 END delete_task;
-
+select * from TaskTeam_view;
+SELECT * FROM (select TaskID, TaskTitle, CreationDate, DeadlineDate, TaskPriorityName, TaskStatusName, TaskDescription, row_number() over (ORDER BY TaskID ASC) rn from DBNoto.TaskTeam_view WHERE TeamID = 44) where rn between :n and :m ORDER BY TaskID ASC;
 ------------------------------DELETE TEAM------------------------------
 create or replace PROCEDURE delete_team
     (p_id IN TeamTable.TeamID%TYPE)
@@ -472,17 +492,13 @@ IS
     task_id TaskTable.TaskID%TYPE;
 BEGIN
     SELECT COUNT(*) INTO cnt FROM TeamTable WHERE TeamID = p_id;
-    IF (cnt != 0) THEN
-        SELECT TaskID INTO task_id FROM TaskTable WHERE TaskTeamID = p_id;
-        DELETE TaskComments WHERE ComTask = task_id;
-        DELETE TaskTable WHERE TaskTeamID = p_id;
-        DELETE UserTeamPrivTable WHERE PrivTeam = p_id;
+    IF (cnt != 0) THEN        
         DELETE TeamTable WHERE TeamID = p_id;
     ELSE
         RAISE_APPLICATION_ERROR(-20009, 'Team is not found');
     END IF;
 END delete_team;
-
+SELECT * FROM DBNoto.TaskTeam_view;
 ------------------------------DELETE USER------------------------------
 create or replace PROCEDURE delete_user
     (p_login IN UserTable.UserLogin%TYPE)

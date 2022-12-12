@@ -29,7 +29,7 @@ namespace Noto.Views.UserControls
             InitializeComponent();
         }
 
-        public TaskUC(Int16 _id, string _taskTitle, string _taskDeadlineDate, string _taskCreationDate, string _taskPriority, string _taskStatus, string _taskDescription)
+        public TaskUC(Int16 _id, string _taskTitle,  string _taskCreationDate, string _taskDeadlineDate, string _taskPriority, string _taskStatus, string _taskDescription)
         {
             con.ConnectionString = connectionString;
             InitializeComponent();

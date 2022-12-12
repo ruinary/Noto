@@ -71,7 +71,7 @@ CREATE TABLE TeamTable (
     TeamID NUMBER(10) GENERATED AS IDENTITY(START WITH 1 INCREMENT BY 1),
     TeamName VARCHAR2(30) NOT NULL,
     TeamIcon BLOB DEFAULT EMPTY_BLOB(),
-    CONSTRAINT TeamTable_pk PRIMARY KEY (TeamID)
+    CONSTRAINT TeamTable_pk PRIMARY KEY (TeamID) 
 );
 commit;
 INSERT INTO TeamTable (TeamName) VALUES('team_demo');
@@ -136,7 +136,7 @@ CREATE TABLE UserTeamPrivTable (
     Privelegy NUMBER(10) NOT NULL,
     CONSTRAINT UserToUsers_fk FOREIGN KEY (PrivUser) REFERENCES UserTable(UserID) ON DELETE CASCADE,
     CONSTRAINT TeamToTeams_fk FOREIGN KEY (PrivTeam) REFERENCES TeamTable(TeamID) ON DELETE CASCADE, 
-    CONSTRAINT PrivToPrivs_fk FOREIGN KEY (Privelegy) REFERENCES UserTeamPrivs(UserTeamPrivID)
+    CONSTRAINT PrivToPrivs_fk FOREIGN KEY (Privelegy) REFERENCES UserTeamPrivs(UserTeamPrivID) ON DELETE CASCADE
 );
 commit;
 --INSERT INTO UserTeamPrivTable(PrivUser,PrivTeam,Privelegy) VALUES(1,1,1);

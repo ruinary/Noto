@@ -28,7 +28,18 @@
                         <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
-                        <uc:ChangeTaskTitleUC/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="82*"/>
+                            <ColumnDefinition Width="17*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <uc:ChangeTaskTitleUC/>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Button VerticalAlignment="Stretch" Foreground="#FFFAFAF1" Background="#33FFFFFF" BorderBrush="{x:Null}" Cursor="Hand" Click="DeleteTaskButtonClick" HorizontalAlignment="Stretch">
+                                <materialDesign:PackIcon Kind="Delete"/>
+                            </Button>
+                        </Grid>
                     </Grid>
                     <Grid Grid.Row="1">
                         <Grid.RowDefinitions>

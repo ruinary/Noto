@@ -1,26 +1,42 @@
 ﻿using Noto.Data;
+using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Noto.Views.ExtraWindows
 {
     public partial class TaskSettings : Window
     {
+        OracleConnection con = new OracleConnection();
+        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
         public TaskSettings()
         {
+            con.ConnectionString = connectionString;
+
             InitializeComponent();
-            
+        }
+
+        private void DeleteTaskButtonClick(object sender, RoutedEventArgs e)
+        {
+            con.Open();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "DBNoto.delete_task";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("p_id", OracleDbType.Int32, 10).Value = DataWorker.CurrentTask.taskId;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Задание успешно удалено");
+
+                this.Close();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.ToString());
+            }
+            con.Close();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Noto.Views.ExtraWindows
         String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
         byte[] image;
         string imageName;
-        int rowMargin = 5, rowCounter = 0;
+        int rowMargin = 4, rowCounter = 1;
 
         public TeamSettings()
         {
@@ -33,19 +33,6 @@ namespace Noto.Views.ExtraWindows
 
             InitializeComponent();
 
-            //con.Open();
-            //OracleCommand cmd = con.CreateCommand();
-            //cmd.CommandText = "SELECT * FROM DBNoto.UserTeam_view WHERE TeamID = " + DataWorker.CurrentTeam.teamId + " ORDER BY UserLogin ASC";
-            //cmd.CommandType = CommandType.Text;
-            //OracleDataReader reader = cmd.ExecuteReader();
-            //userList.Children.Clear();
-            //while (reader.Read())
-            //{
-            //    UserUC user = new UserUC(reader.GetInt16(0), reader.GetString(1), reader.GetInt16(3), reader.GetString(4), reader.GetString(5));
-            //    userList.Children.Add(user);
-            //}
-            //con.Close();
-
             loadSomeUsers();
         }
 
@@ -57,9 +44,6 @@ namespace Noto.Views.ExtraWindows
             cmd.CommandText = "SELECT * FROM (select UserID, UserLogin, UserTeamPrivName, row_number() over (order by UserLogin) rn from DBNoto.UserTeam_view WHERE TeamID = '"+DataWorker.CurrentTeam.teamId +"') where rn between :n and :m ORDER BY UserLogin ASC";
             cmd.Parameters.Add(new OracleParameter("n", rowCounter));
             cmd.Parameters.Add(new OracleParameter("m", rowCounter + rowMargin));
-
-            rowCounter += rowMargin;
-            rowCounter++;
 
             cmd.CommandType = CommandType.Text;
             OracleDataReader reader = cmd.ExecuteReader();
@@ -74,8 +58,16 @@ namespace Noto.Views.ExtraWindows
 
         private void showNextPageUsersButtonClick(object sender, RoutedEventArgs e)
         {
+            rowCounter += rowMargin;
+            rowCounter++;
             loadSomeUsers();
         }
+        private void showBackPageUsersButtonClick(object sender, RoutedEventArgs e)
+        {
+            rowCounter -= rowMargin;
+            rowCounter--;
+            loadSomeUsers();
+        } 
 
         private void DeleteTeamButtonClick(object sender, RoutedEventArgs e)
         {

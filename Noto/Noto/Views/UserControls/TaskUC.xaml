@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Noto.Views.UserControls"             
              xmlns:uc="clr-namespace:Noto.Views.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="250" d:DesignWidth="200" MaxHeight="450" MaxWidth="400">
+             d:DesignHeight="250" d:DesignWidth="200" MaxHeight="450" MaxWidth="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="5"/>

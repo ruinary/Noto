@@ -96,6 +96,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\DataWorker.cs" />
+    <Compile Include="Data\ImageWorker.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Views\ExtraWindows\AddUserInTeam.xaml.cs">
       <DependentUpon>AddUserInTeam.xaml</DependentUpon>
@@ -174,6 +175,9 @@
     </Compile>
     <Compile Include="Views\UserControls\CreateTeamUC.xaml.cs">
       <DependentUpon>CreateTeamUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\CreateUC\CreateTeamNameUC.xaml.cs">
+      <DependentUpon>CreateTeamNameUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\TaskUC.xaml.cs">
       <DependentUpon>TaskUC.xaml</DependentUpon>
@@ -299,6 +303,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\CreateTeamUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\CreateUC\CreateTeamNameUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

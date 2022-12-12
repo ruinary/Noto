@@ -4,9 +4,140 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Noto.Views.ExtraWindows"
+       xmlns:uc="clr-namespace:Noto.Views.UserControls.ChangeUC"
+        xmlns:uc1="clr-namespace:Noto.Views.UserControls"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="CreateTask" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="TaskSettings" Height="600" Width="400" Background="{x:Null}">
+    <Border Style="{DynamicResource WinBackground}" CornerRadius="6" BorderBrush="#FF252942" BorderThickness="2" Margin="0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <uc1:WinHeader/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Viewbox>
+                            <TextBlock Style="{DynamicResource CommonTitleTextH1}" Text="Заголовок задания" VerticalAlignment="Top"/>
+                        </Viewbox>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <TextBox x:Name="taskTitleBlock"  TextAlignment="Center"  TextWrapping="Wrap" FontSize="30" FontStyle="Normal" FontWeight="Normal" Foreground="White" FontFamily="Bahnschrift Condensed" HorizontalAlignment="Stretch" Background="{x:Null}" VerticalAlignment="Stretch"/>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <Viewbox>
+                                <TextBlock Style="{DynamicResource CommonTitleTextH1}" Text="Дата создания" VerticalAlignment="Top"/>
+                            </Viewbox>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="0">
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="7*"/>
+                                    <ColumnDefinition Width="15*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock x:Name="taskDaataCreationBlock" Text="{Binding }" TextAlignment="Center"  TextWrapping="Wrap" FontSize="30" FontStyle="Normal" FontWeight="Normal" Foreground="White" FontFamily="Bahnschrift Condensed" Background="{x:Null}" Grid.ColumnSpan="2"/>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Viewbox>
+                                <TextBlock Style="{DynamicResource CommonTitleTextH1}" Text="Дата выполнения" VerticalAlignment="Top"/>
+                            </Viewbox>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="1">
+                            <Grid Grid.Column="0">
+                                <TextBox x:Name="taskDataDeadlineBlock" TextAlignment="Center"  TextWrapping="Wrap" FontSize="30" FontStyle="Normal" FontWeight="Normal" Foreground="White" FontFamily="Bahnschrift Condensed" HorizontalAlignment="Stretch" Background="{x:Null}" VerticalAlignment="Stretch"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <Viewbox>
+                                <TextBlock Style="{DynamicResource CommonTitleTextH1}" Text="Приоритет выполения" VerticalAlignment="Top"/>
+                            </Viewbox>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="0">
+                            <Viewbox>
+                                <ListBox  x:Name="prioritySelection" SelectionChanged="Priority_SelectionChanged" FontFamily="Bahnschrift Condensed" FontSize="30" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{x:Null}"  ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False">
+                                    <ListBoxItem x:Name="selectorLow" Content="LOW" FontFamily="Bahnschrift Condensed" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                                    <ListBoxItem x:Name="selectorMedium" Content="MEDIUM" FontSize="20" Background="{x:Null}"  BorderBrush="{x:Null}"/>
+                                    <ListBoxItem x:Name="selectorHigh" Content="HIGH" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                                </ListBox>
+                            </Viewbox>
+                        </Grid>
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Viewbox>
+                                <TextBlock Style="{DynamicResource CommonTitleTextH1}" Text="Статус выполения" VerticalAlignment="Top"/>
+                            </Viewbox>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="1">
+                            <Viewbox>
+                                <ListBox  x:Name="statusSelection" SelectionChanged="Status_SelectionChanged"  FontFamily="Bahnschrift Condensed" FontSize="30" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{x:Null}"  ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False">
+                                    <ListBoxItem x:Name="selectorNotStarted" Content="NOT STARTED" FontFamily="Bahnschrift Condensed" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                                    <ListBoxItem x:Name="selectorStarter" Content="STARTED" FontSize="20" Background="{x:Null}"  BorderBrush="{x:Null}"/>
+                                    <ListBoxItem x:Name="selectorInProcess" Content="IN PROCESS" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                                    <ListBoxItem x:Name="selectorReady" Content="READY" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                                </ListBox>
+                            </Viewbox>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Viewbox>
+                                <TextBlock Style="{DynamicResource CommonTitleTextH1}" Text="Описание" VerticalAlignment="Top"/>
+                            </Viewbox>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <TextBox x:Name="taskDescriptionBlock" TextAlignment="Center"  TextWrapping="Wrap" FontSize="30" FontStyle="Normal" FontWeight="Normal" Foreground="White" FontFamily="Bahnschrift Condensed" HorizontalAlignment="Stretch" Background="{x:Null}" VerticalAlignment="Stretch"/>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="5">
+                        <Button VerticalAlignment="Stretch" Foreground="#FFBFBFBF" Background="#33FFFFFF" BorderBrush="{x:Null}" Cursor="Hand" Click="ConfCreateTaskButtonClick" HorizontalAlignment="Stretch" >
+                            <materialDesign:PackIcon Kind="Check"/>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            ResizeBorderThickness="5"
+            CaptionHeight="8"
+            GlassFrameThickness="0"
+            CornerRadius="6"
+            />
+    </WindowChrome.WindowChrome>
 </Window>

@@ -34,7 +34,7 @@
                     <TextBlock x:Name="TeamName" Style="{DynamicResource CommonTitleTextH1}" Text="{Binding}"/>
                 </Viewbox>
             </Grid>
-            <Grid Grid.Column="2">
+            <Grid x:Name="teamSettingsButton"  Grid.Column="2">
                 <Button Style="{DynamicResource SettingsButton}" Click="TeamSettingsButtonClick" Height="50" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Column="4">
