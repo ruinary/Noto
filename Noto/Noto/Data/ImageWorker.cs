@@ -1,14 +1,9 @@
 ﻿using Microsoft.Win32;
 using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using static Noto.Data.DataWorker;
 
@@ -45,6 +40,7 @@ namespace Noto.Data
         }
         public static void LoadUserImageBrush()
         {
+
             String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
             OracleConnection con = new OracleConnection();
             con.ConnectionString = connectionString;
@@ -60,8 +56,25 @@ namespace Noto.Data
             {
                 UserProfile.userIconImg = LoadImage(reader.GetValue(0) as byte[]);
             }
-            cmd2.ExecuteNonQuery();
             con.Close();
+
+            //String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+            //OracleConnection con = new OracleConnection();
+            //con.ConnectionString = connectionString;
+
+            //con.Open();
+            //OracleCommand cmd = con.CreateCommand();
+            //cmd.CommandText = "SELECT UserIcon FROM DBNoto.UserTable WHERE UserID = " + UserProfile.userId;;
+            //cmd.CommandType = CommandType.Text;
+            //OracleDataReader reader = cmd.ExecuteReader();
+            //while (reader.Read())
+            //{
+            //    UserProfile.userIconImg = LoadImage(reader.GetValue(0) as byte[]);
+            //}
+            //reader.Close();
+            //con.Close();
+
+            MessageBox.Show(UserProfile.userId + UserProfile.userLogin + UserProfile.userIconImg);
         }
         public static void UpdateUserImageBrush()
         {
@@ -107,7 +120,7 @@ namespace Noto.Data
             cmd2.CommandText = "UPDATE UserTable " +
                               "SET " +
                               "UserIcon = :ImageFront " +
-                              "WHERE UPPER(UserLogin) = UPPER('" + UserProfile.userLogin + "')";
+                              "WHERE UPPER(UserLogin) = UPPER('" + CurrentUser.currentUserLogin + "')";
 
             cmd2.Parameters.Add(":ImageFront", OracleDbType.Blob);
             cmd2.Parameters[":ImageFront"].Value = image;
@@ -116,6 +129,7 @@ namespace Noto.Data
             txn.Commit();
             con.Close();
 
+            CurrentUser.currentUserIconImg = LoadImage(image);
             UserProfile.userIconImg = LoadImage(image);
         }
 
@@ -127,17 +141,15 @@ namespace Noto.Data
             con.ConnectionString = connectionString;
 
             con.Open();
-            OracleCommand cmd2 = con.CreateCommand();
-
-            cmd2.CommandText = "SELECT TeamIcon FROM DBNoto.TeamTable WHERE TeamID = " + CurrentTeam.teamId;
-            cmd2.CommandType = CommandType.Text;
-
-            OracleDataReader reader = cmd2.ExecuteReader();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT TeamIcon FROM DBNoto.TeamTable WHERE TeamID = " + CurrentTeam.teamId;
+            cmd.CommandType = CommandType.Text;
+            OracleDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 CurrentTeam.teamIconImg = LoadImage(reader.GetValue(0) as byte[]);
             }
-            cmd2.ExecuteNonQuery();
+            reader.Close();
             con.Close();
         }
         public static void UpdateTeamImageBrush()
@@ -214,7 +226,7 @@ namespace Noto.Data
             {
                 CurrentTeam.user1IconImg = LoadImage(reader.GetValue(0) as byte[]);
             }
-            cmd2.ExecuteNonQuery();
+            reader.Close();
             con.Close();
         }
     }

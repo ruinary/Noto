@@ -47,7 +47,7 @@ namespace Noto.Views.Pages
             }
         }
         #endregion
-
+        #region Delete Profile
         private void DeleteProfileButtonClick(object sender, RoutedEventArgs e)
         {
             con.Open();
@@ -64,5 +64,6 @@ namespace Noto.Views.Pages
             Application.Current.Windows[0].Close();
 
         }
+        #endregion
     }
 }

@@ -2,7 +2,9 @@ ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 SELECT * FROM user_procedures;
 
 BEGIN
-   REGISTER_USER('REMERAL', '1BLUErose', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru');
+   REGISTER_USER('remeral', 'qwerty', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru');
+   REGISTER_USER('qusest', 'qwerty', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru');
+   REGISTER_USER('ruinary', 'qwerty', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru');
 END;
 
 UPDATE UserTable SET UserRole  = 2 WHERE UserID = 1;
@@ -269,7 +271,7 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20002, 'User is not found');
     END IF;
 END update_user_last_name;
-begin update_user_last_name('REMERAL','E'); end;
+
 -------------------------DELETE_USER-------------------------
 CREATE OR REPLACE PROCEDURE delete_user
     (p_user_login IN UserTable.UserLogin%TYPE)

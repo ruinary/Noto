@@ -31,31 +31,14 @@ namespace Noto.Views.UserControls
             this.teamId = _id;
             this.teamName = _teamName;
 
-            teamNameBlock.Text = teamName; 
+            DataWorker.CurrentTeam.teamId = _id;
 
-            con.Open();
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT TeamIcon FROM DBNoto.UserTeam_view WHERE TeamID = " + teamId.ToString();
-            cmd.CommandType = CommandType.Text;
-            OracleDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                try
-                {
-                    BitmapImage image = new BitmapImage();
-                    image.BeginInit();
-                    image.StreamSource = new MemoryStream(reader.GetValue(0) as byte[]);
-                    image.EndInit();
-                    teamIconCircle.ImageSource = image;
-                }
-                catch (Exception exc)
-                {
-                    MessageBox.Show(exc.Message);
-                }
-            }
-            con.Close();
+            teamNameBlock.Text = teamName;
+            ImageWorker.LoadTeamImageBrush();
+            teamIconCircle.ImageSource = DataWorker.CurrentTeam.teamIconImg;
         }
 
+        #region Open Current Team Page
         private void OpenTeamPageButtonClick(object sender, RoutedEventArgs e)
         {
             DataWorker.CurrentTeam.teamId = teamId;
@@ -66,5 +49,6 @@ namespace Noto.Views.UserControls
             Application.Current.Windows[0].Close();
            
         }
+        #endregion
     }
 }

@@ -3,7 +3,6 @@ ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 SELECT * FROM UserTable;
 
 -------------------------ROLE-------------------------
-
 --DROP TABLE AppRoleTable;
 CREATE TABLE AppRoleTable (
     RoleID NUMBER(10) GENERATED AS IDENTITY(START WITH 1 INCREMENT BY 1),
@@ -17,7 +16,6 @@ commit;
 SELECT * FROM AppRoleTable;
 
 -------------------------USER-------------------------
-
 --DROP TABLE UserTable;
 CREATE TABLE UserTable(
     UserID NUMBER(10) GENERATED AS IDENTITY(START WITH 1 INCREMENT BY 1),
@@ -35,8 +33,8 @@ CREATE TABLE UserTable(
 commit;
 SELECT * FROM UserTable;
 select count(*) from UserTable;
--------------------------TASK STATUSES-------------------------
 
+-------------------------TASK STATUSES-------------------------
 --DROP TABLE TaskStatuses;
 CREATE TABLE TaskStatuses (
     TaskStatusID NUMBER(10) GENERATED AS IDENTITY(START WITH 1 INCREMENT BY 1),

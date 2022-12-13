@@ -18,7 +18,9 @@ namespace Noto.Views.Pages
         {
             con.ConnectionString = connectionString;
             InitializeComponent();
+
             TeamName.DataContext = DataWorker.CurrentTeam.teamName;
+
             DataWorker.CurrentPage.currentTaskPage = new TaskPage();
             taskFrame.DataContext = DataWorker.CurrentPage.currentTaskPage;
 
@@ -62,6 +64,12 @@ namespace Noto.Views.Pages
         {
             TeamSettings teamSettings = new TeamSettings();
             teamSettings.Show();
+        }
+
+        private void CalendarButtonClick(object sender, RoutedEventArgs e)
+        {
+            DataWorker.CurrentPage.currentTaskPage = new CalendarPage();
+            taskFrame.DataContext = DataWorker.CurrentPage.currentTaskPage;
         }
     }
 }

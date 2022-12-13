@@ -29,9 +29,13 @@ FROM UserTeamPrivTable
 SELECT * FROM DBNoto.UserTeam_view ORDER BY TeamName ASC;
 SELECT * FROM UserTeam_view;
 commit;
+
 SELECT * FROM DBNoto.UserTeam_view WHERE TeamID = 1 ORDER BY UserLogin ASC;
 --SELECT UserIcon FROM DBNoto.UserTable WHERE UserID = 1;
---SELECT UserIcon, UserLogin FROM DBNoto.UserTeam_view WHERE TeamID = 49 ORDER BY UserID ASC FETCH FIRST 1 ROWS ONLY;
+SELECT UserIcon FROM DBNoto.UserTable WHERE UserId = 1;
+SELECT UserIcon FROM UserTable WHERE UPPER(UserLogin) = UPPER('remeral');
+SELECT UserIcon, UserLogin FROM DBNoto.UserTeam_view WHERE TeamID = 49 AND UPPER(UserLogin) = UPPER('remeral');
+SELECT UserIcon, UserLogin FROM DBNoto.UserTeam_view WHERE TeamID = 49 ORDER BY UserID ASC FETCH FIRST 1 ROWS ONLY;
 -------------------------TEAM & TASK & LAST COMMENT------------------------- 
 
 --DROP VIEW TaskTeam_view;

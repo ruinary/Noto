@@ -24,7 +24,7 @@
                 <Grid Grid.Column="0">
                     <Button Click="CheckProfileButtonClick" >
                         <Button.Background>
-                            <ImageBrush ImageSource="{Binding user_img_path, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill"/>
+                            <ImageBrush x:Name="userIconCircle" Stretch="UniformToFill"/>
                         </Button.Background>
                     </Button>
                 </Grid>

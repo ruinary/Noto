@@ -75,27 +75,9 @@ namespace Noto.Views.Windows
                     DataWorker.CurrentUser.currentUserName = name;
                     DataWorker.CurrentUser.currentUserLastName = lastname;
 
-                    OracleCommand cmd2 = con.CreateCommand();
-                    cmd2.CommandText = "SELECT UserIcon FROM DBNoto.UserTable WHERE UserID = " + id.ToString();
-                    cmd2.CommandType = CommandType.Text;
-                    OracleDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        try
-                        {
-                            BitmapImage image = new BitmapImage();
-                            image.BeginInit();
-                            byte[] cover = reader.GetValue(0) as byte[];
-                            image.StreamSource = new MemoryStream(reader.GetValue(0) as byte[]);
-                            image.EndInit();
-                            DataWorker.CurrentUser.currentUserIconImg = image;
-                        }
-                        catch (Exception exc)
-                        {
-                            MessageBox.Show(exc.Message);
-                        }
-                    }
-                    cmd.ExecuteNonQuery();
+                    ImageWorker.LoadUserImageBrush();
+                    DataWorker.CurrentUser.currentUserIconImg = DataWorker.UserProfile.userIconImg;
+
                     DataWorker.CurrentPage.currentPage = new UserTeams();
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();

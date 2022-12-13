@@ -4,8 +4,10 @@ using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 using System;
 using System.Data;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace Noto.Views.UserControls
 {
@@ -27,22 +29,42 @@ namespace Noto.Views.UserControls
         public UserUC(Int16 _idUser, string _userLogin, string _userTeamPrivName)
         {
             con.ConnectionString = connectionString;
+            InitializeComponent();
 
             this.idUser = _idUser;
             this.userLogin = _userLogin;
             this.userTeamPrivName = _userTeamPrivName;
 
-            DataWorker.UserProfile.userLogin = _userLogin;
             DataWorker.UserProfile.userId = _idUser;
-
-            InitializeComponent();
-
-            userNameBlock.Text = _userLogin;
+            DataWorker.UserProfile.userLogin = _userLogin;
 
             ImageWorker.LoadUserImageBrush();
-            userIconCircle.ImageSource = DataWorker.UserProfile.userIconImg;
-               
 
+            userIconCircle.ImageSource = DataWorker.UserProfile.userIconImg;
+            userNameBlock.Text = _userLogin;
+
+
+            //con.Open();
+            //OracleCommand cmd = con.CreateCommand();
+            //cmd.CommandText = "SELECT UserIcon FROM DBNoto.UserTable WHERE UserID = " + _idUser;
+            //cmd.CommandType = CommandType.Text;
+            //OracleDataReader reader = cmd.ExecuteReader();
+            //while (reader.Read())
+            //{
+            //    try
+            //    {
+            //        BitmapImage image = new BitmapImage();
+            //        image.BeginInit();
+            //        image.StreamSource = new MemoryStream(reader.GetValue(0) as byte[]);
+            //        image.EndInit();
+            //        userIconCircle.ImageSource = image;
+            //    }
+            //    catch (Exception exc)
+            //    {
+            //        MessageBox.Show(exc.Message);
+            //    }
+            //}
+            //con.Close();
 
             if (userTeamPrivName == "OWNER")
             {
@@ -55,6 +77,7 @@ namespace Noto.Views.UserControls
                 ownerUserIcon.Visibility = Visibility.Hidden;
             }
         }
+        #region Remove User From Team
         private void RemoveUserFromTeamButtonClick(object sender, RoutedEventArgs e)
         {
             try
@@ -67,10 +90,12 @@ namespace Noto.Views.UserControls
                 cmd.Parameters.Add("p_team_id", OracleDbType.Int32, 10).Value = DataWorker.CurrentTeam.teamId;
                 cmd.ExecuteNonQuery();
                 con.Close();
+                MessageBox.Show("Пользователь удален из команды!");
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }
-
+        #endregion
+        #region Open Current User Page
         private void OpenUserPageButtonClick(object sender, RoutedEventArgs e)
         {
             try
@@ -114,7 +139,6 @@ namespace Noto.Views.UserControls
                     DataWorker.UserProfile.userPhoneNumber = phonenumber;
                     DataWorker.UserProfile.userName = name;
                     DataWorker.UserProfile.userLastName = lastname;
-
                 }
                 catch (Exception exc)
                 {
@@ -134,5 +158,6 @@ namespace Noto.Views.UserControls
             mainWindow.Show();
             Application.Current.Windows[0].Close();
         }
+        #endregion
     }
 }
