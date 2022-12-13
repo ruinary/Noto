@@ -8,7 +8,7 @@ namespace Noto.Views.UserControls
         public CommentUC()
         {
             InitializeComponent();
-            userIconCircle.ImageSource = DataWorker.Comment.userIconImg;
+            //userIconCircle.ImageSource = DataWorker.Comment.userIconImg;
         }
 
         private void CheckProfileButtonClick(object sender, RoutedEventArgs e)

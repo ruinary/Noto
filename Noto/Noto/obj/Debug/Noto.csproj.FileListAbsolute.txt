@@ -57,7 +57,6 @@ D:\git\Noto\Noto\Noto\bin\Debug\System.Text.Encodings.Web.xml
 D:\git\Noto\Noto\Noto\bin\Debug\System.Text.Json.xml
 D:\git\Noto\Noto\Noto\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\git\Noto\Noto\Noto\bin\Debug\System.ValueTuple.xml
-D:\git\Noto\Noto\Noto\obj\Debug\Noto.csproj.SuggestedBindingRedirects.cache
 E:\Noto\Noto\Noto\bin\Debug\Noto.exe.config
 E:\Noto\Noto\Noto\bin\Debug\Noto.exe
 E:\Noto\Noto\Noto\bin\Debug\Noto.pdb
@@ -322,3 +321,4 @@ D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\CalendarPage.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\TaskOfDatePage.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\CalendarPage.baml
 D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\TaskOfDatePage.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Noto.csproj.SuggestedBindingRedirects.cache

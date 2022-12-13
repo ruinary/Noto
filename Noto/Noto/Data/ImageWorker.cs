@@ -48,7 +48,7 @@ namespace Noto.Data
             con.Open();
             OracleCommand cmd2 = con.CreateCommand();
 
-            cmd2.CommandText = "SELECT UserIcon FROM UserTable WHERE UPPER(UserLogin) = UPPER('" + UserProfile.userLogin + "')";
+            cmd2.CommandText = "SELECT UserIcon FROM DBNoto.UserTable WHERE UPPER(UserLogin) = UPPER('"+UserProfile.userLogin+ "')";
             cmd2.CommandType = CommandType.Text;
 
             OracleDataReader reader = cmd2.ExecuteReader();
@@ -64,7 +64,7 @@ namespace Noto.Data
 
             //con.Open();
             //OracleCommand cmd = con.CreateCommand();
-            //cmd.CommandText = "SELECT UserIcon FROM DBNoto.UserTable WHERE UserID = " + UserProfile.userId;;
+            //cmd.CommandText = "SELECT UserIcon FROM DBNoto.UserTable WHERE UserID = " + UserProfile.userId; ;
             //cmd.CommandType = CommandType.Text;
             //OracleDataReader reader = cmd.ExecuteReader();
             //while (reader.Read())
@@ -73,8 +73,6 @@ namespace Noto.Data
             //}
             //reader.Close();
             //con.Close();
-
-            MessageBox.Show(UserProfile.userId + UserProfile.userLogin + UserProfile.userIconImg);
         }
         public static void UpdateUserImageBrush()
         {
@@ -117,10 +115,10 @@ namespace Noto.Data
             txn = con.BeginTransaction(IsolationLevel.ReadCommitted);
             cmd2.Transaction = txn;
 
-            cmd2.CommandText = "UPDATE UserTable " +
+            cmd2.CommandText = "UPDATE DBNoto.UserTable " +
                               "SET " +
                               "UserIcon = :ImageFront " +
-                              "WHERE UPPER(UserLogin) = UPPER('" + CurrentUser.currentUserLogin + "')";
+                              "WHERE UPPER(UserLogin) = UPPER('" + UserProfile.userLogin + "')";
 
             cmd2.Parameters.Add(":ImageFront", OracleDbType.Blob);
             cmd2.Parameters[":ImageFront"].Value = image;

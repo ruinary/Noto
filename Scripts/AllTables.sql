@@ -16,6 +16,7 @@ commit;
 SELECT * FROM AppRoleTable;
 
 -------------------------USER-------------------------
+--DELETE UserTable;
 --DROP TABLE UserTable;
 CREATE TABLE UserTable(
     UserID NUMBER(10) GENERATED AS IDENTITY(START WITH 1 INCREMENT BY 1),
@@ -64,6 +65,7 @@ commit;
 SELECT * FROM TaskPriorities;
 
 -------------------------TEAM-------------------------
+--DELETE TeamTable;
 --DROP TABLE TeamTable;
 CREATE TABLE TeamTable (
     TeamID NUMBER(10) GENERATED AS IDENTITY(START WITH 1 INCREMENT BY 1),

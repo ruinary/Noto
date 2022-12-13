@@ -3,11 +3,11 @@ SELECT * FROM user_procedures;
 
 BEGIN
    REGISTER_USER('remeral', 'qwerty', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru');
-   REGISTER_USER('qusest', 'qwerty', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru');
-   REGISTER_USER('ruinary', 'qwerty', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru');
+   --REGISTER_USER('qusest', 'qwerty', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru');
+   --REGISTER_USER('ruinary', 'qwerty', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru');
 END;
 
-UPDATE UserTable SET UserRole  = 2 WHERE UserID = 1;
+UPDATE UserTable SET UserRole  = 2 WHERE UserID = 22;
 --UPDATE UserTable SET UserPassword  = encryption_password('qwerty') WHERE UserLogin = 'REMERAL';
 select* from UserTable;
 
