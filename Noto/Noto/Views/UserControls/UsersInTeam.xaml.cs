@@ -19,14 +19,22 @@ namespace Noto.Views.UserControls
             con.ConnectionString = connectionString;
             InitializeComponent();
 
-            ImageWorker.LoadUser1ImageBrush();
-            
-            ImageBrush brush = new ImageBrush(DataWorker.CurrentTeam.user1IconImg);
+            ImageWorker.LoadUserImageBrush(1);
+            ImageWorker.LoadUserImageBrush(2);
+            ImageWorker.LoadUserImageBrush(3);
 
-            circleUser1.Fill = brush;
-            circleUser2.Fill = brush;
-            circleUser3.Fill = brush;
+            ImageBrush brush1 = new ImageBrush(DataWorker.CurrentTeam.user1IconImg);
+            ImageBrush brush2 = new ImageBrush(DataWorker.CurrentTeam.user2IconImg);
+            ImageBrush brush3 = new ImageBrush(DataWorker.CurrentTeam.user3IconImg);
 
+            circleUser1.Fill = brush1;
+            circleUser2.Fill = brush2;
+            circleUser3.Fill = brush3;
+
+            CountUsers();
+        }
+        void CountUsers()
+        {
             con.Open();
             OracleCommand cmd = con.CreateCommand();
             cmd.CommandText = "DBNoto.count_user_in_team";
@@ -42,7 +50,6 @@ namespace Noto.Views.UserControls
             CountTeamates.Text = count.ToString();
             con.Close();
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             AddUserInTeam auit = new AddUserInTeam();

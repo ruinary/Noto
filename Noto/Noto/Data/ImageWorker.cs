@@ -40,7 +40,6 @@ namespace Noto.Data
         }
         public static void LoadUserImageBrush()
         {
-
             String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
             OracleConnection con = new OracleConnection();
             con.ConnectionString = connectionString;
@@ -48,7 +47,7 @@ namespace Noto.Data
             con.Open();
             OracleCommand cmd2 = con.CreateCommand();
 
-            cmd2.CommandText = "SELECT UserIcon FROM DBNoto.UserTable WHERE UPPER(UserLogin) = UPPER('"+UserProfile.userLogin+ "')";
+            cmd2.CommandText = "SELECT UserIcon FROM DBNoto.UserTable WHERE UserID = " + UserProfile.userId; ;
             cmd2.CommandType = CommandType.Text;
 
             OracleDataReader reader = cmd2.ExecuteReader();
@@ -57,22 +56,6 @@ namespace Noto.Data
                 UserProfile.userIconImg = LoadImage(reader.GetValue(0) as byte[]);
             }
             con.Close();
-
-            //String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
-            //OracleConnection con = new OracleConnection();
-            //con.ConnectionString = connectionString;
-
-            //con.Open();
-            //OracleCommand cmd = con.CreateCommand();
-            //cmd.CommandText = "SELECT UserIcon FROM DBNoto.UserTable WHERE UserID = " + UserProfile.userId; ;
-            //cmd.CommandType = CommandType.Text;
-            //OracleDataReader reader = cmd.ExecuteReader();
-            //while (reader.Read())
-            //{
-            //    UserProfile.userIconImg = LoadImage(reader.GetValue(0) as byte[]);
-            //}
-            //reader.Close();
-            //con.Close();
         }
         public static void UpdateUserImageBrush()
         {
@@ -118,7 +101,7 @@ namespace Noto.Data
             cmd2.CommandText = "UPDATE DBNoto.UserTable " +
                               "SET " +
                               "UserIcon = :ImageFront " +
-                              "WHERE UPPER(UserLogin) = UPPER('" + UserProfile.userLogin + "')";
+                              "WHERE UserID = UPPER('" + UserProfile.userId + "')";
 
             cmd2.Parameters.Add(":ImageFront", OracleDbType.Blob);
             cmd2.Parameters[":ImageFront"].Value = image;
@@ -131,6 +114,25 @@ namespace Noto.Data
             UserProfile.userIconImg = LoadImage(image);
         }
 
+        public static void LoadCommentUserImageBrush()
+        {
+            String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+            OracleConnection con = new OracleConnection();
+            con.ConnectionString = connectionString;
+
+            con.Open();
+            OracleCommand cmd2 = con.CreateCommand();
+
+            cmd2.CommandText = "SELECT UserIcon FROM DBNoto.UserTable WHERE UserID = " + CurrentComment.commentUserId; ;
+            cmd2.CommandType = CommandType.Text;
+
+            OracleDataReader reader = cmd2.ExecuteReader();
+            while (reader.Read())
+            {
+                CurrentComment.commentUserIconImg = LoadImage(reader.GetValue(0) as byte[]);
+            }
+            con.Close();
+        }
 
         public static void LoadTeamImageBrush()
         {
@@ -206,8 +208,42 @@ namespace Noto.Data
             CurrentTeam.teamIconImg = LoadImage(image);
         }
 
+        public static void LoadUserImageBrush(int rn)
+        {
+            String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+            OracleConnection con = new OracleConnection();
+            con.ConnectionString = connectionString;
 
-        public static void LoadUser1ImageBrush()
+            con.Open();
+            OracleCommand cmd2 = con.CreateCommand();
+            cmd2.CommandText = "SELECT * FROM(SELECT UserIcon, row_number() over (order by UserID) rn FROM DBNoto.UserTeam_view WHERE TeamID = " + CurrentTeam.teamId + ") WHERE rn = " + rn;
+            //cmd2.CommandText = "SELECT UserIcon FROM DBNoto.UserTeam_view WHERE TeamID = " + CurrentTeam.teamId + " ORDER BY UserID ASC FETCH FIRST 1 ROWS ONLY";
+            cmd2.CommandType = CommandType.Text;
+
+            OracleDataReader reader = cmd2.ExecuteReader();
+            while (reader.Read())
+            {
+                switch (rn)
+                {
+                    case 1:
+                        CurrentTeam.user1IconImg = LoadImage(reader.GetValue(0) as byte[]);
+                        break;
+                    case 2:
+                        CurrentTeam.user2IconImg = LoadImage(reader.GetValue(0) as byte[]);
+                        break;
+                    case 3:
+                        CurrentTeam.user3IconImg = LoadImage(reader.GetValue(0) as byte[]);
+                        break;
+                    default:
+                        CurrentTeam.user3IconImg = null;
+                        break;
+                }
+                
+            }
+            reader.Close();
+            con.Close();
+        }
+        public static void LoadUser2ImageBrush()
         {
             String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
             OracleConnection con = new OracleConnection();
@@ -216,13 +252,13 @@ namespace Noto.Data
             con.Open();
             OracleCommand cmd2 = con.CreateCommand();
 
-            cmd2.CommandText = "SELECT UserIcon FROM DBNoto.UserTeam_view WHERE TeamID = " + CurrentTeam.teamId + " ORDER BY UserID ASC FETCH FIRST 1 ROWS ONLY";
+            cmd2.CommandText = "SELECT UserIcon FROM DBNoto.UserTeam_view WHERE TeamID = " + CurrentTeam.teamId + " ORDER BY UserID DESC FETCH FIRST 1 ROWS ONLY";
             cmd2.CommandType = CommandType.Text;
 
             OracleDataReader reader = cmd2.ExecuteReader();
             while (reader.Read())
             {
-                CurrentTeam.user1IconImg = LoadImage(reader.GetValue(0) as byte[]);
+                CurrentTeam.user2IconImg = LoadImage(reader.GetValue(0) as byte[]);
             }
             reader.Close();
             con.Close();

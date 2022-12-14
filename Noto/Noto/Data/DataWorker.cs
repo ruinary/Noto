@@ -37,10 +37,11 @@ namespace Noto.Data
         public static class CurrentComment
         {
             public static int commentId { get; set; }
+            public static int commentUserId { get; set; }
             public static string commentUserLogin { get; set; }
+            public static int commentTaskId { get; set; }
             public static string commentText { get; set; }
-            public static byte[] userIcon { get; set; }
-            public static BitmapImage userIconImg { get; set; }
+            public static BitmapImage commentUserIconImg { get; set; }
         }
 
         public static class CurrentUser

@@ -4,6 +4,7 @@ using System;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Noto.Views.Pages
 {
@@ -18,20 +19,28 @@ namespace Noto.Views.Pages
 
             ImageWorker.LoadUserImageBrush();
 
-            userIconCircle.ImageSource = DataWorker.UserProfile.userIconImg;
 
             if (DataWorker.CurrentUser.currentUserId == DataWorker.UserProfile.userId)
             {
+                userIconCircle.ImageSource = DataWorker.UserProfile.userIconImg;
+
                 ChangePasswordGrid.Visibility = Visibility.Visible;
                 DeleteAccGrid.Visibility = Visibility.Visible;
+                changeUserIconGrid.Visibility = Visibility.Visible;
+                simpleUserIconGrid.Visibility = Visibility.Hidden;
+
             }
             else
             {
+                ImageBrush brush = new ImageBrush(DataWorker.UserProfile.userIconImg);
+                circleUser.Fill = brush;
+
                 ChangePasswordGrid.Visibility = Visibility.Hidden;
                 DeleteAccGrid.Visibility = Visibility.Hidden;
+                changeUserIconGrid.Visibility = Visibility.Hidden;
+                simpleUserIconGrid.Visibility = Visibility.Visible;
             }
         }
-
         
         #region Edit Photo
         private void Button_Click(object sender, RoutedEventArgs e)

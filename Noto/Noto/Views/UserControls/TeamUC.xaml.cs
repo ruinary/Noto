@@ -19,7 +19,6 @@ namespace Noto.Views.UserControls
 
         public TeamUC()
         {
-            con.ConnectionString = connectionString;
             InitializeComponent();
         }
 

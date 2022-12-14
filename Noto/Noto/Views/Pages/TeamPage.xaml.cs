@@ -37,26 +37,28 @@ namespace Noto.Views.Pages
                 cmd.CommandText = "DBNoto.search_user_role_in_team";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("p_user_id", OracleDbType.Int32, 10).Value = DataWorker.CurrentUser.currentUserId;
+                cmd.Parameters.Add("p_team_id", OracleDbType.Int32, 10).Value = DataWorker.CurrentTeam.teamId;
 
                 cmd.Parameters.Add("o_user_role", OracleDbType.Varchar2, 30);
                 cmd.Parameters["o_user_role"].Direction = ParameterDirection.Output;
 
                 cmd.ExecuteNonQuery();
                 userRoleInTeam = Convert.ToString(cmd.Parameters["o_user_role"].Value);
+
+                if (userRoleInTeam == "OWNER")
+                {
+                    teamSettingsButton.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    teamSettingsButton.Visibility = Visibility.Hidden;
+                }
             }
             catch (Exception exc)
             {
                 MessageBox.Show("Данные для входа введены неверно!");
             }
 
-            if (userRoleInTeam != "OWNER")
-            {
-                teamSettingsButton.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                teamSettingsButton.Visibility = Visibility.Visible;
-            }
             con.Close();
         }
 

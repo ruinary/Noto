@@ -101,6 +101,9 @@
     <Compile Include="Views\ExtraWindows\AddUserInTeam.xaml.cs">
       <DependentUpon>AddUserInTeam.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ExtraWindows\CreateComment.xaml.cs">
+      <DependentUpon>CreateComment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ExtraWindows\CreateTask.xaml.cs">
       <DependentUpon>CreateTask.xaml</DependentUpon>
     </Compile>
@@ -176,11 +179,17 @@
     <Compile Include="Views\UserControls\CommentUC.xaml.cs">
       <DependentUpon>CommentUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\CreateCommentUC.xaml.cs">
+      <DependentUpon>CreateCommentUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\CreateTaskUC.xaml.cs">
       <DependentUpon>CreateTaskUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\CreateTeamUC.xaml.cs">
       <DependentUpon>CreateTeamUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\CreateUC\CreateCommentUC.xaml.cs">
+      <DependentUpon>CreateCommentUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\CreateUC\CreateTeamNameUC.xaml.cs">
       <DependentUpon>CreateTeamNameUC.xaml</DependentUpon>
@@ -209,6 +218,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ExtraWindows\AddUserInTeam.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExtraWindows\CreateComment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -312,11 +325,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\CreateCommentUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\CreateTaskUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\CreateTeamUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\CreateUC\CreateCommentUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

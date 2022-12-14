@@ -16,7 +16,7 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
+        <Grid x:Name="changeUserIconGrid" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="10*"/>
@@ -27,6 +27,15 @@
                         <ImageBrush x:Name="userIconCircle" ImageSource="{Binding }" Stretch="UniformToFill"/>
                     </Button.Background>
                 </Button>
+            </Viewbox>
+        </Grid>
+        <Grid x:Name="simpleUserIconGrid" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="10*"/>
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Column="1">
+                <Rectangle x:Name="circleUser" RadiusY="100" RadiusX="100" MinWidth="40" MinHeight="40" Fill="{DynamicResource ColorTransWhiteBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
             </Viewbox>
         </Grid>
         <Grid Grid.Column="1">

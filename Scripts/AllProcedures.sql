@@ -118,9 +118,10 @@ END log_in_user;
 -------------------------SEARCH_USER_ROLE_IN_TEAM-------------------------
 CREATE OR REPLACE PROCEDURE search_user_role_in_team
     (p_user_id IN UserTable.UserID%TYPE,
+    p_team_id IN TeamTable.TeamID%TYPE,
     o_user_role OUT UserTeamPrivs.UserTeamPrivName%TYPE)
 IS
-    CURSOR user_cursor IS SELECT UserTeamPrivName FROM UserTeam_view WHERE UserID = p_user_id;
+    CURSOR user_cursor IS SELECT UserTeamPrivName FROM UserTeam_view WHERE UserID = p_user_id AND TeamID = p_team_id;
 BEGIN
     OPEN user_cursor;
         FETCH user_cursor INTO o_user_role;
@@ -132,7 +133,7 @@ END search_user_role_in_team;
 
 declare
     o_user_role UserTeamPrivs.UserTeamPrivName%TYPE;
-begin search_user_role_in_team(1,o_user_role); end;
+begin search_user_role_in_team(30,59,o_user_role); end;
 
 -------------------------SEARCH_USER-------------------------
 CREATE OR REPLACE PROCEDURE search_user
@@ -159,7 +160,9 @@ declare
     o_user_lastname UserTable.UserLastName%TYPE;
     o_user_phonenumber UserTable.UserPhoneNumber%TYPE;
     o_user_email UserTable.UserEmail%TYPE;
-begin search_user('REMERAL',o_user_id,o_user_name,o_user_lastname,o_user_phonenumber,o_user_email); end;
+begin search_user('qusest',o_user_id,o_user_name,o_user_lastname,o_user_phonenumber,o_user_email); 
+dbms_output.put_line(o_user_id||o_user_name||o_user_lastname||o_user_phonenumber||o_user_email);
+end;
 
 -------------------------UPDATE_USER_LOGIN-------------------------
 CREATE OR REPLACE PROCEDURE update_user_login
@@ -311,6 +314,7 @@ BEGIN
     END IF;
 END create_team;
 --begin create_team('remeral','ww'); end;
+
 -------------------------CREATE_TASK (without comments)-------------------------
 CREATE OR REPLACE PROCEDURE create_task
     (p_user_login IN UserTable.UserLogin%TYPE,
@@ -328,7 +332,60 @@ BEGIN
         VALUES(tm_id, p_task_status, p_task_priority, p_task_title, p_task_description, TO_CHAR(SYSDATE, 'DD.MM.YYYY'), p_task_deadlineDate);
         COMMIT;
 END create_task;
+-------------------------CREATE_COMMENTS-------------------------
+CREATE OR REPLACE PROCEDURE create_comment
+    (p_user_id IN UserTable.UserID%TYPE,
+     p_task_id IN TaskTable.TaskID%TYPE,
+     p_comment_text IN TaskComments.ComText%TYPE)
+IS
+     cnt NUMBER;
+BEGIN 
+SELECT COUNT(*) INTO cnt FROM UserTable WHERE UserID = p_user_id;
+    IF (cnt != 0) THEN
+        SELECT COUNT(*) INTO cnt FROM TaskTable WHERE TaskID = p_task_id;
+        IF (cnt != 0) THEN
+            INSERT INTO TaskComments(ComUser, ComTask, ComDate, ComText) 
+            VALUES(p_user_id, p_task_id, TO_CHAR(SYSDATE, 'DD.MM.YYYY'), p_comment_text);
+            COMMIT;  
+        ELSE
+            RAISE_APPLICATION_ERROR(-20002, 'Task is not found');
+        END IF;
+    ELSE
+        RAISE_APPLICATION_ERROR(-20002, 'User is not found');
+    END IF;
+END create_comment;
+select * from USerTable;
+select * from TaskTable;
+delete TaskComments;
 
+--select * from TaskComments ORDER BY TO_DATE(ComDate, 'DD.MM.YYYY') desc  ;
+--begin create_comment(30,31,'testQusEstW'); end;
+--begin create_comment(30,30,'testQusEstA'); end;
+--begin create_comment(32,31,'testRemeralW'); end;
+update TaskComments set ComDate = '15.12.2022' where comid = 20;
+
+-------------------------GET_LAST_COMMENT-------------------------
+CREATE OR REPLACE PROCEDURE get_last_comment
+    (p_task_id IN TaskTable.TaskID%TYPE,
+     o_user_id OUT UserTable.UserID%TYPE,
+     o_user_login OUT UserTable.UserLogin%TYPE,
+     o_comment_date OUT TaskComments.ComDate%TYPE,
+     o_comment_text OUT TaskComments.ComText%TYPE)
+IS
+BEGIN 
+SELECT ComUser, ComDate, ComText INTO o_user_id, o_comment_date,o_comment_text FROM TaskComments WHERE ComTask = p_task_id ORDER BY TO_DATE(ComDate, 'DD.MM.YYYY') desc FETCH FIRST 1 ROWS ONLY;
+SELECT UserLogin INTO o_user_login FROM UserTable WHERE UserID = o_user_id;
+END get_last_comment;
+
+declare
+    o_user_id  UserTable.UserID%TYPE;
+     o_user_login  UserTable.UserLogin%TYPE;
+     o_comment_date  TaskComments.ComDate%TYPE;
+     o_comment_text  TaskComments.ComText%TYPE;
+begin 
+get_last_comment(31,o_user_id,o_user_login,o_comment_date,o_comment_text); 
+dbms_output.put_line(o_user_id||o_user_login||o_comment_date||o_comment_text);
+end;
 -------------------------UPDATE_TEAM_NAME-------------------------
 CREATE OR REPLACE PROCEDURE update_team_name
     (p_old_team_name IN TeamTable.TeamName%TYPE,
@@ -486,6 +543,7 @@ BEGIN
 END delete_task;
 select * from TaskTeam_view;
 SELECT * FROM (select TaskID, TaskTitle, CreationDate, DeadlineDate, TaskPriorityName, TaskStatusName, TaskDescription, row_number() over (ORDER BY TaskID ASC) rn from DBNoto.TaskTeam_view WHERE TeamID = 44) where rn between :n and :m ORDER BY TaskID ASC;
+
 ------------------------------DELETE TEAM------------------------------
 create or replace PROCEDURE delete_team
     (p_id IN TeamTable.TeamID%TYPE)
@@ -501,6 +559,7 @@ BEGIN
     END IF;
 END delete_team;
 SELECT * FROM DBNoto.TaskTeam_view;
+
 ------------------------------DELETE USER------------------------------
 create or replace PROCEDURE delete_user
     (p_login IN UserTable.UserLogin%TYPE)
@@ -518,6 +577,7 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20003, 'User is not found');
     END IF;
 END delete_user;
+
 ------------------------------ADD USER TO TEAM------------------------------
 CREATE OR REPLACE PROCEDURE add_user_to_team
     (p_user_login IN UserTable.UserLogin%TYPE,
@@ -543,6 +603,7 @@ END add_user_to_team;
 
 --select * from UserTable;
 --begin add_user_to_team('qusest',1); end;
+
 ------------------------------REMOVE USER FROM TEAM------------------------------
 CREATE OR REPLACE PROCEDURE remove_user_from_team
     (p_user_id IN UserTable.UserID%TYPE,

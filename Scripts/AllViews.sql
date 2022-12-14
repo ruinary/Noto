@@ -27,7 +27,7 @@ FROM UserTeamPrivTable
     JOIN UserTable ON UserTeamPrivTable.PrivUser = UserTable.UserID;
 
 SELECT * FROM DBNoto.UserTeam_view ORDER BY TeamName ASC;
-SELECT * FROM UserTeam_view;
+SELECT * FROM DBNoto.UserTeam_view;
 commit;
 
 SELECT * FROM DBNoto.UserTeam_view WHERE TeamID = 1 ORDER BY UserLogin ASC;

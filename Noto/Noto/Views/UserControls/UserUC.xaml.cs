@@ -22,7 +22,6 @@ namespace Noto.Views.UserControls
 
         public UserUC()
         {
-            con.ConnectionString = connectionString;
             InitializeComponent();
         }
 
@@ -43,28 +42,6 @@ namespace Noto.Views.UserControls
             userIconCircle.ImageSource = DataWorker.UserProfile.userIconImg;
             userNameBlock.Text = _userLogin;
 
-
-            //con.Open();
-            //OracleCommand cmd = con.CreateCommand();
-            //cmd.CommandText = "SELECT UserIcon FROM DBNoto.UserTable WHERE UserID = " + _idUser;
-            //cmd.CommandType = CommandType.Text;
-            //OracleDataReader reader = cmd.ExecuteReader();
-            //while (reader.Read())
-            //{
-            //    try
-            //    {
-            //        BitmapImage image = new BitmapImage();
-            //        image.BeginInit();
-            //        image.StreamSource = new MemoryStream(reader.GetValue(0) as byte[]);
-            //        image.EndInit();
-            //        userIconCircle.ImageSource = image;
-            //    }
-            //    catch (Exception exc)
-            //    {
-            //        MessageBox.Show(exc.Message);
-            //    }
-            //}
-            //con.Close();
 
             if (userTeamPrivName == "OWNER")
             {

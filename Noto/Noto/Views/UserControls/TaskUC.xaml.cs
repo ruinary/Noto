@@ -2,6 +2,7 @@
 using Noto.Views.ExtraWindows;
 using Noto.Views.Pages;
 using Oracle.ManagedDataAccess.Client;
+using Oracle.ManagedDataAccess.Types;
 using System;
 using System.Data;
 using System.IO;
@@ -25,13 +26,13 @@ namespace Noto.Views.UserControls
         
         public TaskUC()
         {
-            con.ConnectionString = connectionString;
             InitializeComponent();
         }
 
         public TaskUC(Int16 _id, string _taskTitle,  string _taskCreationDate, string _taskDeadlineDate, string _taskPriority, string _taskStatus, string _taskDescription)
         {
             con.ConnectionString = connectionString;
+
             InitializeComponent();
 
             this.taskId = _id;
@@ -48,10 +49,7 @@ namespace Noto.Views.UserControls
             taskPriorityBlock.Text = taskPriority;
             taskStatusBlock.Text = taskStatus;
             taskDescriptionBlock.Text = taskDescription;
-        }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
             DataWorker.CurrentTask.taskId = taskId;
             DataWorker.CurrentTask.taskTitle = taskTitle;
             DataWorker.CurrentTask.taskDeadlineDate = taskDeadlineDate;
@@ -60,6 +58,54 @@ namespace Noto.Views.UserControls
             DataWorker.CurrentTask.taskStatus = taskStatus;
             DataWorker.CurrentTask.taskDescription = taskDescription;
 
+            GetLastComment();
+
+        }
+        void GetLastComment()
+        {
+            try
+            {
+                con.Open();
+
+                OracleCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "DBNoto.get_last_comment";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("p_task_id", OracleDbType.Int32, 10).Value = taskId;
+
+                cmd.Parameters.Add("o_user_id", OracleDbType.Int32, 10);
+                cmd.Parameters["o_user_id"].Direction = ParameterDirection.Output;
+
+                cmd.Parameters.Add("o_user_login", OracleDbType.Varchar2, 30);
+                cmd.Parameters["o_user_login"].Direction = ParameterDirection.Output;
+
+                cmd.Parameters.Add("o_comment_date", OracleDbType.Varchar2, 30);
+                cmd.Parameters["o_comment_date"].Direction = ParameterDirection.Output;
+
+                cmd.Parameters.Add("o_comment_text", OracleDbType.Varchar2, 100);
+                cmd.Parameters["o_comment_text"].Direction = ParameterDirection.Output;
+
+                cmd.ExecuteNonQuery();
+
+                //string comDate = Convert.ToString(cmd.Parameters["o_comment_date"].Value); 
+                DataWorker.CurrentComment.commentUserId = Convert.ToInt32((decimal)(OracleDecimal)(cmd.Parameters["o_user_id"].Value));
+                DataWorker.CurrentComment.commentTaskId = taskId;
+                DataWorker.CurrentComment.commentUserLogin = Convert.ToString(cmd.Parameters["o_user_login"].Value);
+                DataWorker.CurrentComment.commentText = Convert.ToString(cmd.Parameters["o_comment_text"].Value);
+
+                MessageBox.Show(DataWorker.CurrentComment.commentUserId + DataWorker.CurrentComment.commentTaskId+ DataWorker.CurrentComment.commentUserLogin + DataWorker.CurrentComment.commentText);
+                con.Close();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.ToString());
+            }
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
             TaskSettings taskSettings = new TaskSettings();
             taskSettings.Show();
         }

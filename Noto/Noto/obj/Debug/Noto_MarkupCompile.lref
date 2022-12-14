@@ -38,4 +38,7 @@ FD:\git\Noto\Noto\Noto\Views\UserControls\WinHeader.xaml;;
 FD:\git\Noto\Noto\Noto\Views\Windows\Authorization.xaml;;
 FD:\git\Noto\Noto\Noto\Views\Windows\MainWindow.xaml;;
 FD:\git\Noto\Noto\Noto\Views\Windows\Registration.xaml;;
+FD:\git\Noto\Noto\Noto\Views\ExtraWindows\CreateComment.xaml;;
+FD:\git\Noto\Noto\Noto\Views\UserControls\CreateCommentUC.xaml;;
+FD:\git\Noto\Noto\Noto\Views\UserControls\CreateUC\CreateCommentUC.xaml;;
 
