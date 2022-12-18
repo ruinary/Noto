@@ -61,5 +61,4 @@ namespace Noto.Views.Pages
             con.Close();
         }
     }
-
 }

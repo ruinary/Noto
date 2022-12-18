@@ -73,5 +73,11 @@ namespace Noto.Views.Pages
             DataWorker.CurrentPage.currentTaskPage = new CalendarPage();
             taskFrame.DataContext = DataWorker.CurrentPage.currentTaskPage;
         }
+
+        private void ChartButtonClick(object sender, RoutedEventArgs e)
+        {
+            DataWorker.CurrentPage.currentTaskPage = new ChartPage();
+            taskFrame.DataContext = DataWorker.CurrentPage.currentTaskPage;
+        }
     }
 }

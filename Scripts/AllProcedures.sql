@@ -3,11 +3,11 @@ SELECT * FROM user_procedures;
 
 BEGIN
    REGISTER_USER('remeral', 'qwerty', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru');
-   --REGISTER_USER('qusest', 'qwerty', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru');
-   --REGISTER_USER('ruinary', 'qwerty', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru');
+   REGISTER_USER('qusest', 'qwerty', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru');
+   REGISTER_USER('ruinary', 'qwerty', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru');
 END;
-
-UPDATE UserTable SET UserRole  = 2 WHERE UserID = 22;
+commit;
+UPDATE UserTable SET UserRole  = 2 WHERE UserID = 42;
 --UPDATE UserTable SET UserPassword  = encryption_password('qwerty') WHERE UserLogin = 'REMERAL';
 select* from UserTable;
 
@@ -635,6 +635,20 @@ END count_user_in_team;
 --declare count_users NUMBER;
 --begin count_user_in_team(21,count_users); end;
 
+------------------------------COUNT TASK BY DATE------------------------------
+CREATE OR REPLACE PROCEDURE count_task_by_date 
+    (p_team_id IN TeamTable.TeamID%TYPE,
+     p_deadlinedate IN TaskTable.DeadlineDate%TYPE,
+     o_count_tasks OUT NUMBER)
+IS
+BEGIN
+    SELECT count(*)INTO o_count_tasks FROM TaskTeam_view WHERE TeamID = p_team_id AND DeadlineDate = p_deadlinedate;
+END count_task_by_date;
+
+--declare count_users NUMBER;
+--begin count_task_by_date(31,'15.12.2022',count_users); 
+--dbms_output.put_line(count_users);
+--end;
 ------------------------INSERT 100 000 USERS-------------------------
 CREATE OR REPLACE PROCEDURE insert_100k_users
 IS
@@ -660,10 +674,11 @@ END insert_100k_tasks;
 
 ------------------------------EXPORT XML-------------------------
 ---------------------- as sys to orcl:
+drop directory cw_dir;
 create directory cw_dir as '/CW';
 select * from dba_directories where directory_name='CW_DIR';
 grant read, write on directory cw_dir to DBNoto;
-
+GRANT CREATE ANY DIRECTORY TO DBNoto;
 ------------------------------TEAM EXPORT XML-------------------------
 CREATE OR REPLACE PROCEDURE teams_export
 IS
@@ -675,15 +690,16 @@ BEGIN
     DBMS_XMLDOM.WRITETOFILE(doc, 'CW_DIR/teams_export.xml');
 END teams_export;
 
-begin teams_export(); end;
+begin DBNOTO.teams_export(); end;
 ------------------------------USER EXPORT XML-------------------------
 CREATE OR REPLACE PROCEDURE users_export
 IS
     rc sys_refcursor;
     doc DBMS_XMLDOM.DOMDocument;
 BEGIN
-    OPEN rc FOR SELECT UserID, UserLogin, decr, RoleName FROM UserRole_full_view;
+    open rc for select USERLOGIN,USERPASSWORD,USERNAME,USERLASTNAME,USERPHONENUMBER,USEREMAIL,USERROLE from UserTable;
     doc := DBMS_XMLDOM.NewDOMDocument(XMLTYPE(rc));
+    --doc := UTL_FILE.FOPEN( 'CW_DIR' , 'users_export.xml' , 'w' );
     DBMS_XMLDOM.WRITETOFILE(doc, 'CW_DIR/users_export.xml');
 END users_export;
 
@@ -691,20 +707,58 @@ BEGIN
     users_export();
 END;
 ------------------------------ IMPORT XML
-CREATE OR REPLACE PROCEDURE artist_import
+CREATE OR REPLACE PROCEDURE teams_import
 IS
 BEGIN
-    INSERT INTO artist_table (artist_name)
-    SELECT ExtractValue(VALUE(artist), '//NAME') AS artist_name
-    FROM TABLE(XMLSequence(EXTRACT(XMLTYPE(bfilename('CW_DIR', 'artist_import.xml'),
-    nls_charset_id('UTF-8')),'/ROWSET/ROW'))) artist;
-END artist_import;
+    INSERT INTO TeamTable(TeamName)
+    SELECT ExtractValue(VALUE(TeamName), '//NAME') AS team_name
+    FROM TABLE(XMLSequence(EXTRACT(XMLTYPE(bfilename('CW_DIR', 'teams_export.xml'),
+    nls_charset_id('UTF-8')),'/ROWSET/ROW'))) teams;
+END teams_import;
 
 BEGIN
-    artist_import();
+    teams_import();
 END;
 
-delete from artist_table where artist_id in(101, 102); 
-select * from artist_table;
-commit;
+CREATE OR REPLACE PROCEDURE users_import
+IS
+BEGIN
+    INSERT INTO UserTable(USERLOGIN,USERPASSWORD,USERNAME,USERLASTNAME,USERPHONENUMBER,USEREMAIL,USERROLE)
+    SELECT ExtractValue(VALUE(Users), '//LOGIN') AS UserLogin,
+           ExtractValue(VALUE(Users), '//PASSWORD') AS UserPassword,
+           ExtractValue(VALUE(Users), '//NAME') AS UserName,
+           ExtractValue(VALUE(Users), '//LASTNAME') AS UserLastName,
+           ExtractValue(VALUE(Users), '//PHONENUMBER') AS UserPhoneNumber,
+           ExtractValue(VALUE(Users), '//EMAIL') AS UserEmail,
+           ExtractValue(VALUE(Users), '//ROLE') AS UserRole
+    FROM TABLE(XMLSequence(EXTRACT(XMLTYPE(bfilename('CW_DIR', 'users_export.xml'),
+    nls_charset_id('UTF-8')),'/ROWSET/ROW'))) Users;
+END users_import;
 
+
+procedure importXmlDataFromComponents
+is
+begin
+insert into shopofcomponents (comname, price)
+select ExtractValue(value(components), '//NAME') as comname,
+       ExtractValue(value(components), '//PRICE') as price
+from table(XMLSequence(extract(xmltype(bfilename('DIR', 'components_import.xml'),
+             nls_charset_id('UTF-8')),'/ROWSET/ROW'))) components;
+exception
+when others then
+raise_application_error(-20001,'An error was encountered - '||SQLCODE||' -ERROR- '||SQLERRM);
+end importXmlDataFromComponents;
+
+procedure exportXmlToClients
+is 
+    rc sys_refcursor;
+    doc DBMS_XMLDOM.DOMDocument;
+begin
+open rc for select USERLOGIN,USERPASSWORD,USERNAME,USERLASTNAME,USERPHONENUMBER,USEREMAIL,USERROLE from UserTable;
+doc := DBMS_XMLDOM.NewDOMDocument(xmltype(rc));
+DBMS_XMLDOM.WRITETOFILE(doc, 'CW_DIR/users_export.xml');
+commit;
+exception
+when others then
+raise_application_error(-20001,'An error was encountered - '||SQLCODE||' -ERROR- '||SQLERRM);      
+end exportXmlToClients;

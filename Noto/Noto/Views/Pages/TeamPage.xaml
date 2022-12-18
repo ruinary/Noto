@@ -44,7 +44,7 @@
                 <Button Style="{DynamicResource CalendarButton}" Click="CalendarButtonClick"/>
             </Grid>
             <Grid Grid.Column="6">
-                <Button Style="{DynamicResource GraficButton}"/>
+                <Button Style="{DynamicResource GraficButton}" Click="ChartButtonClick"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">

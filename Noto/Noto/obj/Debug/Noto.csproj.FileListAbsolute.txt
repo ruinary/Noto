@@ -318,9 +318,7 @@ D:\git\Noto\Noto\Noto\obj\Debug\Views\ExtraWindows\CreateTeam.baml
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\CreateUC\CreateTeamNameUC.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\CreateUC\CreateTeamNameUC.baml
 D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\CalendarPage.g.cs
-D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\TaskOfDatePage.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\CalendarPage.baml
-D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\TaskOfDatePage.baml
 D:\git\Noto\Noto\Noto\obj\Debug\Noto.csproj.SuggestedBindingRedirects.cache
 D:\git\Noto\Noto\Noto\obj\Debug\Views\ExtraWindows\CreateComment.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\CreateCommentUC.g.cs
@@ -328,3 +326,7 @@ D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\CreateUC\CreateCommentUC.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\ExtraWindows\CreateComment.baml
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\CreateCommentUC.baml
 D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\CreateUC\CreateCommentUC.baml
+D:\git\Noto\Noto\Noto\bin\Debug\LiveCharts.dll
+D:\git\Noto\Noto\Noto\bin\Debug\LiveCharts.Wpf.dll
+D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\ChartPage.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\ChartPage.baml

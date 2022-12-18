@@ -21,11 +21,11 @@ namespace Noto.Views.UserControls
             con.ConnectionString = connectionString;
             InitializeComponent();
 
-            ImageWorker.LoadCommentUserImageBrush();
-            userIconCircle.ImageSource = DataWorker.CurrentComment.commentUserIconImg;
             userLoginBlock.Text = DataWorker.CurrentComment.commentUserLogin;
             commentTextBlock.Text = DataWorker.CurrentComment.commentText;
 
+            ImageWorker.LoadCommentUserImageBrush();
+            userIconCircle.ImageSource = DataWorker.CurrentComment.commentUserIconImg;
         }
 
         public CommentUC(Int16 _idComment, string _userLogin, string _commentText)
@@ -37,10 +37,10 @@ namespace Noto.Views.UserControls
 
             InitializeComponent();
 
-            ImageWorker.LoadCommentUserImageBrush();
-            userIconCircle.ImageSource = DataWorker.CurrentComment.commentUserIconImg;
             userLoginBlock.Text = DataWorker.CurrentComment.commentUserLogin;
             commentTextBlock.Text = DataWorker.CurrentComment.commentText;
+            ImageWorker.LoadCommentUserImageBrush();
+            userIconCircle.ImageSource = DataWorker.CurrentComment.commentUserIconImg;
         }
         void GetUserProfileInfo()
         {
@@ -96,7 +96,7 @@ namespace Noto.Views.UserControls
         private void CheckProfileButtonClick(object sender, RoutedEventArgs e)
         {
             GetUserProfileInfo();
-            MessageBox.Show(DataWorker.UserProfile.userLogin);
+
             DataWorker.CurrentPage.currentPage = new Profile();
 
             MainWindow mainWindow = new MainWindow();

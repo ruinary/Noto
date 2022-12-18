@@ -22,5 +22,4 @@ GRANT CREATE JOB TO DBNoto;
 COMMIT;
 
 GRANT EXECUTE ON SYS.dbms_crypto TO dbnoto;
-
 COMMIT;

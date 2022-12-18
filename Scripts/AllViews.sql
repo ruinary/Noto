@@ -20,7 +20,7 @@ SELECT * FROM UserRole_full_view;
 -------------------------USER & TEAM & PRIVELEGY-------------------------
 --DROP VIEW UserTeam_view;
 CREATE VIEW UserTeam_view AS SELECT TeamTable.TeamID, TeamTable.TeamName,TeamTable.TeamIcon,
-         UserTable.UserID,UserTable.UserLogin,USerTable.UserIcon,UserTeamPrivs.UserTeamPrivName 
+         UserTable.UserID,UserTable.UserLogin,UserTable.UserIcon,UserTeamPrivs.UserTeamPrivName 
 FROM UserTeamPrivTable 
     JOIN UserTeamPrivs ON UserTeamPrivTable.Privelegy = UserTeamPrivs.UserTeamPrivID
     JOIN TeamTable ON UserTeamPrivTable.PrivTeam = TeamTable.TeamID
@@ -36,7 +36,22 @@ SELECT UserIcon FROM DBNoto.UserTable WHERE UserId = 1;
 SELECT UserIcon FROM UserTable WHERE UPPER(UserLogin) = UPPER('remeral');
 SELECT UserIcon, UserLogin FROM DBNoto.UserTeam_view WHERE TeamID = 49 AND UPPER(UserLogin) = UPPER('remeral');
 SELECT UserIcon, UserLogin FROM DBNoto.UserTeam_view WHERE TeamID = 49 ORDER BY UserID ASC FETCH FIRST 1 ROWS ONLY;
--------------------------TEAM & TASK & LAST COMMENT------------------------- 
+
+-------------------------USER & COMMENT & TASK-------------------------
+--DROP VIEW UserComment_view;
+CREATE VIEW UserComment_view AS SELECT TaskComments.ComID, TaskComments.ComTask, TaskComments.ComText, TaskComments.ComDate,
+            UserTable.UserID,UserTable.UserLogin,UserTable.UserIcon
+FROM TaskComments 
+    JOIN UserTable ON TaskComments.ComUser = UserTable.UserID;
+    
+--Select * from TaskComments;
+--Select * from TeamTable;
+--SELECT * FROM (select TaskID, TaskTitle, CreationDate, DeadlineDate, TaskPriorityName, TaskStatusName, TaskDescription, row_number() over (ORDER BY TaskID ASC) rn from DBNoto.TaskTeam_view WHERE TeamID = 57) where rn between :n and :m ORDER BY TaskID ASC;
+--SELECT * FROM (select TaskID, TaskTitle, CreationDate, DeadlineDate, TaskPriorityName, TaskStatusName, TaskDescription, row_number() over (ORDER BY TaskID ASC) rn from DBNoto.TaskTeam_view WHERE TeamID = 57 AND DeadlineDate = '15.12.2022') where rn between :n and :m ORDER BY TaskID ASC;
+--SELECT * FROM (select ComID, UserLogin, ComText,ComDate, row_number() over (ORDER BY TO_DATE(ComDate, 'DD.MM.YYYY') DESC) rn from DBNoto.UserComment_view WHERE ComTask = 31) where rn between :n and :m;
+--SELECT * FROM DBNoto.UserComment_view;
+commit;
+-------------------------TEAM & TASK------------------------- 
 
 --DROP VIEW TaskTeam_view;
 CREATE VIEW TaskTeam_view 

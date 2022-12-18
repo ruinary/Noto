@@ -11,13 +11,52 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="7*"/>
-            <RowDefinition Height="83*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="70*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <DatePicker BorderBrush="{x:Null}" Background="{x:Null}" />
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Viewbox>
+                    <TextBlock Style="{DynamicResource CommonTitleTextH1}" Text="Выберите дату завершения выполнения задания:" VerticalAlignment="Top"/>
+                </Viewbox>
+            </Grid>
+            <Grid Grid.Row="1">
+                <DatePicker x:Name="datePicker" BorderBrush="{x:Null}" Background="{x:Null}" SelectedDateFormat="Short" SelectedDateChanged="SelectedDateChanged"/>
+            </Grid>
         </Grid>
         <Grid Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Button Foreground="#FFFAFAF1" Background="#33FFFFFF" BorderBrush="{x:Null}" Cursor="Hand" Click="showBackPageTasksButtonClick" Grid.Column="0">
+                            <materialDesign:PackIcon Kind="ArrowBack"/>
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Button Foreground="#FFFAFAF1" Background="#33FFFFFF" BorderBrush="{x:Null}" Cursor="Hand" Click="showNextPageTasksButtonClick" Grid.Column="0">
+                            <materialDesign:PackIcon Kind="ArrowForward"/>
+                        </Button>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <DockPanel x:Name="taskList" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Left" />
+                </Grid>
+            </Grid>
         </Grid>
     </Grid>
 </Page>
