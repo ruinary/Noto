@@ -11,10 +11,10 @@ namespace Noto.Views.UserControls.ChangeUC
     public partial class ChangeEmailUC : UserControl
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
         public ChangeEmailUC()
         {
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
             InitializeComponent();
 
             userEmail.Text = DataWorker.UserProfile.userEmail;

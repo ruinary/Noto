@@ -1,15 +1,21 @@
 ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 SELECT * FROM user_procedures;
 
+EXPLAIN PLAN FOR select * from UserTable;
+SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY());
+SELECT * FROM (select UserID, UserLogin, UserTeamPrivName, row_number() over (order by UserLogin) rn from DBNoto.UserTeam_view) where rn between :n and :m ORDER BY UserLogin ASC;
+
+----------------------------------------------------------------------
+
 BEGIN
    REGISTER_USER('remeral', 'qwerty', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru');
    REGISTER_USER('qusest', 'qwerty', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru');
    REGISTER_USER('ruinary', 'qwerty', 'Elizabeth', 'A.','+375291477513', 'nelope@mail.ru');
 END;
 commit;
-UPDATE UserTable SET UserRole  = 2 WHERE UserID = 42;
---UPDATE UserTable SET UserPassword  = encryption_password('qwerty') WHERE UserLogin = 'REMERAL';
-select* from UserTable;
+UPDATE UserTable SET UserRole  = 2 WHERE UserID = 1; commit;
+select count(*) from UserTable;
+commit;
 
 -------------------------ENCRYPTION_PASSWORD-------------------------
 CREATE OR REPLACE FUNCTION encryption_password
@@ -112,7 +118,6 @@ BEGIN
     ELSE
         RAISE_APPLICATION_ERROR(-20002, 'User is not found');
     END IF;
-    --check_role(o_user_login, o_user_role);
 END log_in_user;
 
 -------------------------SEARCH_USER_ROLE_IN_TEAM-------------------------
@@ -153,16 +158,6 @@ BEGIN
         END IF;
     CLOSE user_cursor;
 END search_user;
-
-declare
-    o_user_id UserTable.UserID%TYPE;
-    o_user_name UserTable.UserName%TYPE;
-    o_user_lastname UserTable.UserLastName%TYPE;
-    o_user_phonenumber UserTable.UserPhoneNumber%TYPE;
-    o_user_email UserTable.UserEmail%TYPE;
-begin search_user('qusest',o_user_id,o_user_name,o_user_lastname,o_user_phonenumber,o_user_email); 
-dbms_output.put_line(o_user_id||o_user_name||o_user_lastname||o_user_phonenumber||o_user_email);
-end;
 
 -------------------------UPDATE_USER_LOGIN-------------------------
 CREATE OR REPLACE PROCEDURE update_user_login
@@ -313,7 +308,6 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20003, 'Team with this name already exists');
     END IF;
 END create_team;
---begin create_team('remeral','ww'); end;
 
 -------------------------CREATE_TASK (without comments)-------------------------
 CREATE OR REPLACE PROCEDURE create_task
@@ -332,6 +326,7 @@ BEGIN
         VALUES(tm_id, p_task_status, p_task_priority, p_task_title, p_task_description, TO_CHAR(SYSDATE, 'DD.MM.YYYY'), p_task_deadlineDate);
         COMMIT;
 END create_task;
+
 -------------------------CREATE_COMMENTS-------------------------
 CREATE OR REPLACE PROCEDURE create_comment
     (p_user_id IN UserTable.UserID%TYPE,
@@ -354,15 +349,6 @@ SELECT COUNT(*) INTO cnt FROM UserTable WHERE UserID = p_user_id;
         RAISE_APPLICATION_ERROR(-20002, 'User is not found');
     END IF;
 END create_comment;
-select * from USerTable;
-select * from TaskTable;
-delete TaskComments;
-
---select * from TaskComments ORDER BY TO_DATE(ComDate, 'DD.MM.YYYY') desc  ;
---begin create_comment(30,31,'testQusEstW'); end;
---begin create_comment(30,30,'testQusEstA'); end;
---begin create_comment(32,31,'testRemeralW'); end;
-update TaskComments set ComDate = '15.12.2022' where comid = 20;
 
 -------------------------GET_LAST_COMMENT-------------------------
 CREATE OR REPLACE PROCEDURE get_last_comment
@@ -377,15 +363,6 @@ SELECT ComUser, ComDate, ComText INTO o_user_id, o_comment_date,o_comment_text F
 SELECT UserLogin INTO o_user_login FROM UserTable WHERE UserID = o_user_id;
 END get_last_comment;
 
-declare
-    o_user_id  UserTable.UserID%TYPE;
-     o_user_login  UserTable.UserLogin%TYPE;
-     o_comment_date  TaskComments.ComDate%TYPE;
-     o_comment_text  TaskComments.ComText%TYPE;
-begin 
-get_last_comment(31,o_user_id,o_user_login,o_comment_date,o_comment_text); 
-dbms_output.put_line(o_user_id||o_user_login||o_comment_date||o_comment_text);
-end;
 -------------------------UPDATE_TEAM_NAME-------------------------
 CREATE OR REPLACE PROCEDURE update_team_name
     (p_old_team_name IN TeamTable.TeamName%TYPE,
@@ -558,7 +535,6 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20009, 'Team is not found');
     END IF;
 END delete_team;
-SELECT * FROM DBNoto.TaskTeam_view;
 
 ------------------------------DELETE USER------------------------------
 create or replace PROCEDURE delete_user
@@ -601,9 +577,6 @@ BEGIN
     END IF;
 END add_user_to_team;
 
---select * from UserTable;
---begin add_user_to_team('qusest',1); end;
-
 ------------------------------REMOVE USER FROM TEAM------------------------------
 CREATE OR REPLACE PROCEDURE remove_user_from_team
     (p_user_id IN UserTable.UserID%TYPE,
@@ -620,9 +593,6 @@ BEGIN
     END IF;
 END remove_user_from_team;
 
---select * from teamtable;
---begin DBNoto.remove_user_from_team(21,1); end;
-
 ------------------------------COUNT USER IN TEAM------------------------------
 CREATE OR REPLACE PROCEDURE count_user_in_team 
     (p_team_id IN TeamTable.TeamID%TYPE,
@@ -631,9 +601,6 @@ IS
 BEGIN
     SELECT count(*)INTO o_count_users FROM UserTeam_view WHERE TeamID = p_team_id;
 END count_user_in_team;
-
---declare count_users NUMBER;
---begin count_user_in_team(21,count_users); end;
 
 ------------------------------COUNT TASK BY DATE------------------------------
 CREATE OR REPLACE PROCEDURE count_task_by_date 
@@ -644,121 +611,3 @@ IS
 BEGIN
     SELECT count(*)INTO o_count_tasks FROM TaskTeam_view WHERE TeamID = p_team_id AND DeadlineDate = p_deadlinedate;
 END count_task_by_date;
-
---declare count_users NUMBER;
---begin count_task_by_date(31,'15.12.2022',count_users); 
---dbms_output.put_line(count_users);
---end;
-------------------------INSERT 100 000 USERS-------------------------
-CREATE OR REPLACE PROCEDURE insert_100k_users
-IS
-BEGIN
-    FOR i IN 1 .. 100000 LOOP
-         REGISTER_USER('user' || i, 'pass' || i, 'UserName'|| i, 'UserLastName'|| i, '+375291234567', 'user@mail.ru');
-    END LOOP;
-END insert_100k_users;
-
-BEGIN
-insert_100k_users();
-commit;
-END;
-
-CREATE OR REPLACE PROCEDURE insert_100k_tasks
-IS
-BEGIN    
-    BEGIN  create_team('qusest','team_demo'); commit; END;
-    FOR i IN 1 .. 100000 LOOP
-         create_task('user1','team1','task_title'||i,1,1,'task_desc'||i, TO_CHAR(SYSDATE, 'DD.MM.YYYY'));
-    END LOOP;
-END insert_100k_tasks;
-
-------------------------------EXPORT XML-------------------------
----------------------- as sys to orcl:
-drop directory cw_dir;
-create directory cw_dir as '/CW';
-select * from dba_directories where directory_name='CW_DIR';
-grant read, write on directory cw_dir to DBNoto;
-GRANT CREATE ANY DIRECTORY TO DBNoto;
-------------------------------TEAM EXPORT XML-------------------------
-CREATE OR REPLACE PROCEDURE teams_export
-IS
-    rc sys_refcursor;
-    doc DBMS_XMLDOM.DOMDocument;
-BEGIN
-    OPEN rc FOR SELECT TeamID, TeamName FROM TeamTable;
-    doc := DBMS_XMLDOM.NewDOMDocument(XMLTYPE(rc));
-    DBMS_XMLDOM.WRITETOFILE(doc, 'CW_DIR/teams_export.xml');
-END teams_export;
-
-begin DBNOTO.teams_export(); end;
-------------------------------USER EXPORT XML-------------------------
-CREATE OR REPLACE PROCEDURE users_export
-IS
-    rc sys_refcursor;
-    doc DBMS_XMLDOM.DOMDocument;
-BEGIN
-    open rc for select USERLOGIN,USERPASSWORD,USERNAME,USERLASTNAME,USERPHONENUMBER,USEREMAIL,USERROLE from UserTable;
-    doc := DBMS_XMLDOM.NewDOMDocument(XMLTYPE(rc));
-    --doc := UTL_FILE.FOPEN( 'CW_DIR' , 'users_export.xml' , 'w' );
-    DBMS_XMLDOM.WRITETOFILE(doc, 'CW_DIR/users_export.xml');
-END users_export;
-
-BEGIN
-    users_export();
-END;
------------------------------- IMPORT XML
-CREATE OR REPLACE PROCEDURE teams_import
-IS
-BEGIN
-    INSERT INTO TeamTable(TeamName)
-    SELECT ExtractValue(VALUE(TeamName), '//NAME') AS team_name
-    FROM TABLE(XMLSequence(EXTRACT(XMLTYPE(bfilename('CW_DIR', 'teams_export.xml'),
-    nls_charset_id('UTF-8')),'/ROWSET/ROW'))) teams;
-END teams_import;
-
-BEGIN
-    teams_import();
-END;
-
-CREATE OR REPLACE PROCEDURE users_import
-IS
-BEGIN
-    INSERT INTO UserTable(USERLOGIN,USERPASSWORD,USERNAME,USERLASTNAME,USERPHONENUMBER,USEREMAIL,USERROLE)
-    SELECT ExtractValue(VALUE(Users), '//LOGIN') AS UserLogin,
-           ExtractValue(VALUE(Users), '//PASSWORD') AS UserPassword,
-           ExtractValue(VALUE(Users), '//NAME') AS UserName,
-           ExtractValue(VALUE(Users), '//LASTNAME') AS UserLastName,
-           ExtractValue(VALUE(Users), '//PHONENUMBER') AS UserPhoneNumber,
-           ExtractValue(VALUE(Users), '//EMAIL') AS UserEmail,
-           ExtractValue(VALUE(Users), '//ROLE') AS UserRole
-    FROM TABLE(XMLSequence(EXTRACT(XMLTYPE(bfilename('CW_DIR', 'users_export.xml'),
-    nls_charset_id('UTF-8')),'/ROWSET/ROW'))) Users;
-END users_import;
-
-
-procedure importXmlDataFromComponents
-is
-begin
-insert into shopofcomponents (comname, price)
-select ExtractValue(value(components), '//NAME') as comname,
-       ExtractValue(value(components), '//PRICE') as price
-from table(XMLSequence(extract(xmltype(bfilename('DIR', 'components_import.xml'),
-             nls_charset_id('UTF-8')),'/ROWSET/ROW'))) components;
-exception
-when others then
-raise_application_error(-20001,'An error was encountered - '||SQLCODE||' -ERROR- '||SQLERRM);
-end importXmlDataFromComponents;
-
-procedure exportXmlToClients
-is 
-    rc sys_refcursor;
-    doc DBMS_XMLDOM.DOMDocument;
-begin
-open rc for select USERLOGIN,USERPASSWORD,USERNAME,USERLASTNAME,USERPHONENUMBER,USEREMAIL,USERROLE from UserTable;
-doc := DBMS_XMLDOM.NewDOMDocument(xmltype(rc));
-DBMS_XMLDOM.WRITETOFILE(doc, 'CW_DIR/users_export.xml');
-commit;
-exception
-when others then
-raise_application_error(-20001,'An error was encountered - '||SQLCODE||' -ERROR- '||SQLERRM);      
-end exportXmlToClients;

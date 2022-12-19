@@ -40,9 +40,9 @@ namespace Noto.Data
         }
         public static void LoadUserImageBrush()
         {
-            String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+             
             OracleConnection con = new OracleConnection();
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
 
             con.Open();
             OracleCommand cmd2 = con.CreateCommand();
@@ -87,9 +87,9 @@ namespace Noto.Data
                 MessageBox.Show(ex.Message.ToString());
             }
 
-            String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+             
             OracleConnection con = new OracleConnection();
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
 
             con.Open();
 
@@ -116,9 +116,9 @@ namespace Noto.Data
 
         public static void LoadCommentUserImageBrush()
         {
-            String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+             
             OracleConnection con = new OracleConnection();
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
 
             con.Open();
             OracleCommand cmd2 = con.CreateCommand();
@@ -136,9 +136,9 @@ namespace Noto.Data
 
         public static void LoadTeamImageBrush()
         {
-            String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+             
             OracleConnection con = new OracleConnection();
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
 
             con.Open();
             OracleCommand cmd = con.CreateCommand();
@@ -182,9 +182,9 @@ namespace Noto.Data
                 MessageBox.Show(ex.Message.ToString());
             }
 
-            String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+             
             OracleConnection con = new OracleConnection();
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
 
             con.Open();
 
@@ -210,9 +210,9 @@ namespace Noto.Data
 
         public static void LoadUserImageBrush(int rn)
         {
-            String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+             
             OracleConnection con = new OracleConnection();
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
 
             con.Open();
             OracleCommand cmd2 = con.CreateCommand();
@@ -245,9 +245,9 @@ namespace Noto.Data
         }
         public static void LoadUser2ImageBrush()
         {
-            String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+             
             OracleConnection con = new OracleConnection();
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
 
             con.Open();
             OracleCommand cmd2 = con.CreateCommand();

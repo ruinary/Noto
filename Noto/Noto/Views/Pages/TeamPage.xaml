@@ -25,8 +25,15 @@
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <Viewbox Margin="2">
+                <!--<Viewbox Margin="2">
                     <Rectangle x:Name="circleTeamIcon" RadiusY="100" RadiusX="100" MinWidth="40" MinHeight="40" Fill="{DynamicResource ColorTransWhiteBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"  />
+                </Viewbox>-->
+                <Viewbox Margin="2">
+                    <Button Style="{DynamicResource ImgTeam}" Click="OpenTeamHomePageButtonClick" >
+                        <Button.Background>
+                            <ImageBrush x:Name="circleTeamIcon" ImageSource="{Binding }" Stretch="UniformToFill"/>
+                        </Button.Background>
+                    </Button>
                 </Viewbox>
             </Grid>
             <Grid Grid.Column="1">

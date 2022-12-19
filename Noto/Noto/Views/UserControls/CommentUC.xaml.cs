@@ -14,11 +14,11 @@ namespace Noto.Views.UserControls
     public partial class CommentUC : UserControl
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
 
         public CommentUC()
         {
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
             InitializeComponent();
 
             userLoginBlock.Text = DataWorker.CurrentComment.commentUserLogin;
@@ -30,7 +30,7 @@ namespace Noto.Views.UserControls
 
         public CommentUC(Int16 _idComment, string _userLogin, string _commentText)
         {
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
             DataWorker.CurrentComment.commentId = _idComment;
             DataWorker.CurrentComment.commentText = _commentText;
             DataWorker.CurrentComment.commentUserLogin = _userLogin;
@@ -46,7 +46,7 @@ namespace Noto.Views.UserControls
         {
             try
             {
-                con.ConnectionString = connectionString;
+                con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
                 con.Open();
 
                 OracleCommand cmd = con.CreateCommand();

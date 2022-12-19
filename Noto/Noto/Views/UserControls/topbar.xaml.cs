@@ -11,6 +11,8 @@ namespace Noto.Views.UserControls
         public Topbar()
         {
             InitializeComponent();
+            if (DataWorker.CurrentUser.currentUserRole == "ADMIN") AdminGrid.Visibility = Visibility.Visible;
+            else AdminGrid.Visibility = Visibility.Hidden;
             MainFrame.Content = DataWorker.CurrentPage.currentPage;
         }
 
@@ -31,6 +33,13 @@ namespace Noto.Views.UserControls
             DataWorker.UserProfile.userIconImg = DataWorker.CurrentUser.currentUserIconImg;
 
             DataWorker.CurrentPage.currentPage = new Profile();
+            MainFrame.Content = DataWorker.CurrentPage.currentPage;
+        }
+
+        private void AdminPageButtonClick(object sender, RoutedEventArgs e)
+        {
+            DataWorker.CurrentPage.currentPage = new AdminPage(); 
+            DataWorker.CurrentPage.currentPage = new AdminPage();
             MainFrame.Content = DataWorker.CurrentPage.currentPage;
         }
     }

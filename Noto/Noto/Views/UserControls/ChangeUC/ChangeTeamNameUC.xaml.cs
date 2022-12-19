@@ -12,10 +12,10 @@ namespace Noto.Views.UserControls.ChangeUC
     {
 
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
         public ChangeTeamNameUC()
         {
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
             InitializeComponent();
 
             teamNameBlock.Text = DataWorker.CurrentTeam.teamName;

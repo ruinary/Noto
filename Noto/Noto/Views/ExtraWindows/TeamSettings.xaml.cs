@@ -16,12 +16,12 @@ namespace Noto.Views.ExtraWindows
     public partial class TeamSettings : Window
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
         int rowMargin = 4, rowCounter = 1;
 
         public TeamSettings()
         {
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
 
             con.Open();
             OracleCommand cmd0 = con.CreateCommand();

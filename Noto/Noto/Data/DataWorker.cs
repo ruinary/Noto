@@ -1,5 +1,5 @@
 ﻿using Noto.Views.Pages;
-using System.Collections.Generic;
+using System;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -7,6 +7,11 @@ namespace Noto.Data
 {
     public static class DataWorker
     {
+        public static class ConnectionToOracle
+        {
+            public static String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=DBNoto;PASSWORD=Pa$$w0rd";
+        }
+
         public static class CurrentPage
         {
             public static Page currentPage = new UserTeams();

@@ -1,21 +1,15 @@
 ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 select * from user_views;
-SELECT * FROM DBNoto.TaskTeam_view WHERE TeamID = 1;
+
 -------------------------USER & ROLE-------------------------
 
 CREATE VIEW AppRoleTable_view AS SELECT UserTable.UserLogin, UserTable.UserPassword, AppRoleTable.RoleName
 FROM UserTable LEFT JOIN AppRoleTable ON UserTable.UserRole = AppRoleTable.RoleID;
 
-SELECT * FROM AppRoleTable_view;
-
-DROP VIEW AppRoleTable_view;
-
 -------------------------USER & ROLE FULL-------------------------
 --DROP VIEW user_role_full_view;
 CREATE VIEW UserRole_full_view AS SELECT UserTable.UserID, UserTable.UserLogin, decryption_password(UserTable.UserPassword) as decr, AppRoleTable.RoleName
 FROM UserTable LEFT JOIN AppRoleTable ON UserTable.UserRole = AppRoleTable.RoleID;
-
-SELECT * FROM UserRole_full_view;
 
 -------------------------USER & TEAM & PRIVELEGY-------------------------
 --DROP VIEW UserTeam_view;
@@ -25,17 +19,8 @@ FROM UserTeamPrivTable
     JOIN UserTeamPrivs ON UserTeamPrivTable.Privelegy = UserTeamPrivs.UserTeamPrivID
     JOIN TeamTable ON UserTeamPrivTable.PrivTeam = TeamTable.TeamID
     JOIN UserTable ON UserTeamPrivTable.PrivUser = UserTable.UserID;
-
-SELECT * FROM DBNoto.UserTeam_view ORDER BY TeamName ASC;
-SELECT * FROM DBNoto.UserTeam_view;
 commit;
 
-SELECT * FROM DBNoto.UserTeam_view WHERE TeamID = 1 ORDER BY UserLogin ASC;
---SELECT UserIcon FROM DBNoto.UserTable WHERE UserID = 1;
-SELECT UserIcon FROM DBNoto.UserTable WHERE UserId = 1;
-SELECT UserIcon FROM UserTable WHERE UPPER(UserLogin) = UPPER('remeral');
-SELECT UserIcon, UserLogin FROM DBNoto.UserTeam_view WHERE TeamID = 49 AND UPPER(UserLogin) = UPPER('remeral');
-SELECT UserIcon, UserLogin FROM DBNoto.UserTeam_view WHERE TeamID = 49 ORDER BY UserID ASC FETCH FIRST 1 ROWS ONLY;
 
 -------------------------USER & COMMENT & TASK-------------------------
 --DROP VIEW UserComment_view;
@@ -43,13 +28,6 @@ CREATE VIEW UserComment_view AS SELECT TaskComments.ComID, TaskComments.ComTask,
             UserTable.UserID,UserTable.UserLogin,UserTable.UserIcon
 FROM TaskComments 
     JOIN UserTable ON TaskComments.ComUser = UserTable.UserID;
-    
---Select * from TaskComments;
---Select * from TeamTable;
---SELECT * FROM (select TaskID, TaskTitle, CreationDate, DeadlineDate, TaskPriorityName, TaskStatusName, TaskDescription, row_number() over (ORDER BY TaskID ASC) rn from DBNoto.TaskTeam_view WHERE TeamID = 57) where rn between :n and :m ORDER BY TaskID ASC;
---SELECT * FROM (select TaskID, TaskTitle, CreationDate, DeadlineDate, TaskPriorityName, TaskStatusName, TaskDescription, row_number() over (ORDER BY TaskID ASC) rn from DBNoto.TaskTeam_view WHERE TeamID = 57 AND DeadlineDate = '15.12.2022') where rn between :n and :m ORDER BY TaskID ASC;
---SELECT * FROM (select ComID, UserLogin, ComText,ComDate, row_number() over (ORDER BY TO_DATE(ComDate, 'DD.MM.YYYY') DESC) rn from DBNoto.UserComment_view WHERE ComTask = 31) where rn between :n and :m;
---SELECT * FROM DBNoto.UserComment_view;
 commit;
 -------------------------TEAM & TASK------------------------- 
 
@@ -65,9 +43,3 @@ FROM TaskTable
     JOIN TaskPriorities ON TaskTable.TaskPriority = TaskPriorities.TaskPriorityID
     JOIN TaskStatuses ON TaskTable.TaskStatus = TaskStatuses.TaskStatusID;
 commit;
-SELECT * FROM DBNoto.TaskTeam_view WHERE TeamID = 1 ORDER BY TaskPriorityName ASC;
-select * from TaskTeam_view;
-
-
- --JOIN TaskComments ON TaskTable.TaskID = TaskComments.ComTask
------------------------------

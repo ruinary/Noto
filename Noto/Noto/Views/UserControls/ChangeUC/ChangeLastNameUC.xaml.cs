@@ -11,10 +11,10 @@ namespace Noto.Views.UserControls.ChangeUC
     public partial class ChangeLastNameUC : UserControl
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
         public ChangeLastNameUC()
         {
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
             InitializeComponent();
 
             userLastName.Text = DataWorker.UserProfile.userLastName;

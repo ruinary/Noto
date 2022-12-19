@@ -11,11 +11,11 @@ namespace Noto.Views.ExtraWindows
     public partial class TaskSettings : Window
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
         int rowMargin = 2, rowCounter = 1;
         public TaskSettings()
         {
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
 
             InitializeComponent();
             loadSomeComments();

@@ -10,7 +10,7 @@ namespace Noto.Views.ExtraWindows
     public partial class CreateTask : Window
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root"; 
+          
         bool flagTitle = false;
         bool flagDescription = false;
         bool flagDataDeadline = false;
@@ -20,7 +20,7 @@ namespace Noto.Views.ExtraWindows
         int priprityId = 0;
         public CreateTask()
         {
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
             InitializeComponent();
             taskDaataCreationBlock.Text = DateTime.Today.ToString("d");
         }

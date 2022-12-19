@@ -12,11 +12,11 @@ namespace Noto.Views.Pages
     public partial class TeamPage : Page
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root"; 
+          
         string userRoleInTeam = "";
         public TeamPage()
         {
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
             InitializeComponent();
 
             TeamName.DataContext = DataWorker.CurrentTeam.teamName;
@@ -25,8 +25,7 @@ namespace Noto.Views.Pages
             taskFrame.DataContext = DataWorker.CurrentPage.currentTaskPage;
 
             ImageWorker.LoadTeamImageBrush();
-            ImageBrush brush = new ImageBrush(DataWorker.CurrentTeam.teamIconImg);
-            circleTeamIcon.Fill = brush;
+            circleTeamIcon.ImageSource = DataWorker.CurrentTeam.teamIconImg;
 
             con.Open();
 
@@ -77,6 +76,12 @@ namespace Noto.Views.Pages
         private void ChartButtonClick(object sender, RoutedEventArgs e)
         {
             DataWorker.CurrentPage.currentTaskPage = new ChartPage();
+            taskFrame.DataContext = DataWorker.CurrentPage.currentTaskPage;
+        }
+
+        private void OpenTeamHomePageButtonClick(object sender, RoutedEventArgs e)
+        {
+            DataWorker.CurrentPage.currentTaskPage = new TaskPage();
             taskFrame.DataContext = DataWorker.CurrentPage.currentTaskPage;
         }
     }

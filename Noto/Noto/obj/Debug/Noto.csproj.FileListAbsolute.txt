@@ -330,3 +330,9 @@ D:\git\Noto\Noto\Noto\bin\Debug\LiveCharts.dll
 D:\git\Noto\Noto\Noto\bin\Debug\LiveCharts.Wpf.dll
 D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\ChartPage.g.cs
 D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\ChartPage.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\AdminPage.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\Pages\AdminPage.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\AdminUserListUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\AdminUserListUC.baml
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\AdminTeamListUC.g.cs
+D:\git\Noto\Noto\Noto\obj\Debug\Views\UserControls\AdminTeamListUC.baml

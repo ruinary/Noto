@@ -11,10 +11,10 @@ namespace Noto.Views.UserControls.ChangeUC
     public partial class ChangeTaskTitleUC : UserControl
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
         public ChangeTaskTitleUC()
         {
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
             InitializeComponent();
 
             taskTitleBlock.Text = DataWorker.CurrentTask.taskTitle;

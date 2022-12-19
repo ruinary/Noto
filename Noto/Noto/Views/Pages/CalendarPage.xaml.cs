@@ -11,12 +11,12 @@ namespace Noto.Views.Pages
     public partial class CalendarPage : Page
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
         int rowMargin = 2, rowCounter = 1;
         string date = DateTime.Now.ToString("dd.MM.yyyy");
         public CalendarPage()
         {
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
             InitializeComponent();
 
             loadSomeTasks();

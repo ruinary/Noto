@@ -11,10 +11,10 @@ namespace Noto.Views.UserControls.ChangeUC
     public partial class ChangeDateCreationUC : UserControl
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
         public ChangeDateCreationUC()
         {
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
             InitializeComponent();
 
             taskDateCreationBlock.Text = DataWorker.CurrentTask.taskCreationDate;

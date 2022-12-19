@@ -11,11 +11,11 @@ namespace Noto.Views.Pages
     public partial class Profile : Page
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
         public Profile()
         {
             InitializeComponent();
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
 
             ImageWorker.LoadUserImageBrush();
 

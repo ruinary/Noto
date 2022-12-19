@@ -11,11 +11,11 @@ namespace Noto.Views.ExtraWindows
     public partial class AddUserInTeam : Window
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
         public AddUserInTeam()
         {
             InitializeComponent();
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
         }
 
         private void AddUserToTeamButtonClick(object sender, RoutedEventArgs e)

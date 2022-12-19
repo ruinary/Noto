@@ -13,7 +13,7 @@ namespace Noto.Views.UserControls
     public partial class TeamUC : UserControl
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
         Int16 teamId;
         string teamName;
 
@@ -24,7 +24,7 @@ namespace Noto.Views.UserControls
 
         public TeamUC(Int16 _id, string _teamName)
         {
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
             InitializeComponent();
 
             this.teamId = _id;

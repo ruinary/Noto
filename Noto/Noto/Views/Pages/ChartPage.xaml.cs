@@ -6,6 +6,7 @@ using Oracle.ManagedDataAccess.Types;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,7 +15,7 @@ namespace Noto.Views.Pages
     public partial class ChartPage : Page
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
         public SeriesCollection SeriesCollection { get; set; }
         public Func<int, string> YFormatter { get; set; }
         List<string> labels = new List<string>();
@@ -22,7 +23,7 @@ namespace Noto.Views.Pages
 
         public ChartPage()
         {
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
             InitializeComponent();
         }
         int GetCountTasks(string _date)
@@ -35,8 +36,6 @@ namespace Noto.Views.Pages
 
                 cmd.CommandText = "DBNoto.count_task_by_date";
                 cmd.CommandType = CommandType.StoredProcedure;
-                MessageBox.Show(DataWorker.CurrentTeam.teamId.ToString());
-                MessageBox.Show(_date.ToString());
 
                 cmd.Parameters.Add("p_team_id", OracleDbType.Int32, 10).Value = DataWorker.CurrentTeam.teamId;
                 cmd.Parameters.Add("p_deadlinedate", OracleDbType.Varchar2, 30).Value = _date;
@@ -60,7 +59,8 @@ namespace Noto.Views.Pages
         private void SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedDate = calendar.SelectedDates;
-
+            
+            if (SeriesCollection != null) MessageBox.Show(SeriesCollection[SeriesCollection.Count()-1].ToString());
             labels.Clear();
             foreach (var date in selectedDate)
             {
@@ -71,6 +71,7 @@ namespace Noto.Views.Pages
 
             ChartValues<int> d = new ChartValues<int>();
 
+            d.Clear();
             foreach (int x in taskCount)
             {
                 d.Add(x);
@@ -86,6 +87,7 @@ namespace Noto.Views.Pages
             YFormatter = value => value.ToString("C");
 
             chartDiagram.Series = SeriesCollection;
+            calendar.SelectedDates.Clear();
         }
     }
     

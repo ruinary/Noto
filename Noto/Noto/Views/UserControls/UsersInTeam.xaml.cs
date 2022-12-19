@@ -13,10 +13,10 @@ namespace Noto.Views.UserControls
     public partial class UsersInTeam : UserControl
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
         public UsersInTeam()
         {
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
             InitializeComponent();
 
             ImageWorker.LoadUserImageBrush(1);

@@ -122,6 +122,9 @@
     <Compile Include="Views\ExtraWindows\TeamSettings.xaml.cs">
       <DependentUpon>TeamSettings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\AdminPage.xaml.cs">
+      <DependentUpon>AdminPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\CalendarPage.xaml.cs">
       <DependentUpon>CalendarPage.xaml</DependentUpon>
     </Compile>
@@ -139,6 +142,12 @@
     </Compile>
     <Compile Include="Views\Pages\UserTeams.xaml.cs">
       <DependentUpon>UserTeams.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\AdminTeamListUC.xaml.cs">
+      <DependentUpon>AdminTeamListUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\AdminUserListUC.xaml.cs">
+      <DependentUpon>AdminUserListUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ChangeUC\ChangeDateCreationUC.xaml.cs">
       <DependentUpon>ChangeDateCreationUC.xaml</DependentUpon>
@@ -247,6 +256,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\AdminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\CalendarPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -268,6 +281,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\UserTeams.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\AdminTeamListUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\AdminUserListUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

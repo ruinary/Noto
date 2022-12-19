@@ -15,7 +15,7 @@ namespace Noto.Views.UserControls
     public partial class TaskUC : UserControl
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
         Int16 taskId;
         string taskTitle;
         string taskDeadlineDate;
@@ -31,7 +31,7 @@ namespace Noto.Views.UserControls
 
         public TaskUC(Int16 _id, string _taskTitle,  string _taskCreationDate, string _taskDeadlineDate, string _taskPriority, string _taskStatus, string _taskDescription)
         {
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
 
             InitializeComponent();
 
@@ -63,6 +63,7 @@ namespace Noto.Views.UserControls
         }
         void GetLastComment()
         {
+
             try
             {
                 con.Open();
@@ -72,7 +73,7 @@ namespace Noto.Views.UserControls
                 cmd.CommandText = "DBNoto.get_last_comment";
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add("p_task_id", OracleDbType.Int32, 10).Value = taskId;
+                cmd.Parameters.Add("p_task_id", OracleDbType.Int32, 10).Value = DataWorker.CurrentTask.taskId;
 
                 cmd.Parameters.Add("o_user_id", OracleDbType.Int32, 10);
                 cmd.Parameters["o_user_id"].Direction = ParameterDirection.Output;
@@ -90,11 +91,11 @@ namespace Noto.Views.UserControls
 
                 //string comDate = Convert.ToString(cmd.Parameters["o_comment_date"].Value); 
                 DataWorker.CurrentComment.commentUserId = Convert.ToInt32((decimal)(OracleDecimal)(cmd.Parameters["o_user_id"].Value));
-                DataWorker.CurrentComment.commentTaskId = taskId;
+                DataWorker.CurrentComment.commentTaskId = DataWorker.CurrentTask.taskId;
                 DataWorker.CurrentComment.commentUserLogin = Convert.ToString(cmd.Parameters["o_user_login"].Value);
                 DataWorker.CurrentComment.commentText = Convert.ToString(cmd.Parameters["o_comment_text"].Value);
 
-                MessageBox.Show(DataWorker.CurrentComment.commentUserId + DataWorker.CurrentComment.commentTaskId+ DataWorker.CurrentComment.commentUserLogin + DataWorker.CurrentComment.commentText);
+                //MessageBox.Show(DataWorker.CurrentComment.commentUserId + DataWorker.CurrentComment.commentTaskId+ DataWorker.CurrentComment.commentUserLogin + DataWorker.CurrentComment.commentText);
                 con.Close();
             }
             catch (Exception exc)
@@ -106,6 +107,14 @@ namespace Noto.Views.UserControls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            DataWorker.CurrentTask.taskId = taskId;
+            DataWorker.CurrentTask.taskTitle = taskTitle;
+            DataWorker.CurrentTask.taskDeadlineDate = taskDeadlineDate;
+            DataWorker.CurrentTask.taskCreationDate = taskCreationDate;
+            DataWorker.CurrentTask.taskPriority = taskPriority;
+            DataWorker.CurrentTask.taskStatus = taskStatus;
+            DataWorker.CurrentTask.taskDescription = taskDescription;
+
             TaskSettings taskSettings = new TaskSettings();
             taskSettings.Show();
         }

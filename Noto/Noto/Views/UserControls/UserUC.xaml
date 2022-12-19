@@ -36,7 +36,7 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="10"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="1" Grid.Row="1" x:Name="ownerUserIcon" >
+                <Grid Grid.Column="1" Grid.Row="1" x:Name="ownerUserIcon" Visibility="Hidden">
                     <Viewbox>
                         <materialDesign:PackIcon Kind="Crown" VerticalAlignment="Stretch" Foreground="#FFFAFAF1" BorderBrush="{x:Null}" HorizontalAlignment="Stretch"/>
                     </Viewbox>
@@ -55,7 +55,7 @@
                         <TextBlock x:Name="userNameBlock" Style="{DynamicResource CommonTitleTextH1}">User Login</TextBlock>
                     </Viewbox>
                 </Grid>
-                <Grid x:Name="usereDeleteButton" Grid.Column="4" Grid.Row="1">
+                <Grid x:Name="usereDeleteButton" Grid.Column="4" Grid.Row="1" Visibility="Hidden">
                     <Button VerticalAlignment="Stretch" Foreground="#FFBFBFBF" Background="#33FFFFFF" BorderBrush="{x:Null}" Cursor="Hand" Click="RemoveUserFromTeamButtonClick" HorizontalAlignment="Stretch">
                         <materialDesign:PackIcon Kind="Close"/>
                     </Button>

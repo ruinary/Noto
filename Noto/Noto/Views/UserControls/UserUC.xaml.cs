@@ -14,7 +14,7 @@ namespace Noto.Views.UserControls
     public partial class UserUC : UserControl
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
 
         Int16 idUser;
         string userLogin;
@@ -27,7 +27,7 @@ namespace Noto.Views.UserControls
 
         public UserUC(Int16 _idUser, string _userLogin, string _userTeamPrivName)
         {
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
             InitializeComponent();
 
             this.idUser = _idUser;
@@ -42,16 +42,23 @@ namespace Noto.Views.UserControls
             userIconCircle.ImageSource = DataWorker.UserProfile.userIconImg;
             userNameBlock.Text = _userLogin;
 
-
-            if (userTeamPrivName == "OWNER")
+            if (DataWorker.CurrentPage.currentPage is AdminPage)
             {
                 usereDeleteButton.Visibility = Visibility.Hidden;
-                ownerUserIcon.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                usereDeleteButton.Visibility = Visibility.Visible;
                 ownerUserIcon.Visibility = Visibility.Hidden;
+            }
+            if (!(DataWorker.CurrentPage.currentPage is AdminPage))
+            {
+                if (userTeamPrivName == "OWNER")
+                {
+                    usereDeleteButton.Visibility = Visibility.Hidden;
+                    ownerUserIcon.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    usereDeleteButton.Visibility = Visibility.Visible;
+                    ownerUserIcon.Visibility = Visibility.Hidden;
+                }
             }
         }
         #region Remove User From Team

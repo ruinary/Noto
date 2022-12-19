@@ -74,9 +74,8 @@ CREATE TABLE TeamTable (
     CONSTRAINT TeamTable_pk PRIMARY KEY (TeamID) 
 );
 commit;
-INSERT INTO TeamTable (TeamName) VALUES('team_demo');
 SELECT * FROM TeamTable;
-SELECT TeamIcon FROM TeamTable WHERE TeamID = 54;
+
 -------------------------TASK-------------------------
 --DROP TABLE TaskTable;
 CREATE TABLE TaskTable (
@@ -94,7 +93,6 @@ CREATE TABLE TaskTable (
     CONSTRAINT TaskTable_pk PRIMARY KEY (TaskID)
 );
 commit;
---INSERT INTO TaskTable (TaskTeamID,TaskStatus,TaskPriority,TaskTitle,TaskDescription,CreationDate,DeadlineDate) VALUES(1,1,1,'loh','d','22.01.2022','23.01.2022');
 SELECT * FROM TaskTable;
 
 -------------------------TASK COMMENTS-------------------------
@@ -110,9 +108,6 @@ CREATE TABLE TaskComments (
     CONSTRAINT TaskCommentTask_fk FOREIGN KEY (ComTask) REFERENCES TaskTable(TaskID) ON DELETE CASCADE
 );
 commit;
-
---INSERT INTO TaskComments ( ComDate,ComText,ComUser) VALUES('22.01.2022','ComText',1);
-
 SELECT * FROM TaskComments; 
 
 -------------------------TEAM USER PRIVS-------------------------
@@ -139,5 +134,4 @@ CREATE TABLE UserTeamPrivTable (
     CONSTRAINT PrivToPrivs_fk FOREIGN KEY (Privelegy) REFERENCES UserTeamPrivs(UserTeamPrivID) ON DELETE CASCADE
 );
 commit;
---INSERT INTO UserTeamPrivTable(PrivUser,PrivTeam,Privelegy) VALUES(1,1,1);
 SELECT * FROM UserTeamPrivTable;

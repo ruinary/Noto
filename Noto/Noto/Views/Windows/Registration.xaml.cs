@@ -1,4 +1,5 @@
-﻿using Oracle.ManagedDataAccess.Client;
+﻿using Noto.Data;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
 using System.Windows;
@@ -8,11 +9,11 @@ namespace Noto.Views.Windows
     public partial class Registration : Window
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
         public Registration()
         {
             InitializeComponent();
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
         }
 
         private void RegistrationButtonClick(object sender, RoutedEventArgs e)

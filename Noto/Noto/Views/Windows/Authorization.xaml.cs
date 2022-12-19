@@ -13,11 +13,11 @@ namespace Noto.Views.Windows
     public partial class Authorization : Window
     {
         OracleConnection con = new OracleConnection();
-        String connectionString = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=system;PASSWORD=root";
+         
         public Authorization()
         {
             InitializeComponent();
-            con.ConnectionString = connectionString;
+            con.ConnectionString = DataWorker.ConnectionToOracle.connectionString;
         }
 
         private void AuthButtonClick(object sender, RoutedEventArgs e)

@@ -26,9 +26,8 @@
                     <Button  Style="{DynamicResource MoreButton}" Click="UserTeamsButtonClick"/>
                 </Grid>
                 <Grid Grid.Column="1"/>
-                <Grid Grid.Column="2"/>
-                <Grid Grid.Column="3">
-                    <Button Style="{DynamicResource NoticesButton}"/>
+                <Grid Grid.Column="3"  Visibility="Hidden" x:Name="AdminGrid" >
+                    <Button Style="{DynamicResource NoticesButton}" Click="AdminPageButtonClick"/>
                 </Grid>
                 <Grid Grid.Column="4">
                     <Button Style="{DynamicResource UserButton}" Click="ProfileButtonClick"/>
